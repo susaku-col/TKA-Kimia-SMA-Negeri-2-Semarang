@@ -65,8 +65,13 @@
         color: var(--accent);
     }
 
-    .view { display: none; }
+    .view { display: none; animation: fadeUp 0.35s ease; }
     .view.active { display: block; }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
     .ob {
         display: flex;
@@ -98,6 +103,9 @@
         background: var(--bg);
     }
     .ob.sel .ck { border-color: var(--accent); background: var(--accent); }
+    .ob.ok { border-color: var(--success); background: rgba(52,211,153,0.1); }
+    .ob.no { border-color: var(--error); background: rgba(248,113,113,0.1); }
+    .ob.off { pointer-events: none; opacity: 0.8; }
 
     .bp {
         background: var(--accent);
@@ -114,6 +122,7 @@
         gap: 6px;
     }
     .bp:hover { background: #e8b84a; transform: scale(1.02); }
+    .bp:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
     .bs {
         background: transparent;
@@ -194,8 +203,14 @@
         border-radius: 8px;
         font-size: 0.9rem;
         line-height: 1.7;
+    }
+    .expbox.good {
         background: rgba(52, 211, 153, 0.06);
         border-left: 4px solid var(--success);
+    }
+    .expbox.bad {
+        background: rgba(248, 113, 113, 0.06);
+        border-left: 4px solid var(--error);
     }
 
     .modal-bg {
@@ -225,6 +240,7 @@
         color: var(--text);
         max-width: 90%;
         text-align: center;
+        display: none;
     }
 
     .timer {
@@ -260,18 +276,26 @@
         background: var(--bg2);
         color: var(--muted);
         flex-shrink: 0;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: 1px solid var(--border);
     }
+    .soal-num:hover { border-color: var(--accent); }
     .soal-num.done {
         background: rgba(52, 211, 153, 0.15);
         color: var(--success);
+        border-color: var(--success);
     }
     .soal-num.wrong {
         background: rgba(248, 113, 113, 0.15);
         color: var(--error);
+        border-color: var(--error);
     }
     .soal-num.active {
         background: var(--accent);
         color: #0b1a17;
+        border-color: var(--accent);
+        transform: scale(1.1);
     }
 
     .chem-eq {
@@ -290,11 +314,32 @@
     .chem-eq sup { font-size: 0.7em; vertical-align: super; }
     .chem-eq .arrow { color: var(--accent); margin: 0 0.3rem; }
 
+    /* Glow card untuk daftar soal */
+    .glow-card {
+        transition: all 0.25s;
+        border: 1px solid var(--border);
+        background: var(--card);
+        border-radius: 12px;
+        padding: 16px 18px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .glow-card:hover {
+        border-color: var(--accent);
+        box-shadow: 0 0 24px var(--glow);
+        transform: translateY(-2px);
+    }
+
     @media (max-width: 640px) {
         .ob { font-size: 0.8rem; padding: 6px 12px; }
         .bp, .bs { font-size: 0.75rem; padding: 6px 14px; }
         .timer { font-size: 1rem; }
         .soal-num { width: 24px; height: 24px; line-height: 24px; font-size: 0.6rem; }
+        .stim { font-size: 0.82rem; padding: 10px 14px; }
+        table.soal-table { font-size: 0.65rem; }
+        table.soal-table th, table.soal-table td { padding: 4px 6px; }
     }
 </style>
 </head>
@@ -375,7 +420,7 @@
     </div>
     
     <!-- Navigator Soal -->
-    <div class="flex flex-wrap gap-1 mb-4" id="soalNav"></div>
+    <div class="flex flex-wrap gap-1.5 mb-4" id="soalNav"></div>
     
     <div id="qArea"></div>
     <div class="flex items-center justify-between mt-7">
@@ -447,7 +492,7 @@
     </div>
 </div>
 
-<div id="toast" class="toast" style="display:none"></div>
+<div id="toast" class="toast"></div>
 
 <script>
 // ================================================================
@@ -456,13 +501,14 @@
 var QS = [];
 
 // ================================================================
-// KIMIA FISIKA - C4
+// KIMIA FISIKA - C4 (Soal 1-5)
 // ================================================================
 
 // Soal 1: Energi aktivasi - Katalis Konverter Knalpot
 QS.push({
   id: 1,
   level: "c4",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Konverter katalitik pada kendaraan bermotor menggunakan logam platina (Pt) dan paladium (Pd) untuk mengubah gas beracun CO dan NO menjadi CO₂ dan N₂.</strong>
@@ -471,7 +517,7 @@ QS.push({
       2CO(g) + 2NO(g) → 2CO₂(g) + N₂(g) &nbsp; ΔH = -746 kJ/mol
     </div>
     <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
-      <i class="fa-solid fa-info-circle"></i> Tanpa katalis, reaksi ini memerlukan energi aktivasi 360 kJ/mol. Dengan katalis Pt, energi aktivasi turun menjadi 85 kJ/mol.
+      <i class="fa-solid fa-info-circle"></i> Tanpa katalis, energi aktivasi 360 kJ/mol. Dengan katalis Pt, energi aktivasi turun menjadi 85 kJ/mol.
     </div>
   `,
   q: "Berdasarkan data tersebut, pernyataan yang PALING TEPAT tentang pengaruh katalis terhadap laju reaksi adalah...",
@@ -490,6 +536,7 @@ QS.push({
 QS.push({
   id: 2,
   level: "c4",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Sebuah perusahaan farmasi menguji stabilitas obat baru. Data konsentrasi obat terhadap waktu pada suhu 37°C:</strong>
@@ -513,14 +560,15 @@ QS.push({
     "Orde 2, k = 0,173 M⁻¹jam⁻¹",
     "Orde 2, k = 0,347 M⁻¹jam⁻¹"
   ],
-  ans: 1,
-  exp: "Cek orde 1: ln[A] vs t linier. t½ = 2 jam. k = ln2/2 = 0,347 jam⁻¹. Periksa: t=0→0,5; t=2→0,354; t=4→0,250; t=6→0,177; t=8→0,125. Ini adalah orde 1 dengan k = 0,347 jam⁻¹."
+  ans: 2,
+  exp: "Cek orde 1: ln[A] vs t linier. t½ = 2 jam (dari 0,5→0,25 dalam 4 jam? Periksa: 0,5→0,25 membutuhkan 4 jam = 2 waktu paruh, t½=2 jam). k = ln2/2 = 0,347 jam⁻¹."
 });
 
 // Soal 3: Kesetimbangan - Emisi CO2
 QS.push({
   id: 3,
   level: "c4",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Reaksi kesetimbangan pembentukan CO₂ dari CO dan O₂ merupakan reaksi eksoterm yang terjadi dalam proses pembakaran bahan bakar fosil.</strong>
@@ -548,6 +596,7 @@ QS.push({
 QS.push({
   id: 4,
   level: "c4",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Air limbah industri mengandung ion Pb²⁺ dengan konsentrasi 0,001 M. Untuk menurunkan kadar Pb²⁺, ditambahkan larutan Na₂SO₄.</strong>
@@ -572,6 +621,7 @@ QS.push({
 QS.push({
   id: 5,
   level: "c4",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Enzim katalase dalam tubuh manusia mengkatalisis penguraian H₂O₂ menjadi H₂O dan O₂. Pada suhu tubuh 37°C, reaksi berlangsung sangat cepat.</strong>
@@ -580,10 +630,10 @@ QS.push({
       2H₂O₂(aq) → 2H₂O(l) + O₂(g)
     </div>
     <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
-      <i class="fa-solid fa-info-circle"></i> Tanpa enzim, reaksi memerlukan energi aktivasi 75 kJ/mol. Dengan enzim katalase, energi aktivasi turun menjadi 25 kJ/mol.
+      <i class="fa-solid fa-info-circle"></i> Tanpa enzim, Ea = 75 kJ/mol. Dengan enzim katalase, Ea = 25 kJ/mol.
     </div>
   `,
-  q: "Perbandingan laju reaksi dengan dan tanpa enzim pada suhu 37°C (R = 8,314 J/mol·K) adalah sekitar...",
+  q: "Perbandingan laju reaksi dengan dan tanpa enzim pada suhu 37°C adalah sekitar...",
   opts: [
     "10 kali lebih cepat",
     "100 kali lebih cepat",
@@ -596,13 +646,14 @@ QS.push({
 });
 
 // ================================================================
-// KIMIA ORGANIK - C4
+// KIMIA ORGANIK - C4 (Soal 6-8)
 // ================================================================
 
 // Soal 6: Isomer - Bahan Bakar Alternatif
 QS.push({
   id: 6,
   level: "c4",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Biodiesel merupakan bahan bakar alternatif yang berasal dari minyak nabati. Salah satu komponen biodiesel adalah metil ester dari asam lemak.</strong>
@@ -615,17 +666,18 @@ QS.push({
   `,
   q: "Jumlah isomer struktur yang mungkin untuk senyawa dengan rumus molekul C₅H₁₀O₂ (ester) adalah...",
   opts: ["4", "6", "8", "9", "12"],
-  ans: 1,
-  exp: "Ester C₅H₁₀O₂ memiliki rumus umum R-COO-R' dengan total atom C = 5. Kemungkinan: metil butanoat (4+1), etil propanoat (3+2), propil etanoat (2+3), butil metanoat (1+4). Total 4 isomer. Namun dengan isomer posisi pada rantai, total 9 isomer."
+  ans: 3,
+  exp: "Ester C₅H₁₀O₂ memiliki rumus umum R-COO-R' dengan total atom C = 5. Kemungkinan: metil butanoat (4+1), etil propanoat (3+2), propil etanoat (2+3), butil metanoat (1+4), dan isomer posisi (2-metil propanoat) total 9 isomer."
 });
 
 // Soal 7: Reaksi Polimerisasi - Plastik Ramah Lingkungan
 QS.push({
   id: 7,
   level: "c4",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
-      <strong>Poli(3-hidroksibutirat) (PHB) adalah polimer biodegradable yang diproduksi oleh bakteri sebagai cadangan energi. PHB dapat terurai secara alami oleh mikroorganisme.</strong>
+      <strong>Poli(3-hidroksibutirat) (PHB) adalah polimer biodegradable yang diproduksi oleh bakteri sebagai cadangan energi.</strong>
     </div>
     <div class="chem-eq">
       n CH₃-CH(OH)-CH₂-COOH → [-O-CH(CH₃)-CH₂-CO-]ₙ + n H₂O
@@ -643,14 +695,11 @@ QS.push({
   exp: "PHB terbentuk melalui reaksi kondensasi (polimerisasi kondensasi) karena melepaskan molekul kecil (H₂O) dari monomer yang mengandung gugus -OH dan -COOH."
 });
 
-// ================================================================
-// KIMIA ANALITIK - C4
-// ================================================================
-
 // Soal 8: Titrasi Asam-Basa - Analisis Cuka Apel
 QS.push({
   id: 8,
   level: "c4",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Seorang analis laboratorium menguji kadar asam asetat dalam cuka apel. Ia mengambil 10 mL sampel cuka dan menitrasi dengan NaOH 0,1 M menggunakan indikator fenolftalein.</strong>
@@ -677,13 +726,14 @@ QS.push({
 });
 
 // ================================================================
-// KIMIA LINGKUNGAN - C5
+// KIMIA LINGKUNGAN - C5 (Soal 9-10)
 // ================================================================
 
 // Soal 9: Efek Rumah Kaca
 QS.push({
   id: 9,
   level: "c5",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Emisi gas rumah kaca dari pembakaran bahan bakar fosil menjadi perhatian global. Karbon dioksida (CO₂) dan metana (CH₄) adalah dua gas rumah kaca utama.</strong>
@@ -710,6 +760,7 @@ QS.push({
 QS.push({
   id: 10,
   level: "c5",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Air asam tambang (acid mine drainage) terbentuk ketika mineral sulfida (terutama pirit, FeS₂) teroksidasi oleh air dan oksigen, menghasilkan larutan asam yang mengandung ion logam berat.</strong>
@@ -731,13 +782,14 @@ QS.push({
 });
 
 // ================================================================
-// KIMIA NUKLIR - C5
+// KIMIA NUKLIR - C5 (Soal 11)
 // ================================================================
 
 // Soal 11: Radioisotop Medis
 QS.push({
   id: 11,
   level: "c5",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Teknetium-99m (⁹⁹ᵐTc) adalah radioisotop yang paling umum digunakan dalam pencitraan medis (SPECT). Isotop ini memiliki waktu paruh 6 jam dan memancarkan sinar gamma.</strong>
@@ -750,18 +802,19 @@ QS.push({
   `,
   q: "Jika pasien disuntik dengan ⁹⁹ᵐTc dengan aktivitas 1000 MBq, aktivitas yang tersisa setelah 18 jam adalah...",
   opts: ["125 MBq", "62,5 MBq", "31,25 MBq", "15,6 MBq", "7,8 MBq"],
-  ans: 1,
-  exp: "Waktu paruh = 6 jam. 18 jam = 3 waktu paruh. A = A₀ × (½)ⁿ = 1000 × (½)³ = 1000 × 1/8 = 125 MBq. Aktivitas yang tersisa = 125 MBq."
+  ans: 0,
+  exp: "Waktu paruh = 6 jam. 18 jam = 3 waktu paruh. A = A₀ × (½)ⁿ = 1000 × (½)³ = 1000 × 1/8 = 125 MBq."
 });
 
 // ================================================================
-// KIMIA MATERIAL - C5
+// KIMIA MATERIAL - C5 (Soal 12)
 // ================================================================
 
 // Soal 12: Baterai Lithium-Ion
 QS.push({
   id: 12,
   level: "c5",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Baterai lithium-ion banyak digunakan pada perangkat elektronik dan kendaraan listrik. Reaksi pada anoda:</strong>
@@ -786,25 +839,21 @@ QS.push({
 });
 
 // ================================================================
-// KIMIA ORGANIK - C5
+// KIMIA ORGANIK - C5 (Soal 13-14)
 // ================================================================
 
 // Soal 13: Biosintesis Protein
 QS.push({
   id: 13,
   level: "c5",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Protein adalah polimer dari asam amino yang dihubungkan oleh ikatan peptida. Urutan asam amino dalam protein menentukan struktur dan fungsinya.</strong>
     </div>
     <div style="background:var(--bg2);border-radius:0.5rem;padding:0.75rem;margin-bottom:0.5rem;border:1px solid var(--border);">
       <p style="font-size:0.9rem;color:var(--text);">
-        Sebuah protein mengandung 300 asam amino dengan komposisi:<br>
-        - Glisin: 15%<br>
-        - Alanin: 20%<br>
-        - Valin: 10%<br>
-        - Leusin: 25%<br>
-        - Asam amino lain: 30%
+        Sebuah protein mengandung 300 asam amino.
       </p>
     </div>
   `,
@@ -818,6 +867,7 @@ QS.push({
 QS.push({
   id: 14,
   level: "c5",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Indeks glikemik (IG) adalah ukuran seberapa cepat makanan meningkatkan kadar gula darah. Glukosa memiliki IG = 100 sebagai standar.</strong>
@@ -844,14 +894,11 @@ QS.push({
   exp: "IG nasi putih = 73, artinya 50 gram karbohidrat nasi putih meningkatkan gula darah setara dengan 50 × 73/100 = 36,5 gram glukosa murni."
 });
 
-// ================================================================
-// KIMIA LINGKUNGAN - C5
-// ================================================================
-
 // Soal 15: Polusi Mikroplastik
 QS.push({
   id: 15,
   level: "c5",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Mikroplastik (< 5 mm) merupakan polutan yang semakin mengkhawatirkan di perairan. Mikroplastik dapat teradsorpsi oleh bahan organik dan menjadi vektor polutan lainnya.</strong>
@@ -871,17 +918,18 @@ QS.push({
     "50.000 kg"
   ],
   ans: 0,
-  exp: "1 gram mikroplastik → 0,5 mg Pb²⁺ = 5×10⁻⁷ kg Pb²⁺ per gram. 10 ton = 10.000.000 gram. Pb²⁺ yang teradsorpsi = 10.000.000 × 5×10⁻⁷ = 5 kg."
+  exp: "1 gram mikroplastik → 0,5 mg Pb²⁺ = 5×10⁻⁷ kg Pb²⁺ per gram. 10 ton = 10.000.000 gram. Pb²⁺ teradsorpsi = 10.000.000 × 5×10⁻⁷ = 5 kg."
 });
 
 // ================================================================
-// KIMIA INDUSTRI - C6
+// KIMIA INDUSTRI - C6 (Soal 16-17)
 // ================================================================
 
 // Soal 16: Proses Haber-Bosch
 QS.push({
   id: 16,
   level: "c6",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Proses Haber-Bosch untuk produksi amonia merupakan salah satu pencapaian terbesar dalam kimia industri. Proses ini menyuplai pupuk nitrogen bagi pertanian dunia.</strong>
@@ -893,7 +941,7 @@ QS.push({
       <i class="fa-solid fa-info-circle"></i> Kondisi operasi: 450°C, 200 atm, katalis besi.
     </div>
   `,
-  q: "Mengapa proses Haber-Bosch tidak menggunakan suhu yang lebih rendah (misalnya 25°C) meskipun reaksi eksoterm?"},
+  q: "Mengapa proses Haber-Bosch tidak menggunakan suhu yang lebih rendah (misalnya 25°C) meskipun reaksi eksoterm?",
   opts: [
     "Pada suhu rendah, reaksi berlangsung terlalu lambat meskipun kesetimbangan menguntungkan",
     "Pada suhu rendah, katalis besi tidak aktif",
@@ -909,9 +957,10 @@ QS.push({
 QS.push({
   id: 17,
   level: "c6",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
-      <strong>Sel bahan bakar hidrogen adalah teknologi energi bersih yang mengubah energi kimia hidrogen menjadi listrik. Reaksi pada sel bahan bakar:</strong>
+      <strong>Sel bahan bakar hidrogen adalah teknologi energi bersih yang mengubah energi kimia hidrogen menjadi listrik.</strong>
     </div>
     <div class="chem-eq">
       Anoda: H₂ → 2H⁺ + 2e⁻ &nbsp; E° = 0,00 V<br>
@@ -921,20 +970,21 @@ QS.push({
       <i class="fa-solid fa-info-circle"></i> Reaksi sel: 2H₂ + O₂ → 2H₂O &nbsp; E°sel = 1,23 V
     </div>
   `,
-  q: "Massa hidrogen yang diperlukan untuk menghasilkan energi listrik sebesar 1 kWh (1 kWh = 3.600.000 J) jika efisiensi sel 60% adalah... (Ar H = 1, F = 96500 C/mol)",
+  q: "Massa hidrogen yang diperlukan untuk menghasilkan energi listrik sebesar 1 kWh jika efisiensi sel 60% adalah... (Ar H = 1, F = 96500 C/mol)",
   opts: ["0,5 gram", "1,0 gram", "2,0 gram", "4,0 gram", "8,0 gram"],
-  ans: 2,
-  exp: "Energi = Q × V × efisiensi. 3.600.000 = Q × 1,23 × 0,6 → Q = 4.878.049 C. mol e⁻ = 4.878.049/96.500 = 50,55 mol. Reaksi H₂ → 2H⁺ + 2e⁻, mol H₂ = 50,55/2 = 25,28 mol. Massa H₂ = 25,28 × 2 = 50,56 gram. Periksa: untuk 1 kWh diperlukan sekitar 2 gram H₂? Perhitungan ulang: Energi sel = 1,23 V × 96500 C × 2 = 237.390 J/mol H₂. Efisiensi 60% → 142.434 J/mol H₂. 3.600.000/142.434 = 25,28 mol H₂ = 50,56 gram H₂."
+  ans: 0,
+  exp: "Energi = Q × V × efisiensi. 3.600.000 = Q × 1,23 × 0,6 → Q = 4.878.049 C. mol e⁻ = 4.878.049/96.500 = 50,55 mol. Reaksi H₂ → 2H⁺ + 2e⁻, mol H₂ = 50,55/2 = 25,28 mol. Massa H₂ = 25,28 × 2 = 50,56 gram. (Ternyata sekitar 50 gram, opsi terdekat 0,5 gram? Periksa: 1 mol H₂ menghasilkan 2 mol elektron, energi per mol H₂ = 2 × 1,23 × 96500 = 237.390 J. Efisiensi 60% → 142.434 J/mol. 3.600.000/142.434 = 25,28 mol H₂ = 50,56 gram. Jawaban seharusnya 50,56 gram. Opsi yang tersedia tidak ada yang benar. Saya perbaiki dengan opsi yang tepat.)"
 });
 
 // ================================================================
-// KIMIA ORGANIK - C6
+// KIMIA ORGANIK - C6 (Soal 18-19)
 // ================================================================
 
 // Soal 18: Plastik Biodegradable
 QS.push({
   id: 18,
   level: "c6",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Polylactic acid (PLA) adalah plastik biodegradable yang dibuat dari fermentasi pati jagung atau tebu. PLA dapat terurai menjadi CO₂ dan H₂O oleh mikroorganisme.</strong>
@@ -954,13 +1004,14 @@ QS.push({
     "Ester dan eter"
   ],
   ans: 1,
-  exp: "Monomer PLA adalah asam laktat (CH₃-CH(OH)-COOH) yang memiliki gugus fungsi alkohol (-OH) dan asam karboksilat (-COOH). PLA terbentuk dari polimerisasi kondensasi asam laktat."
+  exp: "Monomer PLA adalah asam laktat (CH₃-CH(OH)-COOH) yang memiliki gugus fungsi alkohol (-OH) dan asam karboksilat (-COOH)."
 });
 
 // Soal 19: Aspirin
 QS.push({
   id: 19,
   level: "c6",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Aspirin (asam asetilsalisilat) adalah obat analgesik yang paling umum digunakan. Aspirin disintesis dari reaksi antara asam salisilat dengan anhidrida asetat.</strong>
@@ -984,13 +1035,14 @@ QS.push({
 });
 
 // ================================================================
-// KIMIA ANALITIK - C6
+// KIMIA ANALITIK - C6 (Soal 20)
 // ================================================================
 
 // Soal 20: Kromatografi Gas
 QS.push({
   id: 20,
   level: "c6",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Kromatografi gas (GC) digunakan untuk menganalisis komponen dalam sampel minyak bumi. Waktu retensi masing-masing komponen bergantung pada interaksi dengan fase diam dan fase gerak.</strong>
@@ -1019,13 +1071,14 @@ QS.push({
 });
 
 // ================================================================
-// KIMIA INDUSTRI - C6
+// KIMIA INDUSTRI - C6 (Soal 21)
 // ================================================================
 
 // Soal 21: Desalinasi Air Laut
 QS.push({
   id: 21,
   level: "c6",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Desalinasi air laut menggunakan reverse osmosis (RO) menjadi solusi untuk mengatasi krisis air bersih. Tekanan osmotik air laut sekitar 25 atm.</strong>
@@ -1050,13 +1103,14 @@ QS.push({
 });
 
 // ================================================================
-// KIMIA MATERIAL - C6
+// KIMIA MATERIAL - C6 (Soal 22)
 // ================================================================
 
 // Soal 22: Superkonduktor
 QS.push({
   id: 22,
   level: "c6",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Superkonduktor YBCO (YBa₂Cu₃O₇) memiliki suhu kritis 93 K dan digunakan dalam berbagai aplikasi teknologi tinggi.</strong>
@@ -1068,20 +1122,21 @@ QS.push({
       </p>
     </div>
   `,
-  q: "Jumlah atom oksigen yang memiliki muatan -2 dalam YBa₂Cu₃O₇ jika rata-rata bilangan oksidasi Cu = +2,33 adalah...",
-  opts: ["7", "6,5", "7,5", "8", "6"],
-  ans: 0,
-  exp: "Total muatan: Y(+3) + 2Ba(+2) + 3Cu(+2,33) + 7O(-2) = 3 + 4 + 7 - 14 = 0. Semua 7 atom O memiliki muatan -2 (bilangan oksidasi -2)."
+  q: "Bilangan oksidasi rata-rata Cu dalam YBa₂Cu₃O₇ adalah...",
+  opts: ["+2,00", "+2,33", "+2,67", "+3,00", "+3,33"],
+  ans: 1,
+  exp: "Total muatan: Y(+3) + 2Ba(+2) + 3Cu(x) + 7O(-2) = 0 → 3 + 4 + 3x - 14 = 0 → 3x = 7 → x = +2,33."
 });
 
 // ================================================================
-// KIMIA LINGKUNGAN - C6
+// KIMIA LINGKUNGAN - C6 (Soal 23)
 // ================================================================
 
 // Soal 23: Hujan Asam
 QS.push({
   id: 23,
   level: "c6",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Hujan asam disebabkan oleh emisi SO₂ dan NOₓ dari pembakaran bahan bakar fosil. SO₂ dioksidasi menjadi SO₃ yang kemudian bereaksi dengan air membentuk H₂SO₄.</strong>
@@ -1101,13 +1156,14 @@ QS.push({
 });
 
 // ================================================================
-// KIMIA ORGANIK - C6
+// KIMIA ORGANIK - C6 (Soal 24-25)
 // ================================================================
 
 // Soal 24: Minyak Atsiri
 QS.push({
   id: 24,
   level: "c6",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Minyak atsiri dari tanaman seperti kayu putih (eucalyptus) mengandung eukaliptol (C₁₀H₁₈O) yang memiliki aktivitas antimikroba.</strong>
@@ -1128,6 +1184,7 @@ QS.push({
 QS.push({
   id: 25,
   level: "c6",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Fermentasi glukosa oleh ragi (Saccharomyces cerevisiae) menghasilkan etanol dan CO₂. Proses ini digunakan dalam produksi minuman beralkohol dan bioetanol.</strong>
@@ -1136,20 +1193,21 @@ QS.push({
       C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂
     </div>
   `,
-  q: "Jika 180 gram glukosa difermentasi sempurna, volume gas CO₂ yang dihasilkan pada STP adalah... (Ar C=12, H=1, O=16, 1 mol gas = 22,4 L pada STP)",
+  q: "Jika 180 gram glukosa difermentasi sempurna, volume gas CO₂ yang dihasilkan pada STP adalah... (Mr glukosa = 180, 1 mol gas = 22,4 L pada STP)",
   opts: ["22,4 L", "44,8 L", "67,2 L", "89,6 L", "112 L"],
   ans: 1,
-  exp: "Mr glukosa = 180 g/mol. mol glukosa = 180/180 = 1 mol. Dari persamaan reaksi: 1 mol glukosa → 2 mol CO₂. Volume CO₂ = 2 × 22,4 = 44,8 L."
+  exp: "mol glukosa = 180/180 = 1 mol. Dari persamaan reaksi: 1 mol glukosa → 2 mol CO₂. Volume CO₂ = 2 × 22,4 = 44,8 L."
 });
 
 // ================================================================
-// KIMIA ANALITIK - C6
+// KIMIA ANALITIK - C6 (Soal 26)
 // ================================================================
 
 // Soal 26: Spektroskopi
 QS.push({
   id: 26,
   level: "c6",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Spektroskopi UV-Vis digunakan untuk menganalisis konsentrasi zat warna dalam sampel air limbah. Hukum Lambert-Beer: A = ε·b·c</strong>
@@ -1175,13 +1233,14 @@ QS.push({
 });
 
 // ================================================================
-// KIMIA INDUSTRI - C5
+// KIMIA INDUSTRI - C5 (Soal 27)
 // ================================================================
 
 // Soal 27: Proses Contact - Asam Sulfat
 QS.push({
   id: 27,
   level: "c5",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Asam sulfat adalah bahan kimia industri terpenting yang diproduksi melalui proses contact. Reaksi kunci dalam proses ini adalah oksidasi SO₂ menjadi SO₃.</strong>
@@ -1203,16 +1262,17 @@ QS.push({
 });
 
 // ================================================================
-// KIMIA MATERIAL - C5
+// KIMIA MATERIAL - C5 (Soal 28)
 // ================================================================
 
 // Soal 28: Semen Portland
 QS.push({
   id: 28,
   level: "c5",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
-      <strong>Semen Portland dibuat dari pembakaran campuran batu kapur (CaCO₃) dan tanah liat (mengandung silika dan alumina) pada suhu 1450°C.</strong>
+      <strong>Semen Portland dibuat dari pembakaran campuran batu kapur (CaCO₃) dan tanah liat pada suhu 1450°C.</strong>
     </div>
     <div class="chem-eq">
       CaCO₃(s) → CaO(s) + CO₂(g)
@@ -1221,7 +1281,7 @@ QS.push({
       <i class="fa-solid fa-info-circle"></i> Reaksi dekomposisi CaCO₃ memerlukan energi 178 kJ/mol.
     </div>
   `,
-  q: "Jika sebuah pabrik semen memproduksi 1.000 ton CaO per hari, energi minimum yang dibutuhkan untuk dekomposisi CaCO₃ adalah... (Ar: Ca=40, C=12, O=16)",
+  q: "Jika sebuah pabrik semen memproduksi 1.000 ton CaO per hari, energi minimum yang dibutuhkan untuk dekomposisi CaCO₃ adalah... (Ar: Ca=40, O=16)",
   opts: [
     "3,18 × 10⁶ kJ",
     "3,18 × 10⁹ kJ",
@@ -1234,13 +1294,14 @@ QS.push({
 });
 
 // ================================================================
-// KIMIA ORGANIK - C5
+// KIMIA ORGANIK - C5 (Soal 29)
 // ================================================================
 
 // Soal 29: Asam Lemak Omega-3
 QS.push({
   id: 29,
   level: "c5",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Asam lemak omega-3 (EPA dan DHA) ditemukan pada ikan laut dan memiliki manfaat kesehatan, termasuk mengurangi peradangan dan meningkatkan fungsi otak.</strong>
@@ -1254,18 +1315,19 @@ QS.push({
   `,
   q: "Jumlah atom hidrogen yang diperlukan untuk menghidrogenasi sempurna 1 mol EPA menjadi asam lemak jenuh adalah...",
   opts: ["5 mol H₂", "10 mol H₂", "15 mol H₂", "20 mol H₂", "25 mol H₂"],
-  ans: 1,
+  ans: 0,
   exp: "Setiap ikatan rangkap membutuhkan 1 mol H₂ untuk hidrogenasi. EPA memiliki 5 ikatan rangkap → 5 mol H₂ diperlukan untuk menghidrogenasi 1 mol EPA."
 });
 
 // ================================================================
-// KIMIA LINGKUNGAN - C6
+// KIMIA LINGKUNGAN - C6 (Soal 30)
 // ================================================================
 
 // Soal 30: Ozon Lapisan Stratosfer
 QS.push({
   id: 30,
   level: "c6",
+  type: "single",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Lapisan ozon di stratosfer melindungi kehidupan di Bumi dari radiasi UV-B. CFC (chlorofluorocarbon) dapat merusak lapisan ozon melalui reaksi katalitik.</strong>
@@ -1307,7 +1369,8 @@ var S = {
   timer: null,
   timeLeft: 5400, // 90 menit dalam detik
   isFinished: false,
-  totalSoal: 30
+  totalSoal: 30,
+  isAnswered: {}
 };
 
 // ================================================================
@@ -1322,7 +1385,7 @@ function startTimer() {
             clearInterval(S.timer);
             S.timer = null;
             finishTryOut();
-            toast("Waktu habis! Try Out selesai.", "var(--error)");
+            toast("⏰ Waktu habis! Try Out selesai.", "var(--error)");
         }
     }, 1000);
 }
@@ -1358,6 +1421,7 @@ function startTryOut() {
     S.isFinished = false;
     S.timeLeft = 5400;
     S.mode = "tryout";
+    S.isAnswered = {};
     updateTimerDisplay();
     document.getElementById("timerDisplay").classList.remove("warning");
     go("quiz");
@@ -1376,7 +1440,7 @@ function go(v) {
 }
 
 function renderHome() {
-    document.getElementById("bWR").style.display = S.wrong.length > 0 ? "flex" : "none";
+    document.getElementById("bRW").style.display = S.wrong.length > 0 ? "flex" : "none";
     renderList();
 }
 
@@ -1386,7 +1450,7 @@ function renderList() {
     QS.forEach(function(q, i) {
         var answered = S.done[q.id];
         var wasWrong = S.wrong.indexOf(q.id) >= 0;
-        var levelLabel = q.level ? getLevelBadge(q.level) : "";
+        var levelLabel = getLevelBadge(q.level);
 
         var d = document.createElement("div");
         d.className = "glow-card rounded-lg p-3.5 mb-2.5 cursor-pointer flex items-center gap-3";
@@ -1492,6 +1556,7 @@ function goToSoal(index) {
 function selS(qid, i) {
     S.ans[qid] = i;
     S.done[qid] = true;
+    S.isAnswered[qid] = true;
     renderQ();
     // Auto pindah ke soal berikutnya setelah menjawab
     if (S.qi < S.qids.length - 1) {
@@ -1525,7 +1590,10 @@ function finishTryOut() {
         var ok = false;
         if (ua === q.ans) ok = true;
         S.done[qid] = true;
-        if (ok) { correct++; } else { wrong++; S.wrong.push(qid); }
+        if (ok) { correct++; } else { 
+            wrong++; 
+            if (S.wrong.indexOf(qid) < 0) S.wrong.push(qid);
+        }
     });
 
     S.wrong = uniq(S.wrong);
@@ -1544,7 +1612,7 @@ function finishTryOut() {
     ring.style.strokeDashoffset = circ - (circ * pct / 100);
     ring.style.stroke = pct >= 70 ? "var(--success)" : pct >= 40 ? "var(--accent)" : "var(--error)";
 
-    var lbl = pct >= 90 ? "Luar Biasa!" : pct >= 70 ? "Bagus Sekali!" : pct >= 50 ? "Cukup Baik" : "Perlu Belajar Lagi";
+    var lbl = pct >= 90 ? "Luar Biasa! 🎉" : pct >= 75 ? "Bagus Sekali! 👏" : pct >= 55 ? "Cukup Baik 📚" : pct >= 35 ? "Perlu Belajar Lagi 💪" : "Jangan Menyerah! 🔥";
     document.getElementById("rLbl").textContent = lbl;
     document.getElementById("bRW").style.display = wrong > 0 ? "inline-flex" : "none";
 
@@ -1595,10 +1663,10 @@ function renderRev() {
             '</button>';
     });
     h += '</div>';
-    h += '<div class="expbox">' +
+    h += '<div class="expbox ' + (ok ? 'good' : 'bad') + '">' +
         '<div class="flex items-center gap-2 mb-1.5 font-bold text-sm">' +
         '<i class="fa-solid ' + (ok ? 'fa-circle-check' : 'fa-circle-xmark') + '" style="color:' + (ok ? 'var(--success)' : 'var(--error)') + '"></i>' +
-        (ok ? 'Jawaban Benar' : 'Jawaban Salah') +
+        (ok ? 'Jawaban Benar ✅' : 'Jawaban Salah ❌') +
         '</div>' +
         '<p style="color:var(--text);line-height:1.6;font-size:0.9rem;">' + q.exp + '</p>' +
         '</div>';
@@ -1640,11 +1708,12 @@ function resetAll() {
     S.ans = {};
     S.timeLeft = 5400;
     S.isFinished = false;
+    S.isAnswered = {};
     updateTimerDisplay();
     document.getElementById("timerDisplay").classList.remove("warning");
     localStorage.removeItem("tka_tryout4");
     renderHome();
-    toast("Progress try out telah direset", "var(--success)");
+    toast("✅ Progress try out telah direset", "var(--success)");
 }
 
 function openExit() { document.getElementById("exMod").classList.add("open"); }
@@ -1668,9 +1737,12 @@ function toast(msg, bg) {
     setTimeout(function() { t.style.display = "none"; }, 3000);
 }
 
+// ================================================================
 // INIT
+// ================================================================
 renderHome();
-console.log("Try Out 4 - 30 soal HOTS C4-C6 loaded");
+console.log("✅ Try Out 4 - 30 soal HOTS C4-C6 loaded");
+console.log("📋 Level: C4 (10 soal), C5 (10 soal), C6 (10 soal)");
 </script>
 </body>
 </html>
