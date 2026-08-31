@@ -260,37 +260,6 @@
     .timer-container .timer-warning { color: var(--error); }
     .timer-container .timer-safe { color: var(--success); }
 
-    .progress-ring {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        border: 3px solid var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.7rem;
-        font-weight: 700;
-        color: var(--accent);
-        position: relative;
-    }
-    .progress-ring .ring-bg {
-        position: absolute;
-        inset: -3px;
-        border-radius: 50%;
-        border: 3px solid transparent;
-        border-top-color: var(--accent);
-        animation: spin 2s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .soal-counter {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 0.85rem;
-        color: var(--muted);
-    }
-
     .expbox {
         margin-top: 14px;
         padding: 14px 18px;
@@ -325,14 +294,42 @@
         text-align: center;
     }
 
+    /* Review grid buttons */
+    .review-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--muted);
+        font-size: 0.7rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .review-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+    .review-btn.answered {
+        background: rgba(52, 211, 153, 0.15);
+        color: var(--success);
+        border-color: var(--success);
+    }
+    .review-btn.active {
+        border-color: var(--accent);
+        color: var(--accent);
+        box-shadow: 0 0 12px rgba(212, 160, 74, 0.3);
+    }
+
     @media (max-width: 640px) {
         .ob { font-size: 0.82rem; padding: 8px 12px; }
         .bp, .bs { font-size: 0.78rem; padding: 8px 16px; }
         .timer-container { font-size: 0.75rem; padding: 4px 12px; }
-        .soal-counter { font-size: 0.7rem; }
         .stim { font-size: 0.82rem; padding: 10px 14px; }
         table.soal-table { font-size: 0.7rem; }
         table.soal-table th, table.soal-table td { padding: 4px 6px; }
+        .review-btn { width: 28px; height: 28px; font-size: 0.6rem; }
     }
 </style>
 </head>
@@ -438,7 +435,7 @@
     <div class="flex items-center justify-between mt-6 gap-3 flex-wrap">
         <button id="bPrv" onclick="qPrev()" class="bs" style="visibility:hidden"><i class="fa-solid fa-chevron-left mr-1"></i> Sebelumnya</button>
         <div class="flex gap-2">
-            <button onclick="toggleReview()" class="bs text-sm"><i class="fa-regular fa-bookmark"></i> Review</button>
+            <button onclick="toggleReview()" class="bs text-sm"><i class="fa-regular fa-bookmark"></i> <span id="reviewToggleText">Review</span></button>
             <button onclick="submitTryout()" class="bp text-sm"><i class="fa-solid fa-check"></i> Selesai</button>
         </div>
         <button id="bNxt" onclick="qNext()" class="bp">Selanjutnya <i class="fa-solid fa-chevron-right ml-1"></i></button>
@@ -524,19 +521,18 @@
 var QS = [];
 
 // ================================================================
-// SOAL 1 - C3 (Asam-Basa) - Kasus Limbah Industri
+// SOAL 1 - C3 (Asam-Basa)
 // ================================================================
 QS.push({
   id: 1,
-  topic: "asam-basa",
+  topic: "Asam-Basa",
   level: "c3",
   type: "single",
   stim: `
     <div class="stim">
       <strong>📋 Kasus: Limbah Pabrik Tekstil</strong><br>
       Sebuah pabrik tekstil membuang limbah cair yang mengandung asam sulfat (H₂SO₄) 0,05 M ke sungai. 
-      Limbah ini harus dinetralkan sebelum dibuang untuk memenuhi baku mutu lingkungan (pH 6-9).
-      Pengelola pabrik menambahkan kapur tohor (CaO) untuk menetralkan limbah tersebut.
+      Limbah ini harus dinetralkan sebelum dibuang. Pengelola pabrik menambahkan kapur tohor (CaO).
     </div>
   `,
   q: "Jika 100 L limbah asam sulfat 0,05 M dinetralkan dengan CaO padat, massa CaO yang dibutuhkan adalah... (Ar: Ca=40, O=16)",
@@ -552,19 +548,18 @@ QS.push({
 });
 
 // ================================================================
-// SOAL 2 - C3 (Buffer) - Kasus Darah dan Asidosis
+// SOAL 2 - C3 (Buffer)
 // ================================================================
 QS.push({
   id: 2,
-  topic: "buffer",
+  topic: "Larutan Penyangga",
   level: "c3",
   type: "single",
   stim: `
     <div class="stim">
       <strong>🏥 Kasus: Asidosis Metabolik</strong><br>
-      Seorang pasien dengan kondisi asidosis metabolik memiliki pH darah 7,25. 
+      Seorang pasien dengan asidosis metabolik memiliki pH darah 7,25. 
       Sistem buffer utama darah adalah H₂CO₃/HCO₃⁻ dengan pKa = 6,1. 
-      Dokter memutuskan memberikan infus natrium bikarbonat (NaHCO₃) untuk menaikkan pH darah.
     </div>
   `,
   q: "Jika perbandingan normal [HCO₃⁻]/[H₂CO₃] dalam darah adalah 20:1, berapakah perbandingan tersebut pada saat pH darah 7,25? (pH = pKa + log [HCO₃⁻]/[H₂CO₃])",
@@ -580,19 +575,18 @@ QS.push({
 });
 
 // ================================================================
-// SOAL 3 - C3 (Kesetimbangan) - Kasus Industri Ammonia
+// SOAL 3 - C3 (Kesetimbangan)
 // ================================================================
 QS.push({
   id: 3,
-  topic: "kesetimbangan",
+  topic: "Kesetimbangan",
   level: "c3",
   type: "single",
   stim: `
     <div class="stim">
       <strong>🏭 Kasus: Pabrik Pupuk</strong><br>
-      Sebuah pabrik pupuk memproduksi amonia melalui proses Haber-Bosch:
-      N₂(g) + 3H₂(g) ⇌ 2NH₃(g) &nbsp; ΔH = -92 kJ/mol
-      Untuk memaksimalkan produksi amonia, pabrik beroperasi pada suhu 450°C dan tekanan 200 atm.
+      Proses Haber-Bosch: N₂(g) + 3H₂(g) ⇌ 2NH₃(g) &nbsp; ΔH = -92 kJ/mol
+      Pabrik beroperasi pada suhu 450°C dan tekanan 200 atm.
     </div>
   `,
   q: "Jika tekanan dinaikkan menjadi 300 atm pada suhu yang sama, apa yang terjadi pada kesetimbangan?",
@@ -608,17 +602,17 @@ QS.push({
 });
 
 // ================================================================
-// SOAL 4 - C3 (Elektrokimia) - Kasus Korosi Pipa Bawah Tanah
+// SOAL 4 - C3 (Elektrokimia)
 // ================================================================
 QS.push({
   id: 4,
-  topic: "elektrokimia",
+  topic: "Elektrokimia",
   level: "c3",
   type: "single",
   stim: `
     <div class="stim">
       <strong>🔧 Kasus: Proteksi Katodik Pipa Baja</strong><br>
-      Sebuah pipa baja (Fe) bawah tanah dilindungi dari korosi menggunakan metode proteksi katodik dengan magnesium (Mg) sebagai anoda korban.
+      Pipa baja (Fe) dilindungi dari korosi dengan magnesium (Mg) sebagai anoda korban.
       Diketahui E° Fe²⁺/Fe = -0,44 V dan E° Mg²⁺/Mg = -2,37 V.
     </div>
   `,
@@ -635,19 +629,17 @@ QS.push({
 });
 
 // ================================================================
-// SOAL 5 - C3 (Laju Reaksi) - Kasus Makanan Kadaluarsa
+// SOAL 5 - C3 (Laju Reaksi)
 // ================================================================
 QS.push({
   id: 5,
-  topic: "laju-reaksi",
+  topic: "Laju Reaksi",
   level: "c3",
   type: "single",
   stim: `
     <div class="stim">
       <strong>🍚 Kasus: Makanan Kadaluarsa</strong><br>
-      Makanan cepat rusak karena reaksi oksidasi lemak berlangsung lebih cepat pada suhu ruang. 
-      Untuk memperlambat reaksi, makanan disimpan dalam lemari pendingin.
-      Data menunjukkan laju reaksi oksidasi lemak meningkat 2 kali setiap kenaikan suhu 10°C.
+      Laju reaksi oksidasi lemak meningkat 2 kali setiap kenaikan suhu 10°C.
     </div>
   `,
   q: "Jika pada suhu 25°C makanan bertahan 4 hari, berapa lama makanan bertahan pada suhu 5°C?",
@@ -663,17 +655,16 @@ QS.push({
 });
 
 // ================================================================
-// SOAL 6 - C3 (Ksp) - Kasus Air Minum dan Fluorida
+// SOAL 6 - C3 (Ksp)
 // ================================================================
 QS.push({
   id: 6,
-  topic: "ksp",
+  topic: "Kelarutan & Ksp",
   level: "c3",
   type: "single",
   stim: `
     <div class="stim">
       <strong>💧 Kasus: Kadar Fluorida dalam Air Minum</strong><br>
-      Pemerintah menambahkan fluorida (NaF) ke dalam air minum untuk mencegah gigi berlubang dengan kadar optimal 0,7 mg/L.
       Ksp CaF₂ = 3,9 × 10⁻¹¹. Air minum mengandung ion Ca²⁺ sebesar 0,01 M.
     </div>
   `,
@@ -690,18 +681,18 @@ QS.push({
 });
 
 // ================================================================
-// SOAL 7 - C3 (Koloid) - Kasus Penjernihan Air
+// SOAL 7 - C3 (Koloid)
 // ================================================================
 QS.push({
   id: 7,
-  topic: "koloid",
+  topic: "Sistem Koloid",
   level: "c3",
   type: "single",
   stim: `
     <div class="stim">
       <strong>💧 Kasus: Penjernihan Air Sungai</strong><br>
       Air sungai yang keruh mengandung partikel koloid lumpur bermuatan negatif. 
-      Untuk menjernihkan air, petugas PDAM menambahkan tawas (Al₂(SO₄)₃) ke dalam air.
+      Petugas PDAM menambahkan tawas (Al₂(SO₄)₃) ke dalam air.
     </div>
   `,
   q: "Proses yang terjadi ketika tawas ditambahkan ke dalam air keruh adalah...",
@@ -717,17 +708,16 @@ QS.push({
 });
 
 // ================================================================
-// SOAL 8 - C3 (Hidrokarbon) - Kasus Bahan Bakar
+// SOAL 8 - C3 (Hidrokarbon)
 // ================================================================
 QS.push({
   id: 8,
-  topic: "hidrokarbon",
+  topic: "Hidrokarbon",
   level: "c3",
   type: "single",
   stim: `
     <div class="stim">
       <strong>⛽ Kasus: Bahan Bakar Kendaraan</strong><br>
-      Sebuah SPBU menjual tiga jenis bahan bakar: bensin (C₈H₁₈), solar (C₁₂H₂₆), dan pertamax (campuran hidrokarbon bercabang).
       Pembakaran sempurna bensin: 2C₈H₁₈ + 25O₂ → 16CO₂ + 18H₂O.
     </div>
   `,
@@ -744,21 +734,20 @@ QS.push({
 });
 
 // ================================================================
-// SOAL 9 - C3 (Ikatan Kimia) - Kasus Bahan Bangunan
+// SOAL 9 - C3 (Ikatan Kimia)
 // ================================================================
 QS.push({
   id: 9,
-  topic: "ikatan-kimia",
+  topic: "Ikatan Kimia",
   level: "c3",
   type: "single",
   stim: `
     <div class="stim">
       <strong>🏗️ Kasus: Bahan Bangunan</strong><br>
-      Bahan bangunan seperti marmer (CaCO₃), granit (campuran silika), dan logam besi memiliki sifat fisik yang berbeda.
-      Marmer mudah bereaksi dengan asam, sedangkan silika tidak bereaksi dengan asam.
+      Marmer (CaCO₃) mudah bereaksi dengan asam, sedangkan silika (SiO₂) tidak bereaksi dengan asam.
     </div>
   `,
-  q: "Berdasarkan data di atas, jenis ikatan yang terdapat pada marmer dan silika berturut-turut adalah...",
+  q: "Jenis ikatan yang terdapat pada marmer dan silika berturut-turut adalah...",
   opts: [
     "Ion dan kovalen",
     "Kovalen dan ion",
@@ -767,21 +756,20 @@ QS.push({
     "Ion dan logam"
   ],
   ans: 0,
-  exp: "Marmer (CaCO₃) memiliki ikatan ion (Ca²⁺ dan CO₃²⁻). Silika (SiO₂) memiliki ikatan kovalen. Marmer mudah bereaksi dengan asam karena ion CO₃²⁻ bereaksi dengan H⁺."
+  exp: "Marmer (CaCO₃) memiliki ikatan ion (Ca²⁺ dan CO₃²⁻). Silika (SiO₂) memiliki ikatan kovalen."
 });
 
 // ================================================================
-// SOAL 10 - C3 (Termokimia) - Kasus Kalori Makanan
+// SOAL 10 - C3 (Termokimia)
 // ================================================================
 QS.push({
   id: 10,
-  topic: "termokimia",
+  topic: "Termokimia",
   level: "c3",
   type: "single",
   stim: `
     <div class="stim">
       <strong>🍔 Kasus: Kalori Makanan</strong><br>
-      Seorang atlet mengonsumsi makanan dengan total energi 2.500 kkal per hari.
       Reaksi pembakaran glukosa (C₆H₁₂O₆) menghasilkan energi 2.820 kJ/mol.
       (1 kkal = 4,18 kJ)
     </div>
@@ -792,29 +780,28 @@ QS.push({
     "266 gram",
     "333 gram",
     "400 gram",
-    "533 gram"
+    "667 gram"
   ],
   ans: 4,
-  exp: "2.500 kkal = 2.500 × 4,18 = 10.450 kJ. mol glukosa = 10.450/2.820 = 3,7 mol. massa = 3,7 × 180 = 666 g. (Periksa: 2.500 kkal = 10.450 kJ, 10.450/2.820 = 3,7 mol, 3,7×180 = 666 g.)"
+  exp: "2.500 kkal = 2.500 × 4,18 = 10.450 kJ. mol glukosa = 10.450/2.820 = 3,7 mol. massa = 3,7 × 180 = 667 gram."
 });
 
 // ================================================================
-// SOAL 11 - C4 (Asam-Basa) - Kasus Industri Makanan
+// SOAL 11 - C4 (Asam-Basa)
 // ================================================================
 QS.push({
   id: 11,
-  topic: "asam-basa",
+  topic: "Asam-Basa",
   level: "c4",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>🧪 Kasus: Industri Minuman Ringan</strong><br>
-      Sebuah pabrik minuman ringan menggunakan asam sitrat (C₆H₈O₇) sebagai pengatur keasaman.
       Asam sitrat adalah asam triprotik dengan pKa₁ = 3,13, pKa₂ = 4,76, pKa₃ = 6,40.
-      Untuk mendapatkan rasa asam yang optimal, pH minuman diatur pada 3,5.
+      pH minuman diatur pada 3,5.
     </div>
   `,
-  q: "Berdasarkan data tersebut, pernyataan yang BENAR tentang spesi yang dominan pada pH 3,5 adalah... (Pilih 2 jawaban benar)",
+  q: "Pernyataan yang BENAR tentang spesi yang dominan pada pH 3,5 adalah... (Pilih 2 jawaban benar)",
   opts: [
     "Spesi H₃C₆H₅O₇ (asam sitrat tak terionisasi) dominan",
     "Spesi H₂C₆H₅O₇⁻ (asam sitrat terionisasi satu) dominan",
@@ -823,23 +810,21 @@ QS.push({
     "Asam sitrat terionisasi sempurna pada pH 3,5"
   ],
   ans: [1, 3],
-  exp: "Pada pH = 3,5 (antara pKa₁=3,13 dan pKa₂=4,76), spesi dominan adalah H₂C₆H₅O₇⁻ (terionisasi satu). pH lebih tinggi dari pKa₁ menyebabkan ionisasi pertama terjadi, tetapi lebih rendah dari pKa₂ sehingga ionisasi kedua belum terjadi."
+  exp: "Pada pH = 3,5 (antara pKa₁=3,13 dan pKa₂=4,76), spesi dominan adalah H₂C₆H₅O₇⁻ (terionisasi satu)."
 });
 
 // ================================================================
-// SOAL 12 - C4 (Buffer) - Kasus Buffer dalam Obat
+// SOAL 12 - C4 (Buffer)
 // ================================================================
 QS.push({
   id: 12,
-  topic: "buffer",
+  topic: "Larutan Penyangga",
   level: "c4",
   type: "single",
   stim: `
     <div class="stim">
       <strong>💊 Kasus: Obat Tetes Mata</strong><br>
-      Obat tetes mata harus memiliki pH yang sesuai dengan air mata (pH ≈ 7,4) agar tidak mengiritasi mata.
-      Seorang apoteker membuat larutan buffer menggunakan H₂PO₄⁻/HPO₄²⁻ (pKa₂ = 7,21).
-      Konsentrasi total buffer adalah 0,1 M.
+      Buffer H₂PO₄⁻/HPO₄²⁻ (pKa₂ = 7,21). Konsentrasi total buffer 0,1 M.
     </div>
   `,
   q: "Perbandingan [HPO₄²⁻]/[H₂PO₄⁻] yang diperlukan untuk mendapatkan pH = 7,4 adalah...",
@@ -851,27 +836,25 @@ QS.push({
     "5:1"
   ],
   ans: 1,
-  exp: "pH = pKa + log([HPO₄²⁻]/[H₂PO₄⁻]). 7,4 = 7,21 + log r. log r = 0,19. r = 10⁰·¹⁹ = 1,55. Perbandingan = 1,55:1."
+  exp: "pH = pKa + log([HPO₄²⁻]/[H₂PO₄⁻]). 7,4 = 7,21 + log r. log r = 0,19. r = 10⁰·¹⁹ = 1,55."
 });
 
 // ================================================================
-// SOAL 13 - C4 (Kesetimbangan) - Kasus Industri Kimia
+// SOAL 13 - C4 (Kesetimbangan)
 // ================================================================
 QS.push({
   id: 13,
-  topic: "kesetimbangan",
+  topic: "Kesetimbangan",
   level: "c4",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>🏭 Kasus: Produksi Asam Sulfat</strong><br>
-      Proses kontak untuk produksi asam sulfat melibatkan reaksi:
       2SO₂(g) + O₂(g) ⇌ 2SO₃(g) &nbsp; ΔH = -198 kJ/mol
-      Reaksi ini berlangsung pada suhu 400-500°C dengan katalis V₂O₅.
-      Data Kp pada berbagai suhu: 400°C = 400, 500°C = 40, 600°C = 5.
+      Data Kp: 400°C = 400, 500°C = 40, 600°C = 5.
     </div>
   `,
-  q: "Berdasarkan data di atas, pernyataan yang BENAR adalah... (Pilih 2 jawaban benar)",
+  q: "Pernyataan yang BENAR tentang reaksi ini adalah... (Pilih 2 jawaban benar)",
   opts: [
     "Reaksi pembentukan SO₃ adalah reaksi endoterm",
     "Kp menurun dengan naiknya suhu, menunjukkan reaksi eksoterm",
@@ -880,57 +863,50 @@ QS.push({
     "Pada 600°C, reaksi lebih menguntungkan untuk pembentukan SO₃"
   ],
   ans: [1, 3],
-  exp: "Kp menurun dengan naiknya suhu (400°C:400 → 500°C:40 → 600°C:5) menunjukkan reaksi eksoterm. Katalis mempercepat reaksi tetapi tidak mengubah posisi kesetimbangan. Pernyataan 1 salah: reaksi eksoterm (ΔH negatif).")
+  exp: "Kp menurun dengan naiknya suhu (400°C:400 → 500°C:40 → 600°C:5) menunjukkan reaksi eksoterm. Katalis mempercepat reaksi tetapi tidak mengubah posisi kesetimbangan."
 });
 
 // ================================================================
-// SOAL 14 - C4 (Elektrokimia) - Kasus Baterai Kendaraan Listrik
+// SOAL 14 - C4 (Elektrokimia)
 // ================================================================
 QS.push({
   id: 14,
-  topic: "elektrokimia",
+  topic: "Elektrokimia",
   level: "c4",
   type: "single",
   stim: `
     <div class="stim">
       <strong>🚗 Kasus: Baterai Kendaraan Listrik</strong><br>
-      Baterai lithium-ion pada kendaraan listrik menggunakan reaksi:
-      LiCoO₂ + C₆ ⇌ LiₓC₆ + Li₁₋ₓCoO₂
-      Potensial sel standar baterai ini adalah 3,7 V. Kapasitas baterai 60 kWh.
-      (1 kWh = 3.600.000 J, 1 Faraday = 96.485 C/mol)
+      Baterai lithium-ion: 3,7 V, kapasitas 60 kWh. (1 kWh = 3.600.000 J, 1 Faraday = 96.485 C/mol)
     </div>
   `,
   q: "Jumlah mol elektron yang mengalir saat baterai 60 kWh habis digunakan adalah...",
   opts: [
+    "6,05 × 10² mol",
     "1,35 × 10⁴ mol",
     "2,70 × 10⁴ mol",
     "5,40 × 10⁴ mol",
-    "8,10 × 10⁴ mol",
-    "1,08 × 10⁵ mol"
+    "8,10 × 10⁴ mol"
   ],
-  ans: 1,
-  exp: "Energi = 60 kWh = 60 × 3.600.000 = 216.000.000 J. W = E × Q. Q = W/E = 216.000.000/3,7 = 58.378.378 C. mol e⁻ = 58.378.378/96.485 = 605 mol? Periksa: 216.000.000/3,7 = 58.378.378 C. 58.378.378/96.485 = 605 mol. (Ternyata hasilnya 605 mol, tetapi opsi terdekat 1,35×10⁴? Mari periksa ulang: 60 kWh = 60 × 3,6×10⁶ = 2,16×10⁸ J. Q = 2,16×10⁸/3,7 = 5,84×10⁷ C. mol = 5,84×10⁷/96.485 = 605 mol. Opsi yang tersedia tidak ada yang mendekati 605 mol. Mungkin ada kesalahan asumsi. Jawaban yang paling mendekati adalah 6,05×10² mol.")
+  ans: 0,
+  exp: "Energi = 60 kWh = 60 × 3.600.000 = 216.000.000 J. W = E × Q. Q = W/E = 216.000.000/3,7 = 58.378.378 C. mol e⁻ = 58.378.378/96.485 = 605 mol = 6,05 × 10² mol."
 });
 
 // ================================================================
-// SOAL 15 - C4 (Laju Reaksi) - Kasus Pembusukan Makanan
+// SOAL 15 - C4 (Laju Reaksi)
 // ================================================================
 QS.push({
   id: 15,
-  topic: "laju-reaksi",
+  topic: "Laju Reaksi",
   level: "c4",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>🧊 Kasus: Pembusukan Makanan</strong><br>
-      Sebuah penelitian tentang laju pembusukan daging menunjukkan bahwa reaksi pembusukan mengikuti orde 1.
-      Data waktu paruh (t½) pembusukan pada berbagai suhu:
-      - 0°C: t½ = 10 hari
-      - 10°C: t½ = 3 hari
-      - 20°C: t½ = 1 hari
+      Data waktu paruh pembusukan: 0°C = 10 hari, 10°C = 3 hari, 20°C = 1 hari.
     </div>
   `,
-  q: "Berdasarkan data di atas, pernyataan yang BENAR adalah... (Pilih 2 jawaban benar)",
+  q: "Pernyataan yang BENAR berdasarkan data di atas adalah... (Pilih 2 jawaban benar)",
   opts: [
     "Tetapan laju reaksi (k) meningkat dengan naiknya suhu",
     "Pada 0°C, laju reaksi paling cepat",
@@ -939,26 +915,25 @@ QS.push({
     "Pada 30°C, t½ diperkirakan sekitar 0,3 hari"
   ],
   ans: [0, 4],
-  exp: "t½ semakin kecil dengan naiknya suhu (10→3→1 hari), berarti k semakin besar (k = 0,693/t½). Pada 30°C, t½ ≈ 0,3 hari (setiap naik 10°C, t½ menjadi 1/3 kali).")
+  exp: "t½ semakin kecil dengan naiknya suhu (10→3→1 hari), berarti k semakin besar. Pada 30°C, t½ ≈ 0,3 hari (setiap naik 10°C, t½ menjadi 1/3 kali)."
 });
 
 // ================================================================
-// SOAL 16 - C4 (Ksp) - Kasus Kerak pada Ketel
+// SOAL 16 - C4 (Ksp)
 // ================================================================
 QS.push({
   id: 16,
-  topic: "ksp",
+  topic: "Kelarutan & Ksp",
   level: "c4",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>🫖 Kasus: Kerak pada Ketel</strong><br>
-      Ketel listrik yang sering digunakan untuk memasak air membentuk kerak (scale) yang terdiri dari CaCO₃ dan MgCO₃.
       Ksp CaCO₃ = 3,3 × 10⁻⁹, Ksp MgCO₃ = 6,8 × 10⁻⁶.
-      Air sadah mengandung ion Ca²⁺ dan Mg²⁺ masing-masing 0,001 M.
+      Air sadah mengandung Ca²⁺ dan Mg²⁺ masing-masing 0,001 M.
     </div>
   `,
-  q: "Berdasarkan data di atas, pernyataan yang BENAR tentang pembentukan kerak adalah... (Pilih 2 jawaban benar)",
+  q: "Pernyataan yang BENAR tentang pembentukan kerak adalah... (Pilih 2 jawaban benar)",
   opts: [
     "CaCO₃ akan mengendap lebih dulu karena Ksp-nya lebih kecil",
     "MgCO₃ akan mengendap lebih dulu karena konsentrasi Mg²⁺ lebih besar",
@@ -967,26 +942,24 @@ QS.push({
     "Kedua garam mengendap pada saat yang bersamaan"
   ],
   ans: [0, 2],
-  exp: "CaCO₃ memiliki Ksp lebih kecil (3,3×10⁻⁹) sehingga mengendap lebih dulu. [CO₃²⁻] untuk CaCO₃ = Ksp/[Ca²⁺] = 3,3×10⁻⁹/0,001 = 3,3×10⁻⁶ M. [CO₃²⁻] untuk MgCO₃ = 6,8×10⁻⁶/0,001 = 6,8×10⁻³ M.")
+  exp: "CaCO₃ memiliki Ksp lebih kecil (3,3×10⁻⁹) sehingga mengendap lebih dulu. [CO₃²⁻] untuk CaCO₃ = Ksp/[Ca²⁺] = 3,3×10⁻⁹/0,001 = 3,3×10⁻⁶ M."
 });
 
 // ================================================================
-// SOAL 17 - C4 (Termokimia) - Kasus Pemanasan Global
+// SOAL 17 - C4 (Termokimia)
 // ================================================================
 QS.push({
   id: 17,
-  topic: "termokimia",
+  topic: "Termokimia",
   level: "c4",
   type: "single",
   stim: `
     <div class="stim">
       <strong>🌍 Kasus: Pemanasan Global</strong><br>
-      Emisi CO₂ dari pembakaran bahan bakar fosil berkontribusi terhadap pemanasan global.
-      Reaksi pembakaran metana: CH₄(g) + 2O₂(g) → CO₂(g) + 2H₂O(l) &nbsp; ΔH = -890 kJ/mol
-      Setiap tahun, Indonesia mengonsumsi sekitar 40 juta ton LPG (60% propana C₃H₈, 40% butana C₄H₁₀).
+      LPG: 60% propana (C₃H₈, Mr=44, ΔHc=-2.220 kJ/mol) dan 40% butana (C₄H₁₀, Mr=58, ΔHc=-2.878 kJ/mol).
     </div>
   `,
-  q: "Jika 1 ton LPG (60% propana, 40% butana) dibakar sempurna, total energi yang dihasilkan sekitar... (Mr propana=44, butana=58, ΔHc propana=-2.220 kJ/mol, butana=-2.878 kJ/mol)",
+  q: "Jika 1 ton LPG dibakar sempurna, total energi yang dihasilkan sekitar...",
   opts: [
     "2,5 × 10⁷ kJ",
     "3,0 × 10⁷ kJ",
@@ -994,24 +967,22 @@ QS.push({
     "5,0 × 10⁷ kJ",
     "6,0 × 10⁷ kJ"
   ],
-  ans: 4,
-  exp: "1 ton = 1.000.000 g. Propana: 600.000 g/44 = 13.636 mol × 2.220 = 30,3×10⁶ kJ. Butana: 400.000 g/58 = 6.897 mol × 2.878 = 19,8×10⁶ kJ. Total = 50,1×10⁶ kJ ≈ 5,0×10⁷ kJ.")
+  ans: 3,
+  exp: "1 ton = 1.000.000 g. Propana: 600.000 g/44 = 13.636 mol × 2.220 = 30,3×10⁶ kJ. Butana: 400.000 g/58 = 6.897 mol × 2.878 = 19,8×10⁶ kJ. Total = 50,1×10⁶ kJ ≈ 5,0×10⁷ kJ."
 });
 
 // ================================================================
-// SOAL 18 - C4 (Ikatan Kimia) - Kasus Obat dan Tubuh
+// SOAL 18 - C4 (Ikatan Kimia)
 // ================================================================
 QS.push({
   id: 18,
-  topic: "ikatan-kimia",
+  topic: "Ikatan Kimia",
   level: "c4",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>💊 Kasus: Obat dan Tubuh</strong><br>
-      Obat-obatan berinteraksi dengan reseptor di tubuh melalui ikatan kimia.
-      Jenis ikatan yang terlibat: ikatan ion, ikatan hidrogen, gaya Van der Waals, dan interaksi hidrofobik.
-      Obat yang larut dalam lemak (lipofilik) lebih mudah melewati membran sel.
+      Obat-obatan berinteraksi dengan reseptor melalui ikatan kimia.
     </div>
   `,
   q: "Pernyataan yang BENAR tentang interaksi obat dengan reseptor adalah... (Pilih 2 jawaban benar)",
@@ -1023,26 +994,24 @@ QS.push({
     "Obat hidrofilik lebih mudah melewati membran sel daripada obat lipofilik"
   ],
   ans: [0, 3],
-  exp: "Ikatan hidrogen terjadi antara H yang terikat pada O, N, atau F dengan atom elektronegatif. Ikatan ion terjadi karena serah terima elektron (perbedaan muatan). Gaya Van der Waals adalah interaksi terlemah. Membran sel bersifat nonpolar (lipofilik).")
+  exp: "Ikatan hidrogen terjadi antara H yang terikat pada O, N, atau F dengan atom elektronegatif. Ikatan ion terjadi karena perbedaan muatan."
 });
 
 // ================================================================
-// SOAL 19 - C4 (Struktur Atom) - Kasus Radioisotop Medis
+// SOAL 19 - C4 (Struktur Atom)
 // ================================================================
 QS.push({
   id: 19,
-  topic: "struktur-atom",
+  topic: "Struktur Atom",
   level: "c4",
   type: "single",
   stim: `
     <div class="stim">
       <strong>🏥 Kasus: Radioisotop Medis</strong><br>
-      Teknesium-99m (⁹⁹ᵐTc) digunakan sebagai radioisotop untuk diagnosis medis.
-      ⁹⁹ᵐTc memiliki waktu paruh 6 jam dan memancarkan sinar gamma.
-      ⁹⁹ᵐTc diperoleh dari peluruhan Molibdenum-99 (⁹⁹Mo) dengan waktu paruh 66 jam.
+      ⁹⁹ᵐTc memiliki waktu paruh 6 jam. ⁹⁹Mo memiliki waktu paruh 66 jam.
     </div>
   `,
-  q: "Jika 1 gram ⁹⁹Mo disimpan selama 66 jam, berapa gram ⁹⁹ᵐTc yang terbentuk? (Asumsikan semua Mo meluruh menjadi Tc)",
+  q: "Jika 1 gram ⁹⁹Mo disimpan selama 66 jam, berapa gram ⁹⁹ᵐTc yang terbentuk?",
   opts: [
     "0,25 gram",
     "0,50 gram",
@@ -1050,24 +1019,22 @@ QS.push({
     "1,00 gram",
     "1,50 gram"
   ],
-  ans: 0,
-  exp: "Setelah 66 jam (satu waktu paruh ⁹⁹Mo), ⁹⁹Mo yang tersisa = 0,5 gram. Yang meluruh menjadi ⁹⁹ᵐTc = 0,5 gram. (Karena 1 mol Mo → 1 mol Tc, massa Tc yang terbentuk ≈ 0,5 gram.)")
+  ans: 1,
+  exp: "Setelah 66 jam (satu waktu paruh ⁹⁹Mo), ⁹⁹Mo yang tersisa = 0,5 gram. Yang meluruh menjadi ⁹⁹ᵐTc = 0,5 gram."
 });
 
 // ================================================================
-// SOAL 20 - C4 (Koloid) - Kasus Kosmetik
+// SOAL 20 - C4 (Koloid)
 // ================================================================
 QS.push({
   id: 20,
-  topic: "koloid",
+  topic: "Sistem Koloid",
   level: "c4",
   type: "single",
   stim: `
     <div class="stim">
       <strong>💄 Kasus: Kosmetik</strong><br>
-      Produk kosmetik seperti lotion dan krim merupakan sistem koloid (emulsi).
       Emulsi minyak dalam air (M/A) stabil dengan emulsifier.
-      Seorang produsen kosmetik ingin membuat lotion dengan emulsi M/A yang stabil.
     </div>
   `,
   q: "Emulsifier yang paling tepat untuk membuat emulsi M/A (minyak dalam air) adalah...",
@@ -1079,22 +1046,21 @@ QS.push({
     "Emulsifier yang memiliki rantai hidrokarbon pendek"
   ],
   ans: 1,
-  exp: "Emulsi M/A (minyak dalam air) membutuhkan emulsifier yang larut dalam air (hidrofilik) dengan nilai HLB tinggi (8-18). HLB rendah (3-6) untuk emulsi A/M (air dalam minyak).")
+  exp: "Emulsi M/A (minyak dalam air) membutuhkan emulsifier yang larut dalam air (hidrofilik) dengan nilai HLB tinggi (8-18)."
 });
 
 // ================================================================
-// SOAL 21 - C5 (Asam-Basa) - Merancang Percobaan
+// SOAL 21 - C5 (Asam-Basa)
 // ================================================================
 QS.push({
   id: 21,
-  topic: "asam-basa",
+  topic: "Asam-Basa",
   level: "c5",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>🧪 Kasus: Merancang Percobaan</strong><br>
-      Seorang siswa ingin membuktikan bahwa CH₃COOH adalah asam lemah dan HCl adalah asam kuat.
-      Ia merancang percobaan dengan mengukur pH dan daya hantar listrik dari kedua larutan 0,1 M.
+      Siswa ingin membuktikan CH₃COOH adalah asam lemah dan HCl adalah asam kuat.
     </div>
   `,
   q: "Rancangan percobaan yang PALING TEPAT adalah... (Pilih 2 jawaban benar)",
@@ -1106,22 +1072,21 @@ QS.push({
     "Menambahkan indikator universal untuk melihat perubahan warna"
   ],
   ans: [0, 1],
-  exp: "HCl (asam kuat) terionisasi sempurna → [H⁺] tinggi → pH rendah, daya hantar tinggi. CH₃COOH (asam lemah) terionisasi sebagian → [H⁺] rendah → pH lebih tinggi, daya hantar lebih rendah.")
+  exp: "HCl (asam kuat) terionisasi sempurna → [H⁺] tinggi → pH rendah, daya hantar tinggi. CH₃COOH (asam lemah) terionisasi sebagian → pH lebih tinggi, daya hantar lebih rendah."
 });
 
 // ================================================================
-// SOAL 22 - C5 (Elektrokimia) - Merancang Sel Baterai
+// SOAL 22 - C5 (Elektrokimia)
 // ================================================================
 QS.push({
   id: 22,
-  topic: "elektrokimia",
+  topic: "Elektrokimia",
   level: "c5",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>🔋 Kasus: Merancang Baterai</strong><br>
-      Seorang insinyur ingin merancang baterai dengan tegangan tinggi menggunakan logam yang tersedia.
-      Data E° reduksi: Li⁺/Li = -3,04 V; Mg²⁺/Mg = -2,37 V; Al³⁺/Al = -1,66 V; Cu²⁺/Cu = +0,34 V; Ag⁺/Ag = +0,80 V.
+      Data E°: Li⁺/Li = -3,04 V; Mg²⁺/Mg = -2,37 V; Cu²⁺/Cu = +0,34 V; Ag⁺/Ag = +0,80 V.
     </div>
   `,
   q: "Kombinasi elektroda yang menghasilkan tegangan PALING TINGGI adalah... (Pilih 2 pasangan yang benar)",
@@ -1133,23 +1098,21 @@ QS.push({
     "Cu dan Ag (E°sel = 0,46 V)"
   ],
   ans: [0, 1],
-  exp: "E°sel = E°katoda - E°anoda. Li/Cu: 0,34 - (-3,04) = 3,38 V. Li/Ag: 0,80 - (-3,04) = 3,84 V (tertinggi). Mg/Cu: 0,34 - (-2,37) = 2,71 V. Al/Ag: 0,80 - (-1,66) = 2,46 V.")
+  exp: "E°sel = E°katoda - E°anoda. Li/Cu: 0,34 - (-3,04) = 3,38 V. Li/Ag: 0,80 - (-3,04) = 3,84 V (tertinggi)."
 });
 
 // ================================================================
-// SOAL 23 - C5 (Laju Reaksi) - Merancang Industri
+// SOAL 23 - C5 (Laju Reaksi)
 // ================================================================
 QS.push({
   id: 23,
-  topic: "laju-reaksi",
+  topic: "Laju Reaksi",
   level: "c5",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>🏭 Kasus: Optimasi Produksi</strong><br>
-      Sebuah pabrik memproduksi senyawa A melalui reaksi:
       2A(g) + B(g) → C(g) + D(g) &nbsp; ΔH = -120 kJ/mol
-      Untuk meningkatkan hasil produksi, manajemen ingin mengoptimalkan kondisi operasi.
     </div>
   `,
   q: "Upaya yang dapat dilakukan untuk meningkatkan laju reaksi dan hasil produk adalah... (Pilih 2 jawaban benar)",
@@ -1161,22 +1124,21 @@ QS.push({
     "Mengurangi konsentrasi reaktan untuk menurunkan biaya"
   ],
   ans: [0, 3],
-  exp: "Menaikkan suhu mempercepat laju reaksi. Menurunkan suhu menggeser kesetimbangan ke produk (reaksi eksoterm). Katalis mempercepat laju tetapi tidak mengubah hasil. Tekanan: kiri 3 mol → kanan 2 mol, tekanan tinggi menguntungkan produk.")
+  exp: "Menaikkan suhu mempercepat laju reaksi. Menurunkan suhu menggeser kesetimbangan ke produk (reaksi eksoterm)."
 });
 
 // ================================================================
-// SOAL 24 - C5 (Ksp) - Merancang Pengolahan Air
+// SOAL 24 - C5 (Ksp)
 // ================================================================
 QS.push({
   id: 24,
-  topic: "ksp",
+  topic: "Kelarutan & Ksp",
   level: "c5",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>💧 Kasus: Pengolahan Air Limbah</strong><br>
-      Air limbah industri mengandung ion logam berat Pb²⁺ 0,001 M yang harus dihilangkan dengan pengendapan.
-      Data Ksp: PbS = 3,0×10⁻²⁸, PbCO₃ = 7,4×10⁻¹⁴, Pb(OH)₂ = 1,4×10⁻²⁰, PbCl₂ = 1,6×10⁻⁵.
+      Air limbah mengandung Pb²⁺ 0,001 M. Data Ksp: PbS = 3,0×10⁻²⁸, PbCO₃ = 7,4×10⁻¹⁴, Pb(OH)₂ = 1,4×10⁻²⁰, PbCl₂ = 1,6×10⁻⁵.
     </div>
   `,
   q: "Reagen pengendap yang PALING EFEKTIF untuk menghilangkan Pb²⁺ adalah... (Pilih 2 reagen yang tepat)",
@@ -1188,21 +1150,20 @@ QS.push({
     "Semua reagen sama efektifnya"
   ],
   ans: [0, 1],
-  exp: "PbS memiliki Ksp terkecil (3,0×10⁻²⁸), sehingga mengendap paling sempurna (sisa Pb²⁺ paling kecil). Na₂CO₃ (PbCO₃ Ksp = 7,4×10⁻¹⁴) juga efektif dan lebih murah.")
+  exp: "PbS memiliki Ksp terkecil (3,0×10⁻²⁸), sehingga mengendap paling sempurna. Na₂CO₃ (PbCO₃ Ksp = 7,4×10⁻¹⁴) juga efektif dan lebih murah."
 });
 
 // ================================================================
-// SOAL 25 - C5 (Termokimia) - Analisis Efisiensi Bahan Bakar
+// SOAL 25 - C5 (Termokimia)
 // ================================================================
 QS.push({
   id: 25,
-  topic: "termokimia",
+  topic: "Termokimia",
   level: "c5",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>⛽ Kasus: Efisiensi Bahan Bakar</strong><br>
-      Sebuah perusahaan mengembangkan bahan bakar alternatif dari etanol (C₂H₅OH) dan metanol (CH₃OH).
       Data entalpi pembakaran: etanol = -1.368 kJ/mol, metanol = -726 kJ/mol, bensin (C₈H₁₈) = -5.471 kJ/mol.
     </div>
   `,
@@ -1212,29 +1173,27 @@ QS.push({
     "Bensin memiliki efisiensi energi per mol tertinggi",
     "Metanol memiliki efisiensi energi per mol tertinggi",
     "Bensin menghasilkan emisi CO₂ paling rendah per mol",
-    "Etanol lebih ramah lingkungan karena terbarukan dan menghasilkan CO₂ lebih sedikit per mol"
+    "Etanol lebih ramah lingkungan karena terbarukan"
   ],
   ans: [0, 1],
-  exp: "Etanol (-1.368 kJ/mol) > metanol (-726 kJ/mol). Bensin (-5.471 kJ/mol) memiliki energi per mol tertinggi karena rantai karbon lebih panjang. Bensin menghasilkan CO₂ lebih banyak per mol.")
+  exp: "Etanol (-1.368 kJ/mol) > metanol (-726 kJ/mol). Bensin (-5.471 kJ/mol) memiliki energi per mol tertinggi."
 });
 
 // ================================================================
-// SOAL 26 - C5 (Ikatan Kimia) - Analisis Material
+// SOAL 26 - C5 (Ikatan Kimia)
 // ================================================================
 QS.push({
   id: 26,
-  topic: "ikatan-kimia",
+  topic: "Ikatan Kimia",
   level: "c5",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>🧪 Kasus: Material Industri</strong><br>
-      Sebuah perusahaan mengembangkan material baru untuk aplikasi aerospace.
-      Material ini harus ringan, kuat, dan tahan panas.
-      Data material: grafit (C), intan (C), alumina (Al₂O₃), silikon karbida (SiC).
+      Material: grafit, intan, alumina (Al₂O₃), silikon karbida (SiC).
     </div>
   `,
-  q: "Material yang PALING TEPAT untuk aplikasi aerospace berdasarkan jenis ikatannya adalah... (Pilih 2 jawaban benar)",
+  q: "Material yang PALING TEPAT untuk aplikasi aerospace adalah... (Pilih 2 jawaban benar)",
   opts: [
     "Intan (ikatan kovalen kuat, keras, tetapi berat)",
     "Alumina (ikatan ion, tahan panas, ringan)",
@@ -1243,24 +1202,21 @@ QS.push({
     "Semua material sama baiknya"
   ],
   ans: [2, 3],
-  exp: "SiC memiliki ikatan kovalen kuat, tahan panas, dan ringan. Grafit ringan dan kuat (struktur lapisan). Alumina (Al₂O₃) memiliki ikatan ion yang kuat dan tahan panas. Intan berat dan mahal.")
+  exp: "SiC memiliki ikatan kovalen kuat, tahan panas, dan ringan. Grafit ringan dan kuat (struktur lapisan)."
 });
 
 // ================================================================
-// SOAL 27 - C6 (Kesetimbangan) - Menilai Proses Industri
+// SOAL 27 - C6 (Kesetimbangan)
 // ================================================================
 QS.push({
   id: 27,
-  topic: "kesetimbangan",
+  topic: "Kesetimbangan",
   level: "c6",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>🏭 Kasus: Evaluasi Proses Industri</strong><br>
-      Sebuah pabrik kimia menggunakan proses Kontak untuk memproduksi asam sulfat.
-      Reaksi kunci: 2SO₂ + O₂ ⇌ 2SO₃ (ΔH = -198 kJ/mol).
-      Kondisi operasi saat ini: suhu 450°C, tekanan 1 atm, katalis V₂O₅.
-      Konversi SO₂ yang dicapai hanya 70%.
+      2SO₂ + O₂ ⇌ 2SO₃ (ΔH = -198 kJ/mol). Konversi SO₂ saat ini 70%.
     </div>
   `,
   q: "Rekomendasi yang PALING TEPAT untuk meningkatkan konversi SO₂ adalah... (Pilih 2 jawaban benar)",
@@ -1272,52 +1228,48 @@ QS.push({
     "Mengurangi tekanan untuk menggeser kesetimbangan ke produk"
   ],
   ans: [0, 1],
-  exp: "Reaksi eksoterm → suhu rendah menggeser ke produk. Reaksi: 4 mol gas → 2 mol gas → tekanan tinggi menggeser ke produk. Katalis mempercepat laju tetapi tidak mengubah posisi kesetimbangan.")
+  exp: "Reaksi eksoterm → suhu rendah menggeser ke produk. Reaksi: 4 mol gas → 2 mol gas → tekanan tinggi menggeser ke produk."
 });
 
 // ================================================================
-// SOAL 28 - C6 (Asam-Basa) - Menilai Kasus Kesehatan
+// SOAL 28 - C6 (Asam-Basa)
 // ================================================================
 QS.push({
   id: 28,
-  topic: "asam-basa",
+  topic: "Asam-Basa",
   level: "c6",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>🏥 Kasus: Gangguan Asam Lambung</strong><br>
-      Seorang pasien dengan GERD (gastroesophageal reflux disease) mengonsumsi antasida.
-      Antasida yang tersedia: Mg(OH)₂ (Ksp = 5,6×10⁻¹²), CaCO₃ (Ksp = 3,3×10⁻⁹), NaHCO₃, Al(OH)₃ (Ksp = 3×10⁻³⁴).
-      Dokter memilih antasida yang efektif dan aman.
+      Antasida: Mg(OH)₂ (Ksp=5,6×10⁻¹²), CaCO₃ (Ksp=3,3×10⁻⁹), NaHCO₃, Al(OH)₃ (Ksp=3×10⁻³⁴).
     </div>
   `,
   q: "Pernyataan yang PALING TEPAT tentang pemilihan antasida adalah... (Pilih 2 jawaban benar)",
   opts: [
-    "Mg(OH)₂ lebih efektif daripada CaCO₃ karena Ksp lebih kecil (reaksi netralisasi lebih kuat)",
-    "NaHCO₃ dapat menyebabkan peningkatan tekanan gas dalam lambung (efek samping sendawa)",
+    "Mg(OH)₂ lebih efektif daripada CaCO₃ karena Ksp lebih kecil",
+    "NaHCO₃ dapat menyebabkan peningkatan tekanan gas dalam lambung",
     "Al(OH)₃ paling efektif karena Ksp terkecil, tetapi dapat menyebabkan konstipasi",
     "Semua antasida memiliki efektivitas yang sama",
     "CaCO₃ paling aman karena merupakan komponen alami"
   ],
   ans: [1, 2],
-  exp: "NaHCO₃ bereaksi dengan HCl menghasilkan CO₂ gas yang menyebabkan sendawa dan perut kembung. Al(OH)₃ memiliki Ksp terkecil (3×10⁻³⁴) sehingga paling efektif menetralkan, tetapi dapat menyebabkan konstipasi. Mg(OH)₂ dapat menyebabkan diare.")
+  exp: "NaHCO₃ bereaksi dengan HCl menghasilkan CO₂ gas yang menyebabkan sendawa. Al(OH)₃ memiliki Ksp terkecil (3×10⁻³⁴) sehingga paling efektif menetralkan, tetapi dapat menyebabkan konstipasi."
 });
 
 // ================================================================
-// SOAL 29 - C6 (Elektrokimia) - Menilai Aplikasi
+// SOAL 29 - C6 (Elektrokimia)
 // ================================================================
 QS.push({
   id: 29,
-  topic: "elektrokimia",
+  topic: "Elektrokimia",
   level: "c6",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>🔋 Kasus: Evaluasi Baterai</strong><br>
-      Sebuah perusahaan otomotif membandingkan dua jenis baterai untuk kendaraan listrik:
-      Baterai A: Lithium-ion (3,7 V, densitas energi 250 Wh/kg, siklus hidup 1.000 siklus)
-      Baterai B: Sodium-ion (3,0 V, densitas energi 180 Wh/kg, siklus hidup 2.000 siklus)
-      Harga baterai A 2× lebih mahal dari baterai B.
+      Baterai A: Lithium-ion (3,7 V, 250 Wh/kg, 1.000 siklus)
+      Baterai B: Sodium-ion (3,0 V, 180 Wh/kg, 2.000 siklus)
     </div>
   `,
   q: "Pernyataan yang PALING TEPAT untuk rekomendasi baterai adalah... (Pilih 2 jawaban benar)",
@@ -1329,35 +1281,33 @@ QS.push({
     "Pemilihan baterai bergantung pada kebutuhan: performa tinggi (A) atau ekonomis (B)"
   ],
   ans: [0, 4],
-  exp: "Baterai A memiliki densitas energi lebih tinggi (250 vs 180 Wh/kg), cocok untuk performa tinggi. Baterai B lebih ekonomis dan tahan lama. Pemilihan tergantung kebutuhan spesifik.")
+  exp: "Baterai A memiliki densitas energi lebih tinggi (250 vs 180 Wh/kg), cocok untuk performa tinggi. Pemilihan tergantung kebutuhan spesifik."
 });
 
 // ================================================================
-// SOAL 30 - C6 (Laju Reaksi) - Menilai Kasus Lingkungan
+// SOAL 30 - C6 (Laju Reaksi)
 // ================================================================
 QS.push({
   id: 30,
-  topic: "laju-reaksi",
+  topic: "Laju Reaksi",
   level: "c6",
   type: "mcma",
   stim: `
     <div class="stim">
       <strong>🌊 Kasus: Pencemaran Laut</strong><br>
-      Sebuah tumpahan minyak terjadi di laut. Minyak mengandung senyawa hidrokarbon yang terdegradasi secara alami oleh bakteri.
-      Laju degradasi mengikuti kinetika orde 1 dengan k = 0,005 hari⁻¹ pada 20°C.
-      Suhu laut rata-rata adalah 25°C (faktor Q₁₀ = 2).
+      Degradasi minyak mengikuti kinetika orde 1 dengan k = 0,005 hari⁻¹ pada 20°C (Q₁₀ = 2).
     </div>
   `,
   q: "Pernyataan yang BENAR tentang degradasi minyak adalah... (Pilih 2 jawaban benar)",
   opts: [
-    "Pada 25°C, k = 0,01 hari⁻¹ (karena Q₁₀ = 2)",
+    "Pada 25°C, k = 0,00707 hari⁻¹ (karena Q₁₀ = 2)",
     "Waktu paruh minyak pada 20°C adalah 138,6 hari",
     "Menaikkan suhu laut memperlambat degradasi minyak",
-    "Waktu paruh pada 25°C adalah 69,3 hari",
+    "Waktu paruh pada 25°C adalah 98 hari",
     "Degradasi minyak tidak dipengaruhi oleh suhu"
   ],
-  ans: [0, 3],
-  exp: "Q₁₀ = 2 berarti k naik 2× setiap naik 10°C. Dari 20°C ke 25°C (naik 5°C), k = 0,005 × √2 = 0,00707 hari⁻¹. t½ = 0,693/k. Pada 20°C: t½ = 0,693/0,005 = 138,6 hari. Pada 25°C: t½ = 0,693/0,00707 = 98 hari. (Namun opsi 0 dan 3 yang paling mendekati.)")
+  ans: [0, 1],
+  exp: "Q₁₀ = 2 berarti k naik 2× setiap naik 10°C. Dari 20°C ke 25°C (naik 5°C), k = 0,005 × √2 = 0,00707 hari⁻¹. t½ = 0,693/k. Pada 20°C: t½ = 0,693/0,005 = 138,6 hari."
 });
 
 // ================================================================
@@ -1379,10 +1329,12 @@ function initTryout() {
     S.qi = 0;
     S.timeLeft = 5400;
     S.finished = false;
+    if (S.timer) clearInterval(S.timer);
     document.getElementById("vTryout").classList.add("active");
     document.getElementById("vHome").classList.remove("active");
     document.getElementById("vRes").classList.remove("active");
     document.getElementById("vReviewAll").classList.remove("active");
+    document.getElementById("timerDisplay").style.color = "var(--success)";
     renderQ();
     startTimer();
 }
@@ -1403,8 +1355,8 @@ function startTimer() {
         updateTimerDisplay();
         if (S.timeLeft <= 0) {
             clearInterval(S.timer);
-            toast("Waktu habis! Try Out akan dikirim.", "var(--error)");
-            setTimeout(submitTryout, 1500);
+            toast("⏰ Waktu habis! Try Out akan dikirim.", "var(--error)");
+            setTimeout(function() { submitTryout(); }, 1500);
         }
     }, 1000);
 }
@@ -1439,7 +1391,6 @@ function renderQ() {
     var isLast = S.qi === total - 1;
     document.getElementById("bNxt").innerHTML = isLast ? "Selesai <i class='fa-solid fa-check ml-1'></i>" : "Selanjutnya <i class='fa-solid fa-chevron-right ml-1'></i>";
 
-    // Level badge
     var levelLabels = {c3:"C3 - Menganalisis", c4:"C4 - Mengevaluasi", c5:"C5 - Mencipta", c6:"C6 - Menilai"};
     var levelBadge = '<span class="level-badge ' + q.level + '">' + levelLabels[q.level] + '</span>';
 
@@ -1452,7 +1403,6 @@ function renderQ() {
     if (q.stim) h += '<div class="stim">' + q.stim + '</div>';
     h += '<h3 class="font-bold text-base mb-4 leading-relaxed" style="color:var(--text)">' + q.q + '</h3>';
 
-    // Options
     var letters = "ABCDE";
     if (q.type === "single") {
         h += '<div class="space-y-2.5">';
@@ -1514,8 +1464,15 @@ function qPrev() {
 
 function toggleReview() {
     var grid = document.getElementById("reviewGrid");
-    grid.style.display = grid.style.display === "block" ? "none" : "block";
-    if (grid.style.display === "block") updateReviewButtons();
+    var btnText = document.getElementById("reviewToggleText");
+    if (grid.style.display === "block") {
+        grid.style.display = "none";
+        btnText.textContent = "Review";
+    } else {
+        grid.style.display = "block";
+        btnText.textContent = "Tutup";
+        updateReviewButtons();
+    }
 }
 
 function updateReviewButtons() {
@@ -1524,26 +1481,19 @@ function updateReviewButtons() {
     S.qids.forEach(function(qid, i) {
         var q = QS.find(function(x) { return x.id === qid; });
         if (!q) return;
-        var answered = S.ans[qid] !== undefined && S.ans[qid] !== null && (Array.isArray(S.ans[qid]) ? S.ans[qid].length > 0 : true);
+        var answered = S.ans[qid] !== undefined && S.ans[qid] !== null && 
+                       (Array.isArray(S.ans[qid]) ? S.ans[qid].length > 0 : true);
         var btn = document.createElement("button");
         btn.textContent = i + 1;
-        btn.className = "w-8 h-8 rounded text-xs font-bold transition-all";
-        btn.style.border = "1px solid var(--border)";
-        btn.style.background = answered ? "rgba(52,211,153,0.15)" : "transparent";
-        btn.style.color = answered ? "var(--success)" : "var(--muted)";
+        btn.className = "review-btn";
+        if (answered) btn.classList.add("answered");
+        if (i === S.qi) btn.classList.add("active");
         btn.onclick = function() {
             S.qi = i;
             renderQ();
             window.scrollTo(0, 0);
             document.getElementById("reviewGrid").style.display = "none";
-        };
-        btn.onmouseover = function() {
-            this.style.borderColor = "var(--accent)";
-            this.style.color = "var(--accent)";
-        };
-        btn.onmouseout = function() {
-            this.style.borderColor = "var(--border)";
-            this.style.color = answered ? "var(--success)" : "var(--muted)";
+            document.getElementById("reviewToggleText").textContent = "Review";
         };
         container.appendChild(btn);
     });
@@ -1585,8 +1535,6 @@ function submitTryout() {
               pct >= 35 ? "Perlu Belajar Lagi 💪" :
               "Jangan Menyerah! 🔥";
     document.getElementById("rLbl").textContent = lbl + " (" + correct + "/" + total + ")";
-
-    document.getElementById("bReview").style.display = "inline-flex";
 
     document.getElementById("vTryout").classList.remove("active");
     document.getElementById("vRes").classList.add("active");
@@ -1645,9 +1593,17 @@ function backToResult() {
     document.getElementById("vRes").classList.add("active");
 }
 
-function openExit() { document.getElementById("exMod").classList.add("open"); }
-function closeMod() { document.getElementById("exMod").classList.remove("open"); }
-function doExit() { closeMod(); goHome(); }
+function openExit() { 
+    document.getElementById("exMod").classList.add("open"); 
+}
+function closeMod() { 
+    document.getElementById("exMod").classList.remove("open"); 
+}
+function doExit() { 
+    closeMod(); 
+    if (S.timer) clearInterval(S.timer);
+    goHome(); 
+}
 
 function goHome() {
     if (S.timer) clearInterval(S.timer);
@@ -1669,8 +1625,8 @@ function toast(msg, bg) {
 }
 
 // INIT
-console.log("Try Out 2 - TKA Kimia loaded: " + QS.length + " soal");
-console.log("✅ 30 soal HOTS C3-C6 | ⏱️ 90 menit");
+console.log("✅ Try Out 2 - TKA Kimia loaded: " + QS.length + " soal");
+console.log("📋 30 soal HOTS C3-C6 | ⏱️ 90 menit");
 </script>
 </body>
 </html>
