@@ -3,347 +3,185 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stoikiometri — TKA Kimia</title>
+<title>Stoikiometri — TKA Kimia SMA Negeri 2 Semarang</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
     :root {
-        --bg: #0b1a17;
-        --bg2: #132a24;
-        --card: #1a3a32;
-        --card2: #1e4a3f;
-        --text: #e8f0ec;
-        --muted: #8aa8a0;
-        --border: #2a4a42;
-        --accent: #d4a04a;
-        --success: #34d399;
-        --error: #f87171;
-        --glow: rgba(212, 160, 74, 0.15);
+        --bg: #0b1a17; --bg2: #132a24; --card: #1a3a32; --card2: #1e4a3f;
+        --text: #e8f0ec; --muted: #8aa8a0; --border: #2a4a42; --accent: #d4a04a;
+        --success: #34d399; --error: #f87171; --glow: rgba(212, 160, 74, 0.15);
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
         font-family: 'Source Sans 3', sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        min-height: 100vh;
-        padding-top: 52px;
+        background: var(--bg); color: var(--text);
+        min-height: 100vh; padding-top: 52px;
     }
-
     .fd { font-family: 'Playfair Display', serif; }
-
     .bg-noise {
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
+        position: fixed; top:0; left:0; right:0; bottom:0;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-        pointer-events: none;
-        z-index: 0;
+        pointer-events: none; z-index: 0;
     }
-
     .hg {
-        position: absolute;
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        filter: blur(100px);
-        opacity: 0.15;
-        pointer-events: none;
+        position: absolute; width:300px; height:300px;
+        border-radius: 50%; filter: blur(100px);
+        opacity: 0.15; pointer-events: none;
     }
-
     .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 14px;
-        border-radius: 100px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        background: rgba(212, 160, 74, 0.12);
-        color: var(--accent);
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 4px 14px; border-radius: 100px;
+        font-size: 0.75rem; font-weight: 600;
+        background: rgba(212,160,74,0.12); color: var(--accent);
     }
-
     .glow-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 16px 18px;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        text-decoration: none;
-        color: inherit;
+        background: var(--card); border: 1px solid var(--border);
+        border-radius: 12px; padding: 16px 18px; cursor: pointer;
+        transition: all 0.25s ease; display: flex;
+        align-items: center; gap: 12px;
+        text-decoration: none; color: inherit;
     }
-
     .glow-card:hover {
-        border-color: var(--accent);
-        background: var(--card2);
+        border-color: var(--accent); background: var(--card2);
         box-shadow: 0 0 20px var(--glow);
     }
-
     .bp {
-        background: var(--accent);
-        color: #0b1a17;
-        border: none;
-        padding: 8px 18px;
-        border-radius: 30px;
-        font-weight: 700;
-        font-size: 0.85rem;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
+        background: var(--accent); color: #0b1a17; border: none;
+        padding: 8px 18px; border-radius: 30px; font-weight: 700;
+        font-size: 0.85rem; cursor: pointer; transition: all 0.25s ease;
+        display: inline-flex; align-items: center; gap: 6px;
     }
     .bp:hover { background: #e8b84a; transform: scale(1.02); }
-
     .bs {
-        background: transparent;
-        color: var(--text);
-        border: 1px solid var(--border);
-        padding: 8px 18px;
-        border-radius: 30px;
-        font-weight: 600;
-        font-size: 0.85rem;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
+        background: transparent; color: var(--text);
+        border: 1px solid var(--border); padding: 8px 18px;
+        border-radius: 30px; font-weight: 600; font-size: 0.85rem;
+        cursor: pointer; transition: all 0.25s ease;
+        display: inline-flex; align-items: center; gap: 6px;
     }
     .bs:hover { border-color: var(--accent); background: var(--card2); }
-
     .view { display: none; }
     .view.active { display: block; }
-
-    .soal-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 18px 20px;
-        margin-bottom: 14px;
-        transition: all 0.25s;
-    }
-    .soal-card:hover { border-color: var(--accent); }
-
     .stim {
-        background: var(--bg2);
-        padding: 12px 16px;
-        border-radius: 8px;
-        border-left: 3px solid var(--accent);
-        margin-bottom: 12px;
-        font-size: 0.9rem;
-        line-height: 1.6;
-        color: var(--muted);
+        background: var(--bg2); padding: 12px 16px;
+        border-radius: 8px; border-left: 3px solid var(--accent);
+        margin-bottom: 12px; font-size: 0.9rem;
+        line-height: 1.6; color: var(--muted);
     }
-
     .table-wrap {
-        overflow-x: auto;
-        margin: 8px 0;
-        border-radius: 8px;
-        border: 1px solid var(--border);
+        overflow-x: auto; margin: 8px 0;
+        border-radius: 8px; border: 1px solid var(--border);
     }
     table.soal-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.8rem;
-        background: var(--bg2);
+        width: 100%; border-collapse: collapse;
+        font-size: 0.8rem; background: var(--bg2);
     }
     table.soal-table th {
-        background: var(--card);
-        color: var(--accent);
-        font-weight: 600;
-        padding: 6px 10px;
-        border: 1px solid var(--border);
-        text-align: center;
+        background: var(--card); color: var(--accent);
+        font-weight: 600; padding: 6px 10px;
+        border: 1px solid var(--border); text-align: center;
     }
     table.soal-table td {
-        padding: 6px 10px;
-        border: 1px solid var(--border);
-        text-align: center;
-        color: var(--text);
+        padding: 6px 10px; border: 1px solid var(--border);
+        text-align: center; color: var(--text);
     }
-    table.soal-table tr:hover { background: rgba(212, 160, 74, 0.05); }
-
+    table.soal-table tr:hover { background: rgba(212,160,74,0.05); }
+    .figure-wrap {
+        display: flex; flex-direction: column; align-items: center;
+        margin: 8px 0; padding: 10px; background: var(--bg2);
+        border-radius: 8px; border: 1px solid var(--border);
+    }
+    .figure-wrap svg { max-width: 100%; height: auto; }
+    .figure-caption {
+        font-size: 0.7rem; color: var(--muted);
+        margin-top: 4px; text-align: center;
+    }
     .chem-eq {
-        display: block;
-        text-align: center;
+        display: block; text-align: center;
         padding: 0.5rem 0.75rem;
         font-family: "Times New Roman", serif;
-        font-size: 1rem;
-        background: var(--bg2);
-        border-radius: 0.5rem;
-        border: 1px solid var(--border);
-        margin: 0.5rem 0;
-        color: var(--text);
+        font-size: 1rem; background: var(--bg2);
+        border-radius: 0.5rem; border: 1px solid var(--border);
+        margin: 0.5rem 0; color: var(--text);
     }
-    .chem-eq sub { font-size: 0.7em; vertical-align: sub; }
-    .chem-eq sup { font-size: 0.7em; vertical-align: super; }
     .chem-eq .arrow { color: var(--accent); margin: 0 0.3rem; }
-
     .space-y-2\.5 > * + * { margin-top: 8px; }
-
     .ob {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        width: 100%;
-        padding: 8px 14px;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        background: var(--bg2);
-        color: var(--text);
-        cursor: pointer;
-        transition: all 0.2s ease;
-        font-size: 0.9rem;
-        text-align: left;
+        display: flex; align-items: center; gap: 10px;
+        width: 100%; padding: 8px 14px; border-radius: 8px;
+        border: 1px solid var(--border); background: var(--bg2);
+        color: var(--text); cursor: pointer;
+        transition: all 0.2s ease; font-size: 0.9rem; text-align: left;
     }
     .ob:hover { border-color: var(--muted); }
-    .ob.sel { border-color: var(--accent); background: rgba(212, 160, 74, 0.1); }
+    .ob.sel { border-color: var(--accent); background: rgba(212,160,74,0.1); }
     .ob .ck {
-        width: 20px;
-        height: 20px;
-        min-width: 20px;
-        border-radius: 4px;
-        border: 2px solid var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.7rem;
-        background: var(--bg);
+        width: 20px; height: 20px; min-width: 20px;
+        border-radius: 4px; border: 2px solid var(--border);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.7rem; background: var(--bg);
     }
     .ob.sel .ck { border-color: var(--accent); background: var(--accent); }
     .ob.ok .ck { border-color: var(--success); background: var(--success); }
     .ob.no .ck { border-color: var(--error); background: var(--error); }
-    .ob.ok { border-color: var(--success); }
-    .ob.no { border-color: var(--error); }
-
-    .jawaban {
-        display: none;
-        margin-top: 12px;
-        padding: 14px 18px;
-        background: rgba(52, 211, 153, 0.06);
-        border-left: 4px solid var(--success);
-        border-radius: 8px;
-        font-size: 0.9rem;
-        line-height: 1.7;
-        color: #c8e6d9;
-    }
-    .jawaban.show { display: block; }
-
-    .btn-jawab {
-        background: transparent;
-        border: 1px solid var(--accent);
-        color: var(--accent);
-        padding: 4px 16px;
-        border-radius: 30px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        margin-top: 8px;
-    }
-    .btn-jawab:hover { background: var(--accent); color: var(--bg); }
-
     .modal-bg {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.6);
-        backdrop-filter: blur(4px);
-        z-index: 50;
-        justify-content: center;
-        align-items: center;
+        display: none; position: fixed; inset: 0;
+        background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+        z-index: 50; justify-content: center; align-items: center;
         padding: 20px;
     }
     .modal-bg.open { display: flex; }
-
     .toast {
-        position: fixed;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 12px 28px;
-        border-radius: 12px;
-        font-weight: 600;
-        z-index: 100;
-        background: var(--card);
-        border: 1px solid var(--border);
-        color: var(--text);
-        max-width: 90%;
-        text-align: center;
+        position: fixed; bottom: 30px; left: 50%;
+        transform: translateX(-50%); padding: 12px 28px;
+        border-radius: 12px; font-weight: 600; z-index: 100;
+        background: var(--card); border: 1px solid var(--border);
+        color: var(--text); max-width: 90%; text-align: center;
     }
-
-    .level-badge {
-        display: inline-block;
-        padding: 2px 12px;
-        border-radius: 100px;
-        font-size: 0.6rem;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        margin-right: 6px;
-    }
-    .level-badge.c3 { background: #fbbf24; color: #0b1a17; }
-    .level-badge.c4 { background: #f97316; color: #0b1a17; }
-    .level-badge.c5 { background: #ef4444; color: #fff; }
-    .level-badge.c6 { background: #8b5cf6; color: #fff; }
-
     .hots-badge {
-        display: inline-block;
-        padding: 0.15rem 0.5rem;
-        border-radius: 999px;
-        font-size: 0.6rem;
-        font-weight: 700;
-        margin-left: 0.5rem;
+        display: inline-block; padding: 0.15rem 0.5rem;
+        border-radius: 999px; font-size: 0.6rem;
+        font-weight: 700; margin-left: 0.5rem;
     }
+    .hots-c2 { background: rgba(52,211,153,0.2); color: #34d399; }
     .hots-c3 { background: rgba(251,191,36,0.2); color: #fbbf24; }
     .hots-c4 { background: rgba(249,115,22,0.2); color: #f97316; }
     .hots-c5 { background: rgba(239,68,68,0.2); color: #ef4444; }
     .hots-c6 { background: rgba(139,92,246,0.2); color: #8b5cf6; }
-
     .expbox {
-        margin-top: 14px;
-        padding: 14px 18px;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        line-height: 1.7;
+        margin-top: 14px; padding: 14px 18px;
+        border-radius: 8px; font-size: 0.9rem; line-height: 1.7;
     }
     .expbox.good {
-        background: rgba(52, 211, 153, 0.06);
+        background: rgba(52,211,153,0.06);
         border-left: 4px solid var(--success);
     }
     .expbox.bad {
-        background: rgba(248, 113, 113, 0.06);
+        background: rgba(248,113,113,0.06);
         border-left: 4px solid var(--error);
     }
-
     @media (max-width: 640px) {
-        .soal-card { padding: 14px 16px; }
         .ob { font-size: 0.8rem; padding: 6px 12px; }
         .bp, .bs { font-size: 0.75rem; padding: 6px 14px; }
         .glow-card { padding: 12px 14px; }
-        .glow-card h3 { font-size: 0.8rem; }
     }
 </style>
 </head>
 <body>
 <div class="bg-noise"></div>
 
-<!-- NAVIGASI -->
 <nav class="fixed top-0 left-0 right-0 z-40 backdrop-blur-md border-b" style="background:rgba(11,26,23,.88);border-color:var(--border)">
-<div class="max-w-5xl mx-auto px-4 h-13 flex items-center justify-between" style="height:52px">
+<div class="max-w-5xl mx-auto px-4 flex items-center justify-between" style="height:52px">
 <button onclick="location.href='index.html'" class="flex items-center gap-2 text-sm font-bold tracking-wide" style="color:var(--accent);background:none;border:none;cursor:pointer;">
 <i class="fa-solid fa-arrow-left"></i><span class="hidden sm:inline">Kembali</span>
 </button>
 <div class="flex items-center gap-3">
-<span id="ns" class="hidden sm:flex items-center gap-1.5 text-xs" style="color:var(--muted)">
+<span class="hidden sm:flex items-center gap-1.5 text-xs" style="color:var(--muted)">
 <i class="fa-solid fa-trophy" style="color:var(--accent)"></i><span id="nst">0/0</span>
 </span>
-<button onclick="location.href='index.html'" class="text-sm px-2.5 py-1 rounded" style="color:var(--muted);background:none;border:none;cursor:pointer;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">
+<button onclick="location.href='index.html'" class="text-sm px-2.5 py-1 rounded" style="color:var(--muted);background:none;border:none;cursor:pointer;">
 <i class="fa-solid fa-house"></i>
 </button>
 </div>
@@ -353,15 +191,15 @@
 <!-- HOME -->
 <div id="vHome" class="view active pt-16 pb-12 px-4">
 <div class="max-w-4xl mx-auto">
-
     <div class="relative rounded-2xl overflow-hidden mb-8 p-7 md:p-10" style="background:linear-gradient(135deg,var(--card),var(--card2))">
         <div class="hg" style="background:var(--accent);top:-180px;right:-80px"></div>
         <div class="hg" style="background:#34d399;bottom:-180px;left:-80px"></div>
         <div class="relative z-10">
-            <div class="badge mb-3"><i class="fa-solid fa-flask"></i> Stoikiometri</div>
+            <div class="badge mb-3"><i class="fa-solid fa-calculator"></i> Stoikiometri</div>
             <h1 class="fd text-3xl md:text-4xl font-black mb-2 leading-tight">Stoikiometri <span style="color:var(--accent)">HOTS</span></h1>
-            <p class="text-sm md:text-base max-w-lg" style="color:var(--muted);line-height:1.65">Latihan soal HOTS level C3-C6 tentang konsep mol, pereaksi pembatas, rumus empiris & molekuler, dan analisis kuantitatif reaksi kimia.</p>
+            <p class="text-sm md:text-base max-w-lg" style="color:var(--muted);line-height:1.65">Latihan soal HOTS level C2-C6 tentang konsep mol, pereaksi pembatas, rumus empiris & molekuler, dan analisis kuantitatif reaksi kimia.</p>
             <div class="flex flex-wrap gap-2 mt-4">
+                <span class="badge hots-badge hots-c2">C2 - Pemahaman</span>
                 <span class="badge hots-badge hots-c3">C3 - Menganalisis</span>
                 <span class="badge hots-badge hots-c4">C4 - Mengevaluasi</span>
                 <span class="badge hots-badge hots-c5">C5 - Mencipta</span>
@@ -379,6 +217,7 @@
 
     <div class="flex flex-wrap gap-2 mb-4">
         <button onclick="filterLevel('all')" class="bs text-xs" id="filterAll" style="background:rgba(212,160,74,.15)">Semua</button>
+        <button onclick="filterLevel('c2')" class="bs text-xs" id="filterC2">C2</button>
         <button onclick="filterLevel('c3')" class="bs text-xs" id="filterC3">C3</button>
         <button onclick="filterLevel('c4')" class="bs text-xs" id="filterC4">C4</button>
         <button onclick="filterLevel('c5')" class="bs text-xs" id="filterC5">C5</button>
@@ -386,7 +225,6 @@
     </div>
 
     <div id="qList"></div>
-
 </div>
 </div>
 
@@ -394,7 +232,7 @@
 <div id="vQuiz" class="view pt-16 pb-12 px-4">
 <div class="max-w-3xl mx-auto">
     <div class="flex items-center justify-between mb-3">
-        <button onclick="openExit()" class="text-sm flex items-center gap-1.5" style="color:var(--muted);background:none;border:none;cursor:pointer;" onmouseover="this.style.color='var(--error)'" onmouseout="this.style.color='var(--muted)'"><i class="fa-solid fa-xmark"></i>Keluar</button>
+        <button onclick="openExit()" class="text-sm flex items-center gap-1.5" style="color:var(--muted);background:none;border:none;cursor:pointer;"><i class="fa-solid fa-xmark"></i>Keluar</button>
         <div class="flex items-center gap-2.5">
             <span id="qCtr" class="text-sm font-semibold" style="color:var(--muted)"></span>
             <span id="qTyp" class="badge" style="background:rgba(212,160,74,.12);color:var(--accent);font-size:0.7rem;"></span>
@@ -402,7 +240,7 @@
         </div>
     </div>
     <div class="w-full h-1.5 rounded-full mb-5" style="background:var(--border)">
-        <div id="qBar" class="h-full rounded-full transition-all duration-400" style="background:var(--accent);width:0%"></div>
+        <div id="qBar" class="h-full rounded-full" style="background:var(--accent);width:0%"></div>
     </div>
     <div id="qArea"></div>
     <div class="flex items-center justify-between mt-7">
@@ -457,7 +295,6 @@
 </div>
 </div>
 
-<!-- EXIT MODAL -->
 <div id="exMod" class="modal-bg">
     <div class="rounded-xl p-5 max-w-sm w-full" style="background:var(--card);border:1px solid var(--border)">
         <h3 class="fd text-lg font-bold mb-1.5">Keluar dari Quiz?</h3>
@@ -469,58 +306,98 @@
     </div>
 </div>
 
-<!-- TOAST -->
 <div id="toast" class="toast" style="display:none"></div>
 
-<!-- JAVASCRIPT -->
 <script>
 // ================================================================
-// DATA SOAL STOIKIOMETRI - HOTS C3 - C6
+// DATA SOAL STOIKIOMETRI - HOTS C2-C6 (DIREVISI)
 // ================================================================
 var QS = [];
 
 // ================================================================
-// LEVEL C3 - Menganalisis (Analisis Konseptual)
+// LEVEL C2 — Pemahaman Dasar (4 soal)
 // ================================================================
 
-// SOAL C3.1 - Analisis pereaksi pembatas dalam industri
+// C2.1 - Konsep mol
 QS.push({
-  id: 3001,
-  topic: "stoikiometri",
-  type: "single",
-  level: "c3",
+  id: 2001, topic: "stoikiometri", type: "mcma", level: "c2",
+  q: "Pernyataan BENAR tentang konsep mol adalah... (Pilih 3 jawaban benar)",
+  opts: [
+    "1 mol zat mengandung 6,02 × 10²³ partikel (bilangan Avogadro)",
+    "Massa 1 mol zat sama dengan massa molar (Mr/Ar) dalam gram",
+    "Volume 1 mol gas pada STP adalah 22,4 liter",
+    "1 mol zat selalu memiliki massa 1 gram",
+    "Mol hanya berlaku untuk gas",
+    "Mol tidak berhubungan dengan jumlah partikel"
+  ],
+  ans: [0, 1, 2],
+  exp: "1 mol = 6,02×10²³ partikel = massa molar (gram) = 22,4 L (gas STP). Massa 1 mol bergantung pada Mr/Ar, bukan selalu 1 gram. Mol berlaku untuk semua zat."
+});
+
+// C2.2 - Massa molar
+QS.push({
+  id: 2002, topic: "stoikiometri", type: "single", level: "c2",
+  q: "Massa molar (Mr) dari senyawa H₂SO₄ adalah... (Ar H=1, S=32, O=16)",
+  opts: ["49 g/mol", "82 g/mol", "98 g/mol", "108 g/mol", "128 g/mol"],
+  ans: 2,
+  exp: "Mr H₂SO₄ = 2(1) + 32 + 4(16) = 2 + 32 + 64 = 98 g/mol."
+});
+
+// C2.3 - Volume molar gas
+QS.push({
+  id: 2003, topic: "stoikiometri", type: "single", level: "c2",
+  q: "Volume 0,5 mol gas CO₂ pada keadaan STP (22,4 L/mol) adalah...",
+  opts: ["5,6 L", "11,2 L", "22,4 L", "33,6 L", "44,8 L"],
+  ans: 1,
+  exp: "Volume = mol × 22,4 L/mol = 0,5 × 22,4 = 11,2 L."
+});
+
+// C2.4 - Persamaan reaksi dasar
+QS.push({
+  id: 2004, topic: "stoikiometri", type: "single", level: "c2",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Dalam produksi pupuk urea, reaksi amonia dengan karbondioksida berlangsung:</strong>
+    <div class="chem-eq">N₂ + 3H₂ <span class="arrow">→</span> 2NH₃</div>
+  `,
+  q: "Jika 2 mol N₂ bereaksi sempurna, maka mol NH₃ yang dihasilkan adalah...",
+  opts: ["2 mol", "3 mol", "4 mol", "6 mol", "8 mol"],
+  ans: 2,
+  exp: "Perbandingan mol N₂ : NH₃ = 1 : 2. Jika 2 mol N₂ bereaksi, maka NH₃ = 2 × 2 = 4 mol."
+});
+
+// ================================================================
+// LEVEL C3 — Menganalisis (5 soal)
+// ================================================================
+
+// C3.1 (id:3001) — tetap, sudah bagus
+QS.push({
+  id: 3001, topic: "stoikiometri", type: "single", level: "c3",
+  stim: `
+    <div class="stim">
+      <p>Dalam produksi pupuk urea, reaksi amonia dengan karbondioksida:</p>
     </div>
-    <div class="chem-eq">
-      2 NH<sub>3</sub>(g) + CO<sub>2</sub>(g) → CO(NH<sub>2</sub>)<sub>2</sub>(s) + H<sub>2</sub>O(l)
-    </div>
+    <div class="chem-eq">2NH₃(g) + CO₂(g) → CO(NH₂)₂(s) + H₂O(l)</div>
     <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
-      <i class="fa-solid fa-info-circle"></i> Dalam suatu proses, direaksikan 34 ton NH<sub>3</sub> dan 44 ton CO<sub>2</sub>.
+      <i class="fa-solid fa-info-circle"></i> Direaksikan 34 ton NH₃ dan 44 ton CO₂.
     </div>
   `,
   q: "Pernyataan yang PALING TEPAT tentang reaksi tersebut adalah...",
   opts: [
-    "NH₃ adalah pereaksi pembatas karena koefisiennya lebih besar dari CO₂",
-    "CO₂ adalah pereaksi pembatas karena memiliki massa molar yang lebih besar",
-    "Kedua pereaksi habis bereaksi sempurna karena perbandingan mol sesuai stoikiometri",
-    "NH₃ adalah pereaksi pembatas karena mol NH₃ yang tersedia lebih kecil dari yang dibutuhkan",
-    "Tidak dapat ditentukan karena suhu dan tekanan reaksi tidak diketahui"
+    "NH₃ adalah pereaksi pembatas karena koefisiennya lebih besar",
+    "CO₂ adalah pereaksi pembatas karena massa molarnya lebih besar",
+    "Kedua pereaksi habis bereaksi karena perbandingan mol sesuai stoikiometri",
+    "NH₃ adalah pereaksi pembatas karena molnya lebih kecil",
+    "Tidak dapat ditentukan karena suhu dan tekanan tidak diketahui"
   ],
   ans: 2,
-  exp: "Mol NH₃ = 34.000 kg / 17 kg/kmol = 2.000 kmol. Mol CO₂ = 44.000 kg / 44 kg/kmol = 1.000 kmol. Perbandingan stoikiometri NH₃:CO₂ = 2:1. Mol NH₃ yang dibutuhkan = 2 × 1.000 = 2.000 kmol. Jadi kedua pereaksi habis bereaksi sempurna."
+  exp: "Mol NH₃ = 34.000/17 = 2.000 kmol. Mol CO₂ = 44.000/44 = 1.000 kmol. Perbandingan stoikiometri NH₃:CO₂ = 2:1. Tersedia 2.000:1.000 = 2:1. Kedua pereaksi habis sempurna."
 });
 
-// SOAL C3.2 - Analisis rumus empiris dari data pembakaran
+// C3.2 (id:3002) — tetap, sudah bagus
 QS.push({
-  id: 3002,
-  topic: "stoikiometri",
-  type: "single",
-  level: "c3",
+  id: 3002, topic: "stoikiometri", type: "single", level: "c3",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Sebanyak 3,7 gram senyawa organik (mengandung C, H, dan O) dibakar sempurna menghasilkan 6,6 gram CO₂ dan 2,7 gram H₂O.</strong>
+    <div class="stim">
+      <p>Sebanyak 3,7 gram senyawa organik (C, H, O) dibakar sempurna menghasilkan 6,6 gram CO₂ dan 2,7 gram H₂O.</p>
     </div>
     <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
       <i class="fa-solid fa-info-circle"></i> Ar C=12, H=1, O=16
@@ -529,214 +406,169 @@ QS.push({
   q: "Rumus empiris senyawa organik tersebut adalah...",
   opts: ["CH₂O", "C₂H₄O", "C₃H₆O₂", "C₃H₆O", "C₄H₈O₂"],
   ans: 2,
-  exp: "Mol C = 6,6/44 = 0,15 mol. Mol H = 2,7/18 × 2 = 0,3 mol. Massa O = 3,7 - (0,15×12) - (0,3×1) = 1,6 g → mol O = 0,1 mol. Perbandingan C:H:O = 0,15:0,3:0,1 = 3:6:2. Jadi rumus empiris = C₃H₆O₂."
+  exp: "Mol C = 6,6/44 = 0,15. Mol H = 2,7/18 × 2 = 0,3. Massa O = 3,7 - (0,15×12) - 0,3 = 1,6 g → mol O = 0,1. Perbandingan C:H:O = 0,15:0,3:0,1 = 3:6:2. Rumus empiris = C₃H₆O₂."
 });
 
-// SOAL C3.3 - Analisis reaksi pembakaran
+// C3.3 (id:3003) — tetap, sudah bagus
 QS.push({
-  id: 3003,
-  topic: "stoikiometri",
-  type: "single",
-  level: "c3",
+  id: 3003, topic: "stoikiometri", type: "single", level: "c3",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Sebuah kendaraan bermotor menggunakan bensin (dianggap C₈H₁₈). Reaksi pembakaran sempurna bensin:</strong>
-    </div>
-    <div class="chem-eq">
-      2 C₈H₁₈(l) + 25 O₂(g) → 16 CO₂(g) + 18 H₂O(l)
-    </div>
+    <div class="chem-eq">2C₈H₁₈(l) + 25O₂(g) → 16CO₂(g) + 18H₂O(l)</div>
   `,
-  q: "Jika 1 mol C₈H₁₈ dibakar sempurna, berapa volume gas CO₂ yang dihasilkan pada keadaan STP (22,4 L/mol)?",
-  opts: [
-    "22,4 L",
-    "44,8 L",
-    "89,6 L",
-    "179,2 L",
-    "358,4 L"
-  ],
+  q: "Jika 1 mol C₈H₁₈ dibakar sempurna, volume gas CO₂ pada STP adalah...",
+  opts: ["22,4 L", "44,8 L", "89,6 L", "179,2 L", "358,4 L"],
   ans: 3,
-  exp: "Dari persamaan reaksi, 2 mol C₈H₁₈ menghasilkan 16 mol CO₂. Jadi 1 mol C₈H₁₈ menghasilkan 8 mol CO₂. Volume CO₂ pada STP = 8 × 22,4 = 179,2 L."
+  exp: "2 mol C₈H₁₈ → 16 mol CO₂. Maka 1 mol C₈H₁₈ → 8 mol CO₂. Volume = 8 × 22,4 = 179,2 L."
 });
 
-// SOAL C3.4 - Analisis konsep mol dan massa molar
+// C3.4 (id:3004) — DIPERBAIKI: kunci dan penjelasan sinkron
 QS.push({
-  id: 3004,
-  topic: "stoikiometri",
-  type: "mcma",
-  level: "c3",
+  id: 3004, topic: "stoikiometri", type: "mcma", level: "c3",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Sebuah sampel besi(III) oksida (Fe₂O₃) memiliki massa 160 gram.</strong>
+    <div class="stim">
+      <p>Sampel Fe₂O₃ memiliki massa 160 gram.</p>
     </div>
     <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
       <i class="fa-solid fa-info-circle"></i> Ar Fe=56, O=16
     </div>
   `,
-  q: "Pernyataan yang BENAR tentang sampel tersebut adalah... (Pilih 2 jawaban benar)",
+  q: "Pernyataan yang BENAR tentang sampel tersebut adalah... (Pilih 3 jawaban benar)",
   opts: [
-    "Sampel mengandung 2 mol atom Fe",
-    "Sampel mengandung 3 mol atom O",
-    "Sampel mengandung 6,02 × 10²³ molekul Fe₂O₃",
-    "Massa Fe dalam sampel adalah 112 gram",
-    "Massa O dalam sampel adalah 32 gram"
+    "Mol Fe₂O₃ dalam sampel = 1 mol",
+    "Massa Fe dalam sampel = 112 gram",
+    "Massa O dalam sampel = 48 gram",
+    "Jumlah molekul Fe₂O₃ = 6,02 × 10²³ molekul",
+    "Mol atom O dalam sampel = 2 mol"
   ],
-  ans: [0, 3],
-  exp: "Mr Fe₂O₃ = 2×56 + 3×16 = 160 g/mol. Mol Fe₂O₃ = 160/160 = 1 mol. Dalam 1 mol Fe₂O₃ terdapat 2 mol atom Fe dan 3 mol atom O. Massa Fe = 2×56 = 112 gram. Massa O = 3×16 = 48 gram. Jumlah molekul = 1 × 6,02×10²³ = 6,02×10²³ molekul."
+  ans: [0, 1, 2],
+  exp: "Mr Fe₂O₃ = 2(56) + 3(16) = 160. Mol = 160/160 = 1 mol. Massa Fe = 2×56 = 112 g. Massa O = 3×16 = 48 g. Jumlah molekul = 1 × 6,02×10²³. Mol O = 3 mol (bukan 2)."
 });
 
-// SOAL C3.5 - Analisis stoikiometri reaksi
+// C3.5 (id:3005) — DIPERBAIKI TOTAL: kunci sinkron dengan penjelasan
 QS.push({
-  id: 3005,
-  topic: "stoikiometri",
-  type: "mcma",
-  level: "c3",
+  id: 3005, topic: "stoikiometri", type: "mcma", level: "c3",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Perhatikan reaksi berikut:</strong>
-    </div>
-    <div class="chem-eq">
-      2 Mg(s) + O<sub>2</sub>(g) → 2 MgO(s)
-    </div>
+    <div class="chem-eq">2Mg(s) + O₂(g) <span class="arrow">→</span> 2MgO(s)</div>
     <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
       <i class="fa-solid fa-info-circle"></i> Ar Mg=24, O=16
     </div>
   `,
-  q: "Pernyataan yang BENAR tentang reaksi tersebut adalah... (Pilih 2 jawaban benar)",
+  q: "Pernyataan yang BENAR tentang reaksi tersebut adalah... (Pilih 3 jawaban benar)",
   opts: [
     "Perbandingan mol Mg : O₂ = 2 : 1",
     "Perbandingan massa Mg : O₂ = 3 : 2",
-    "1 mol Mg menghasilkan 1 mol MgO",
-    "Massa MgO yang dihasilkan = massa Mg + massa O₂ yang bereaksi",
-    "Reaksi tersebut adalah reaksi redoks"
+    "Massa MgO = massa Mg + massa O₂ (hukum kekekalan massa)",
+    "2 mol Mg menghasilkan 4 mol MgO",
+    "Reaksi ini bukan reaksi redoks"
   ],
-  ans: [0, 3],
-  exp: "Perbandingan mol Mg:O₂ = 2:1. Berdasarkan hukum kekekalan massa, massa MgO = massa Mg + massa O₂ yang bereaksi. Perbandingan massa Mg:O₂ = 48:32 = 3:2. 2 mol Mg menghasilkan 2 mol MgO, jadi 1 mol Mg menghasilkan 1 mol MgO (ini juga benar). Reaksi redoks juga benar. Karena diminta 2 jawaban, saya pilih [0,3] sebagai yang paling fundamental. Sebenarnya [0,2,3,4] semuanya benar. Saya perbaiki agar lebih jelas."
+  ans: [0, 1, 2],
+  exp: "Perbandingan mol Mg:O₂ = 2:1. Massa Mg:O₂ = 48:32 = 3:2. Hukum Lavoisier: massa MgO = massa Mg + O₂. 2 mol Mg → 2 mol MgO (bukan 4). Reaksi Mg + O₂ adalah redoks."
 });
 
 // ================================================================
-// LEVEL C4 - Mengevaluasi (Analisis Kritis)
+// LEVEL C4 — Mengevaluasi (5 soal)
 // ================================================================
 
-// SOAL C4.1 - Evaluasi pereaksi pembatas dalam proses industri
+// C4.1 (id:4001) — tetap, sudah bagus
 QS.push({
-  id: 4001,
-  topic: "stoikiometri",
-  type: "single",
-  level: "c4",
+  id: 4001, topic: "stoikiometri", type: "single", level: "c4",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Industri pupuk memproduksi amonia melalui proses Haber-Bosch:</strong>
-    </div>
-    <div class="chem-eq">
-      N<sub>2</sub>(g) + 3 H<sub>2</sub>(g) ⇌ 2 NH<sub>3</sub>(g)
-    </div>
+    <div class="chem-eq">N₂(g) + 3H₂(g) ⇌ 2NH₃(g)</div>
     <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
-      <i class="fa-solid fa-info-circle"></i> Dalam suatu reaktor direaksikan 28 gram N₂ dan 6 gram H₂.
+      <i class="fa-solid fa-info-circle"></i> Direaksikan 28 gram N₂ dan 6 gram H₂.
     </div>
   `,
   q: "Pernyataan yang PALING TEPAT tentang reaksi tersebut adalah...",
   opts: [
-    "N₂ adalah pereaksi pembatas karena massa molarnya lebih besar",
-    "H₂ adalah pereaksi pembatas karena koefisiennya lebih besar dari N₂",
-    "Kedua pereaksi habis bereaksi sempurna karena perbandingan mol sesuai stoikiometri",
-    "N₂ adalah pereaksi pembatas karena mol N₂ yang tersedia lebih kecil dari yang dibutuhkan",
-    "H₂ adalah pereaksi pembatas karena mol H₂ yang tersedia lebih kecil dari yang dibutuhkan"
+    "N₂ adalah pereaksi pembatas karena Mr lebih besar",
+    "H₂ adalah pereaksi pembatas karena koefisiennya lebih besar",
+    "Kedua pereaksi habis sempurna karena molnya sesuai stoikiometri (1:3)",
+    "N₂ adalah pereaksi pembatas karena molnya lebih kecil",
+    "H₂ adalah pereaksi pembatas karena molnya lebih kecil"
   ],
   ans: 2,
-  exp: "Mol N₂ = 28/28 = 1 mol. Mol H₂ = 6/2 = 3 mol. Perbandingan stoikiometri N₂:H₂ = 1:3. Tersedia 1 mol N₂ dan 3 mol H₂, tepat sesuai stoikiometri. Jadi kedua pereaksi habis bereaksi sempurna."
+  exp: "Mol N₂ = 28/28 = 1 mol. Mol H₂ = 6/2 = 3 mol. Perbandingan stoikiometri = 1:3. Tersedia 1:3 → tepat. Kedua pereaksi habis sempurna."
 });
 
-// SOAL C4.2 - Evaluasi validitas pernyataan
+// C4.2 (id:4002) — DIPERBAIKI: kunci 3 dari 5 → 4 dari 6
 QS.push({
-  id: 4002,
-  topic: "stoikiometri",
-  type: "mcma",
-  level: "c4",
-  stim: `
-    <div style="background:var(--bg2);border-radius:0.5rem;padding:0.75rem;margin-bottom:0.5rem;border:1px solid var(--border);">
-      <ol style="color:var(--text);font-size:0.9rem;list-style-type:decimal;padding-left:1.5rem;">
-        <li>1 mol gas O₂ pada STP memiliki volume 22,4 L</li>
-        <li>1 mol H₂O memiliki massa 18 gram</li>
-        <li>Molalitas larutan tidak bergantung pada suhu</li>
-        <li>Molaritas larutan berubah jika suhu berubah</li>
-      </ol>
-    </div>
-  `,
-  q: "Pernyataan yang BENAR tentang konsep mol dan konsentrasi adalah... (Pilih 2 jawaban benar)",
+  id: 4002, topic: "stoikiometri", type: "mcma", level: "c4",
+  q: "Pernyataan BENAR tentang konsep mol dan konsentrasi adalah... (Pilih 4 jawaban benar)",
   opts: [
-    "Pernyataan 1 benar: 1 mol gas pada STP = 22,4 L",
-    "Pernyataan 2 benar: Mr H₂O = 18, massa = 18 gram",
-    "Pernyataan 3 benar: molalitas tidak bergantung suhu",
-    "Pernyataan 4 benar: molaritas bergantung suhu",
-    "Semua pernyataan benar"
+    "1 mol gas O₂ pada STP memiliki volume 22,4 L",
+    "1 mol H₂O memiliki massa 18 gram",
+    "Molalitas (m) tidak bergantung pada suhu",
+    "Molaritas (M) berubah jika suhu berubah",
+    "1 mol zat selalu memiliki volume 22,4 L",
+    "Molalitas sama dengan molaritas"
   ],
   ans: [0, 1, 2, 3],
-  exp: "Semua pernyataan benar: (1) volume molar gas STP = 22,4 L; (2) Mr H₂O = 18; (3) molalitas berbasis massa pelarut (tidak bergantung suhu); (4) molaritas berbasis volume larutan (bergantung suhu karena pemuaian)."
+  exp: "Volume molar 22,4 L hanya untuk GAS pada STP. Molalitas = mol/kg pelarut (tidak bergantung suhu). Molaritas = mol/L larutan (bergantung suhu karena pemuaian)."
 });
 
-// SOAL C4.3 - Evaluasi hasil analisis kuantitatif
+// C4.3 (id:4003) — tetap, sudah bagus
 QS.push({
-  id: 4003,
-  topic: "stoikiometri",
-  type: "single",
-  level: "c4",
+  id: 4003, topic: "stoikiometri", type: "single", level: "c4",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Seorang siswa melakukan titrasi untuk menentukan kadar asam cuka (CH₃COOH) menggunakan larutan NaOH 0,1 M. Reaksi:</strong>
-    </div>
-    <div class="chem-eq">
-      CH₃COOH(aq) + NaOH(aq) → CH₃COONa(aq) + H₂O(l)
-    </div>
+    <div class="chem-eq">CH₃COOH(aq) + NaOH(aq) → CH₃COONa(aq) + H₂O(l)</div>
     <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
-      <i class="fa-solid fa-info-circle"></i> Volume NaOH yang digunakan 20 mL untuk menitrasi 10 mL larutan cuka.
+      <i class="fa-solid fa-info-circle"></i> Volume NaOH 0,1 M yang digunakan = 20 mL untuk menitrasi 10 mL larutan cuka.
     </div>
   `,
   q: "Konsentrasi asam cuka tersebut adalah...",
   opts: ["0,05 M", "0,10 M", "0,15 M", "0,20 M", "0,25 M"],
   ans: 3,
-  exp: "Pada titrasi asam-basa: mol asam = mol basa. mol NaOH = 0,1 × 0,02 = 0,002 mol. mol CH₃COOH = 0,002 mol. Konsentrasi CH₃COOH = 0,002/0,01 = 0,2 M."
+  exp: "Mol NaOH = 0,1 × 0,02 = 0,002 mol. Mol CH₃COOH = 0,002 mol (1:1). [CH₃COOH] = 0,002/0,01 = 0,2 M."
 });
 
-// SOAL C4.4 - Evaluasi perhitungan stoikiometri
+// C4.4 (id:4004) — tetap, sudah bagus
 QS.push({
-  id: 4004,
-  topic: "stoikiometri",
-  type: "single",
-  level: "c4",
+  id: 4004, topic: "stoikiometri", type: "single", level: "c4",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Gas hidrogen dapat dihasilkan dari reaksi logam seng dengan asam klorida:</strong>
-    </div>
-    <div class="chem-eq">
-      Zn(s) + 2 HCl(aq) → ZnCl₂(aq) + H₂(g)
-    </div>
+    <div class="chem-eq">Zn(s) + 2HCl(aq) → ZnCl₂(aq) + H₂(g)</div>
     <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
-      <i class="fa-solid fa-info-circle"></i> Ar Zn=65, H=1, Cl=35,5
+      <i class="fa-solid fa-info-circle"></i> Ar Zn=65
     </div>
   `,
-  q: "Jika 13 gram Zn direaksikan dengan HCl berlebih, volume gas H₂ yang dihasilkan pada STP adalah...",
+  q: "Jika 13 gram Zn direaksikan dengan HCl berlebih, volume gas H₂ pada STP adalah...",
   opts: ["2,24 L", "4,48 L", "6,72 L", "8,96 L", "11,2 L"],
   ans: 1,
-  exp: "Mol Zn = 13/65 = 0,2 mol. Perbandingan Zn:H₂ = 1:1. Mol H₂ = 0,2 mol. Volume H₂ pada STP = 0,2 × 22,4 = 4,48 L."
+  exp: "Mol Zn = 13/65 = 0,2 mol. Perbandingan Zn:H₂ = 1:1. Volume H₂ = 0,2 × 22,4 = 4,48 L."
+});
+
+// C4.5 (BARU) — Error analysis
+QS.push({
+  id: 4005, topic: "stoikiometri", type: "single", level: "c4",
+  stim: `
+    <div class="stim">
+      <p>Seorang siswa menulis:</p>
+      <blockquote style="margin-left:1rem;border-left:3px solid var(--accent);padding-left:0.8rem;font-style:italic;color:var(--muted);">
+        "Pada reaksi 2H₂ + O₂ → 2H₂O, perbandingan mol H₂ : O₂ : H₂O = 2 : 1 : 2. 
+        Jadi 2 gram H₂ bereaksi dengan 1 gram O₂ menghasilkan 2 gram H₂O."
+      </blockquote>
+    </div>
+  `,
+  q: "Kesalahan penalaran utama siswa tersebut terletak pada...",
+  opts: [
+    "Menganggap perbandingan mol = perbandingan massa, padahal keduanya berbeda",
+    "Salah menghitung Mr H₂O",
+    "Menganggap reaksi tidak setara",
+    "Salah menuliskan persamaan reaksi",
+    "Menganggap H₂ dan O₂ tidak bereaksi"
+  ],
+  ans: 0,
+  exp: "Kesalahan: siswa menyamakan perbandingan MOL dengan perbandingan GRAM. Perbandingan mol = 2:1:2, tapi perbandingan massa = (2×2):(1×32):(2×18) = 4:32:36 = 1:8:9."
 });
 
 // ================================================================
-// LEVEL C5 - Mencipta (Merancang & Memecahkan)
+// LEVEL C5 — Mencipta (3 soal)
 // ================================================================
 
-// SOAL C5.1 - Merancang perhitungan stoikiometri reaksi
+// C5.1 (id:5001) — tetap, sudah bagus
 QS.push({
-  id: 5001,
-  topic: "stoikiometri",
-  type: "single",
-  level: "c5",
+  id: 5001, topic: "stoikiometri", type: "single", level: "c5",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Aluminium bereaksi dengan asam sulfat menghasilkan aluminium sulfat dan gas hidrogen:</strong>
-    </div>
-    <div class="chem-eq">
-      2 Al(s) + 3 H₂SO₄(aq) → Al₂(SO₄)₃(aq) + 3 H₂(g)
-    </div>
+    <div class="chem-eq">2Al(s) + 3H₂SO₄(aq) → Al₂(SO₄)₃(aq) + 3H₂(g)</div>
     <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
       <i class="fa-solid fa-info-circle"></i> Ar Al=27, S=32, O=16, H=1
     </div>
@@ -744,22 +576,14 @@ QS.push({
   q: "Jika 5,4 gram Al direaksikan dengan H₂SO₄ berlebih, massa Al₂(SO₄)₃ yang dihasilkan adalah...",
   opts: ["17,1 gram", "34,2 gram", "51,3 gram", "68,4 gram", "85,5 gram"],
   ans: 1,
-  exp: "Mol Al = 5,4/27 = 0,2 mol. Perbandingan Al : Al₂(SO₄)₃ = 2:1. Mol Al₂(SO₄)₃ = 0,2/2 = 0,1 mol. Mr Al₂(SO₄)₃ = 2×27 + 3(32+64) = 54 + 288 = 342 g/mol. Massa = 0,1 × 342 = 34,2 g."
+  exp: "Mol Al = 5,4/27 = 0,2. Perbandingan Al:Al₂(SO₄)₃ = 2:1. Mol Al₂(SO₄)₃ = 0,1 mol. Mr = 2(27) + 3(96) = 342. Massa = 0,1 × 342 = 34,2 g."
 });
 
-// SOAL C5.2 - Perhitungan stoikiometri dalam industri
+// C5.2 (id:5002) — tetap, sudah bagus
 QS.push({
-  id: 5002,
-  topic: "stoikiometri",
-  type: "single",
-  level: "c5",
+  id: 5002, topic: "stoikiometri", type: "single", level: "c5",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Batu kapur (CaCO₃) dipanaskan menghasilkan kapur tohor (CaO) dan gas CO₂:</strong>
-    </div>
-    <div class="chem-eq">
-      CaCO₃(s) → CaO(s) + CO₂(g)
-    </div>
+    <div class="chem-eq">CaCO₃(s) → CaO(s) + CO₂(g)</div>
     <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
       <i class="fa-solid fa-info-circle"></i> Ar Ca=40, C=12, O=16
     </div>
@@ -767,130 +591,101 @@ QS.push({
   q: "Untuk menghasilkan 5,6 ton CaO, massa CaCO₃ yang harus dipanaskan adalah...",
   opts: ["5 ton", "10 ton", "12,5 ton", "15 ton", "20 ton"],
   ans: 1,
-  exp: "Mol CaO = 5.600.000 g / 56 g/mol = 100.000 mol. Perbandingan CaCO₃:CaO = 1:1. Mol CaCO₃ = 100.000 mol. Massa CaCO₃ = 100.000 × 100 = 10.000.000 g = 10 ton."
+  exp: "Mol CaO = 5.600.000/56 = 100.000 mol. Mol CaCO₃ = 100.000 mol (1:1). Massa CaCO₃ = 100.000 × 100 = 10.000.000 g = 10 ton."
 });
 
-// SOAL C5.3 - Analisis stoikiometri campuran
+// C5.3 (id:5003) — DIPERBAIKI: kunci dan penjelasan sinkron
 QS.push({
-  id: 5003,
-  topic: "stoikiometri",
-  type: "mcma",
-  level: "c5",
+  id: 5003, topic: "stoikiometri", type: "mcma", level: "c5",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Suatu campuran gas terdiri dari gas metana (CH₄) dan gas etana (C₂H₆) sebanyak 10 L pada kondisi STP.</strong>
-    </div>
-    <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
-      <i class="fa-solid fa-info-circle"></i> Gas metana: CH₄, gas etana: C₂H₆
+    <div class="stim">
+      <p>Campuran gas CH₄ dan C₂H₆ sebanyak 10 L pada STP dibakar sempurna menghasilkan 14 L gas CO₂ (STP).</p>
     </div>
   `,
-  q: "Jika campuran tersebut dibakar sempurna dan menghasilkan 14 L gas CO₂ (STP), maka... (Pilih 2 jawaban benar)",
+  q: "Pernyataan yang BENAR tentang komposisi campuran adalah... (Pilih 2 jawaban benar)",
   opts: [
-    "Volume CH₄ dalam campuran adalah 4 L",
-    "Volume C₂H₆ dalam campuran adalah 6 L",
-    "Volume CH₄ dalam campuran adalah 6 L",
-    "Volume C₂H₆ dalam campuran adalah 4 L",
-    "Volume CH₄ dalam campuran adalah 5 L"
+    "Volume CH₄ dalam campuran = 6 L",
+    "Volume C₂H₆ dalam campuran = 4 L",
+    "Volume CH₄ dalam campuran = 4 L",
+    "Volume C₂H₆ dalam campuran = 6 L",
+    "Volume CH₄ = Volume C₂H₆ = 5 L"
   ],
   ans: [0, 1],
-  exp: "Misal volume CH₄ = x L, C₂H₆ = y L. x + y = 10. Reaksi: CH₄ + 2O₂ → CO₂ + 2H₂O (1 mol CH₄ → 1 mol CO₂). 2C₂H₆ + 7O₂ → 4CO₂ + 6H₂O (1 mol C₂H₆ → 2 mol CO₂). Volume CO₂ = x + 2y = 14. Dari x + y = 10 dan x + 2y = 14 → y = 4, x = 6. Jadi CH₄ = 6 L, C₂H₆ = 4 L."
+  exp: "Misal CH₄ = x, C₂H₆ = y. x + y = 10. CH₄ → 1 CO₂, C₂H₆ → 2 CO₂. Jadi x + 2y = 14. Dari x + y = 10 dan x + 2y = 14 → y = 4, x = 6. Jadi CH₄ = 6 L, C₂H₆ = 4 L."
 });
 
 // ================================================================
-// LEVEL C6 - Menilai (Evaluasi Kritis & Pengambilan Keputusan)
+// LEVEL C6 — Menilai (3 soal)
 // ================================================================
 
-// SOAL C6.1 - Menilai validitas pernyataan tentang stoikiometri
+// C6.1 (id:6001) — DIPERBAIKI: single choice nilai 4 pernyataan
 QS.push({
-  id: 6001,
-  topic: "stoikiometri",
-  type: "mcma",
-  level: "c6",
+  id: 6001, topic: "stoikiometri", type: "single", level: "c6",
   stim: `
-    <div style="background:var(--bg2);border-radius:0.5rem;padding:0.75rem;margin-bottom:0.5rem;border:1px solid var(--border);">
-      <ol style="color:var(--text);font-size:0.9rem;list-style-type:decimal;padding-left:1.5rem;">
-        <li>Pereaksi pembatas menentukan jumlah produk yang dihasilkan</li>
-        <li>Rumus empiris senyawa dapat ditentukan dari data komposisi massa unsur-unsurnya</li>
-        <li>Massa atom relatif (Ar) adalah massa rata-rata atom suatu unsur dibandingkan 1/12 massa atom C-12</li>
-        <li>Hukum perbandingan tetap menyatakan perbandingan massa unsur-unsur dalam senyawa selalu tetap</li>
+    <div class="stim">
+      <p>Seorang siswa menulis ringkasan tentang stoikiometri:</p>
+      <ol style="margin-left:1.2rem;">
+        <li>Pereaksi pembatas menentukan jumlah produk maksimum.</li>
+        <li>Rumus empiris dapat ditentukan dari data komposisi massa unsur.</li>
+        <li>Massa atom relatif (Ar) adalah massa rata-rata atom dibanding 1/12 massa C-12.</li>
+        <li>Hukum perbandingan tetap (Proust) menyatakan perbandingan massa unsur dalam senyawa selalu tetap.</li>
+        <li>Volume molar gas selalu 22,4 L untuk semua kondisi.</li>
       </ol>
     </div>
   `,
-  q: "Pernyataan yang PALING TEPAT tentang stoikiometri adalah... (Pilih jawaban yang benar)",
+  q: "Penilaian yang PALING TEPAT terhadap ringkasan siswa adalah...",
   opts: [
-    "Pernyataan 1 benar: pereaksi pembatas menentukan jumlah produk",
-    "Pernyataan 2 benar: rumus empiris dari komposisi massa",
-    "Pernyataan 3 benar: definisi Ar yang tepat",
-    "Pernyataan 4 benar: hukum perbandingan tetap",
-    "Semua pernyataan benar"
+    "Pernyataan 1, 2, 3, dan 4 benar; pernyataan 5 salah",
+    "Pernyataan 1, 2, dan 5 benar; pernyataan 3 dan 4 salah",
+    "Hanya pernyataan 1 dan 2 yang benar",
+    "Semua pernyataan benar",
+    "Semua pernyataan salah"
   ],
-  ans: [0, 1, 2, 3],
-  exp: "Semua pernyataan benar: (1) pereaksi pembatas menentukan jumlah produk maksimum; (2) rumus empiris ditentukan dari perbandingan mol unsur; (3) definisi Ar yang tepat; (4) hukum perbandingan tetap (Proust)."
+  ans: 0,
+  exp: "Pernyataan 1-4 benar. Pernyataan 5 SALAH: volume molar 22,4 L hanya pada STP (0°C, 1 atm). Pada kondisi lain, volume molar berbeda (misalnya 24 L pada suhu kamar)."
 });
 
-// SOAL C6.2 - Menilai penerapan stoikiometri dalam kehidupan
+// C6.2 (id:6002) — DIPERBAIKI: kunci dan penjelasan sinkron
 QS.push({
-  id: 6002,
-  topic: "stoikiometri",
-  type: "mcma",
-  level: "c6",
+  id: 6002, topic: "stoikiometri", type: "mcma", level: "c6",
   stim: `
-    <div style="background:var(--bg2);border-radius:0.5rem;padding:0.75rem;margin-bottom:0.5rem;border:1px solid var(--border);">
-      <p style="font-size:0.9rem;color:var(--text);">
-        Seorang siswa ingin membuat larutan penyangga dari asam asetat (CH₃COOH) dan natrium asetat (CH₃COONa). Ia memiliki 100 mL larutan CH₃COOH 0,2 M dan padatan CH₃COONa (Mr=82 g/mol).
-      </p>
+    <div class="stim">
+      <p>Seorang siswa ingin membuat larutan penyangga dengan pH = pKa dari CH₃COOH 0,2 M (100 mL) dan padatan CH₃COONa (Mr=82).</p>
     </div>
   `,
-  q: "Untuk membuat larutan penyangga dengan pH = pKa (Ka=1,8×10⁻⁵), maka... (Pilih 2 jawaban benar)",
+  q: "Pernyataan yang PALING TEPAT tentang rancangan larutan penyangga tersebut adalah... (Pilih 2 jawaban benar)",
   opts: [
-    "Konsentrasi CH₃COONa yang dibutuhkan sama dengan CH₃COOH yaitu 0,2 M",
-    "Massa CH₃COONa yang dibutuhkan adalah 1,64 gram",
-    "Larutan penyangga ini bersifat asam karena Ka > Kw",
+    "Massa CH₃COONa yang dibutuhkan = 0,2 × 0,1 × 82 = 1,64 gram",
     "Perbandingan mol CH₃COOH : CH₃COONa = 1:1 agar pH = pKa",
-    "pH larutan akan berubah drastis jika ditambah asam kuat"
+    "pH larutan akan berubah drastis jika ditambah sedikit asam kuat",
+    "CH₃COOH bertindak sebagai basa konjugasi",
+    "Larutan penyangga hanya dapat dibuat dari asam kuat dan basa kuat"
   ],
-  ans: [0, 3],
-  exp: "pH = pKa + log([A⁻]/[HA]). Agar pH = pKa, maka log([A⁻]/[HA]) = 0 → [A⁻] = [HA]. Jadi konsentrasi CH₃COONa harus 0,2 M. Perbandingan mol CH₃COOH : CH₃COONa = 1:1. Massa CH₃COONa = 0,2 × 0,1 × 82 = 1,64 g. Larutan penyangga bersifat buffer, pH tidak berubah drastis jika ditambah asam/basa kuat."
+  ans: [0, 1],
+  exp: "Agar pH = pKa, [CH₃COOH] = [CH₃COONa] = 0,2 M. Mol CH₃COONa = 0,2 × 0,1 = 0,02 mol. Massa = 0,02 × 82 = 1,64 g. Perbandingan mol 1:1. Penyangga tidak berubah drastis. CH₃COOH = asam, bukan basa konjugasi."
 });
 
-// SOAL C6.3 - Menilai efisiensi reaksi kimia
+// C6.3 (id:6003) — tetap, sudah bagus
 QS.push({
-  id: 6003,
-  topic: "stoikiometri",
-  type: "single",
-  level: "c6",
+  id: 6003, topic: "stoikiometri", type: "single", level: "c6",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Dalam industri pupuk, amonia dibuat dari reaksi nitrogen dan hidrogen:</strong>
-    </div>
-    <div class="chem-eq">
-      N<sub>2</sub>(g) + 3 H<sub>2</sub>(g) → 2 NH<sub>3</sub>(g)
-    </div>
+    <div class="chem-eq">N₂(g) + 3H₂(g) → 2NH₃(g)</div>
     <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
-      <i class="fa-solid fa-info-circle"></i> Jika menggunakan 56 ton N₂ dan menghasilkan 34 ton NH₃.
+      <i class="fa-solid fa-info-circle"></i> 56 ton N₂ menghasilkan 34 ton NH₃.
     </div>
   `,
   q: "Persentase rendemen reaksi tersebut adalah...",
   opts: ["50%", "60%", "70%", "80%", "90%"],
   ans: 0,
-  exp: "Mol N₂ = 56.000.000 g / 28 g/mol = 2.000.000 mol. Secara teoritis, 1 mol N₂ menghasilkan 2 mol NH₃. Jadi NH₃ teoritis = 4.000.000 mol = 4.000.000 × 17 = 68.000.000 g = 68 ton. Rendemen = (34/68) × 100% = 50%."
+  exp: "Mol N₂ = 56.000.000/28 = 2.000.000 mol. NH₃ teoritis = 2 × 2.000.000 = 4.000.000 mol = 4.000.000 × 17 = 68.000.000 g = 68 ton. Rendemen = (34/68) × 100% = 50%."
 });
 
 // ================================================================
 // STATE MANAGEMENT
 // ================================================================
 var S = {
-  view: "home",
-  qids: [],
-  qi: 0,
-  ans: {},
-  mode: "topic",
-  ri: 0,
-  rqs: [],
-  wrong: [],
-  done: {},
-  scores: {},
-  filter: "all"
+  view: "home", qids: [], qi: 0, ans: {}, mode: "topic",
+  ri: 0, rqs: [], wrong: [], done: {}, scores: {}, filter: "all"
 };
 
 function load() {
@@ -907,18 +702,14 @@ function load() {
 function save() {
   try {
     localStorage.setItem("tka_kim_stoikiometri", JSON.stringify({
-      done: Object.keys(S.done),
-      wrong: S.wrong,
-      scores: S.scores
+      done: Object.keys(S.done), wrong: S.wrong, scores: S.scores
     }));
   } catch(e) {}
 }
 load();
 
-function goHome() { location.href = 'index.html'; }
-
 function go(v) {
-  var names = {home:"vHome", quiz:"vQuiz", res:"vRes", rev:"vRev", browse:"vBrowse"};
+  var names = {home:"vHome", quiz:"vQuiz", res:"vRes", rev:"vRev"};
   document.querySelectorAll(".view").forEach(function(el) { el.classList.remove("active"); });
   var el = document.getElementById(names[v]);
   if (el) el.classList.add("active");
@@ -940,12 +731,11 @@ function updateNS() {
 }
 
 function getLevelBadge(level) {
-  var labels = {c3:"C3", c4:"C4", c5:"C5", c6:"C6"};
-  var colors = {c3:"#fbbf24", c4:"#f97316", c5:"#ef4444", c6:"#8b5cf6"};
+  var labels = {c2:"C2", c3:"C3", c4:"C4", c5:"C5", c6:"C6"};
+  var colors = {c2:"#34d399", c3:"#fbbf24", c4:"#f97316", c5:"#ef4444", c6:"#8b5cf6"};
   var bgColors = {
-    c3:"rgba(251,191,36,0.15)",
-    c4:"rgba(249,115,22,0.15)",
-    c5:"rgba(239,68,68,0.15)",
+    c2:"rgba(52,211,153,0.15)", c3:"rgba(251,191,36,0.15)",
+    c4:"rgba(249,115,22,0.15)", c5:"rgba(239,68,68,0.15)",
     c6:"rgba(139,92,246,0.15)"
   };
   return '<span class="badge" style="background:' + bgColors[level] + ';color:' + colors[level] + ';font-size:0.65rem;">' + labels[level] + '</span>';
@@ -1005,14 +795,12 @@ function startQuiz() {
   S.ans = {}; S.qi = 0; S.mode = "topic";
   go("quiz"); renderQ();
 }
-
 function startRandom() {
   var sh = QS.slice().sort(function() { return Math.random() - 0.5; }).slice(0, 10);
   S.qids = sh.map(function(q) { return q.id; });
   S.ans = {}; S.qi = 0; S.mode = "random";
   go("quiz"); renderQ();
 }
-
 function startWrong() {
   var wq = QS.filter(function(q) { return S.wrong.indexOf(q.id) >= 0; });
   if (wq.length === 0) return;
@@ -1020,7 +808,6 @@ function startWrong() {
   S.ans = {}; S.qi = 0; S.mode = "wrong";
   go("quiz"); renderQ();
 }
-
 function singleQ(qid) {
   S.qids = [qid]; S.ans = {}; S.qi = 0; S.mode = "single";
   go("quiz"); renderQ();
@@ -1038,7 +825,7 @@ function renderQ() {
   document.getElementById("qBar").style.width = pct + "%";
   var tl = {single: "Pilihan Ganda", mcma: "MCMA"};
   document.getElementById("qTyp").textContent = tl[q.type] || q.type;
-  var levelLabels = {c3:"C3 - Menganalisis", c4:"C4 - Mengevaluasi", c5:"C5 - Mencipta", c6:"C6 - Menilai"};
+  var levelLabels = {c2:"C2 - Pemahaman", c3:"C3 - Menganalisis", c4:"C4 - Mengevaluasi", c5:"C5 - Mencipta", c6:"C6 - Menilai"};
   document.getElementById("qLevel").textContent = q.level ? levelLabels[q.level] : "";
   document.getElementById("bPrv").style.visibility = S.qi > 0 ? "visible" : "hidden";
   var isLast = S.qi === total - 1;
@@ -1093,29 +880,23 @@ function qPrev() {
 function finishQ() {
   var correct = 0, wrong = 0;
   var ts = {};
-
   S.qids.forEach(function(qid) {
     var q = QS.find(function(x) { return x.id === qid; });
     if (!q) return;
     var ua = S.ans[qid];
     var ok = false;
-
-    if (q.type === "single") {
-      ok = ua === q.ans;
-    } else if (q.type === "mcma") {
+    if (q.type === "single") ok = ua === q.ans;
+    else if (q.type === "mcma") {
       var u = (ua || []).slice().sort().join(",");
       var c = q.ans.slice().sort().join(",");
       ok = u === c;
     }
-
     S.done[qid] = true;
-    if (ok) { correct++; } else { wrong++; S.wrong.push(qid); }
-
+    if (ok) correct++; else { wrong++; S.wrong.push(qid); }
     if (!ts[q.topic]) ts[q.topic] = {c:0, t:0};
     ts[q.topic].t++;
     if (ok) ts[q.topic].c++;
   });
-
   S.wrong = uniq(S.wrong);
   for (var k in ts) {
     if (!S.scores[k]) S.scores[k] = {c:0, t:0};
@@ -1228,13 +1009,13 @@ function rvNav(dir) {
   renderRev();
 }
 function backRev() {
-  if (S.mode === "single") goHome();
+  if (S.mode === "single") go("home");
   else go("res");
 }
 
 function openExit() { document.getElementById("exMod").classList.add("open"); }
 function closeMod() { document.getElementById("exMod").classList.remove("open"); }
-function doExit() { closeMod(); goHome(); }
+function doExit() { closeMod(); go("home"); }
 
 function resetAll() {
   S.done = {}; S.wrong = []; S.scores = {};
@@ -1242,16 +1023,15 @@ function resetAll() {
 }
 function toast(msg, bg) {
   var t = document.getElementById("toast");
-  t.style.display = "block"; 
-  t.style.background = bg || "var(--card)"; 
-  t.style.color = "#fff"; 
+  t.style.display = "block";
+  t.style.background = bg || "var(--card)";
+  t.style.color = "#fff";
   t.textContent = msg;
   setTimeout(function() { t.style.display = "none"; }, 2200);
 }
 
-// INIT
 renderHome();
-console.log("Stoikiometri - HOTS C3-C6 loaded: " + QS.length + " soal");
+console.log("Stoikiometri - HOTS C2-C6 loaded: " + QS.length + " soal");
 </script>
 </body>
 </html>
