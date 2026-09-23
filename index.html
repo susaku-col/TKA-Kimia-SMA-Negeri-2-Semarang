@@ -85,6 +85,7 @@
     .glow-card .ti {
         width: 40px;
         height: 40px;
+        min-width: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -92,12 +93,10 @@
         font-size: 1.1rem;
         background: rgba(212, 160, 74, 0.10);
         color: var(--accent);
+        transition: all 0.3s ease;
     }
 
-    .glow-card:hover .ti {
-        background: rgba(212, 160, 74, 0.20);
-        transform: scale(1.05);
-    }
+    .glow-card:hover .ti { transform: scale(1.05); }
 
     .glow-card h3 {
         font-size: 0.95rem;
@@ -159,9 +158,23 @@
         border: 1px solid rgba(212, 160, 74, 0.2);
     }
 
+    /* Nomor urut topik */
+    .topic-num {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-size: 0.6rem;
+        font-weight: 700;
+        color: var(--muted);
+        opacity: 0.4;
+        letter-spacing: 0.5px;
+    }
+
+    .glow-card { position: relative; }
+
     @media (max-width: 640px) {
         .glow-card { padding: 14px 16px; }
-        .glow-card .ti { width: 34px; height: 34px; font-size: 0.95rem; }
+        .glow-card .ti { width: 34px; height: 34px; min-width: 34px; font-size: 0.95rem; }
         .glow-card h3 { font-size: 0.85rem; }
     }
 </style>
@@ -177,7 +190,7 @@
 <span class="hidden sm:inline">TKA KIMIA SMA Negeri 2 Semarang</span>
 </div>
 <div class="text-xs" style="color:var(--muted)">
-<i class="fa-regular fa-circle-check"></i> 19 Topik + 2 Tryout
+<i class="fa-regular fa-circle-check"></i> 20 Topik + 4 Tryout
 </div>
 </div>
 </nav>
@@ -220,126 +233,168 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
 
-        <!-- ========================================================== -->
-        <!-- TOPIK UTAMA -->
-        <!-- ========================================================== -->
-
+        <!-- 01. Struktur Atom -->
         <a href="struktur-atom.html" class="glow-card">
+            <span class="topic-num">01</span>
             <div class="ti purple"><i class="fa-solid fa-atom"></i></div>
-            <h3>Struktur Atom & Ikatan</h3>
+            <h3>Struktur Atom</h3>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
 
-        <a href="koloid.html" class="glow-card">
-            <div class="ti blue"><i class="fa-solid fa-droplet"></i></div>
-            <h3>Sistem Koloid</h3>
+        <!-- 02. Sistem Periodik Unsur -->
+        <a href="sistem-periodik.html" class="glow-card">
+            <span class="topic-num">02</span>
+            <div class="ti indigo"><i class="fa-solid fa-table-cells"></i></div>
+            <h3>Sistem Periodik Unsur</h3>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
 
-        <a href="bentuk-molekul.html" class="glow-card">
-            <div class="ti purple"><i class="fa-solid fa-shapes"></i></div>
-            <h3>Bentuk Molekul</h3>
-            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
-        </a>
-
-        <a href="redoks.html" class="glow-card">
-            <div class="ti red"><i class="fa-solid fa-right-left"></i></div>
-            <h3>Reaksi Redoks</h3>
-            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
-        </a>
-
-        <a href="elektrokimia.html" class="glow-card">
-            <div class="ti yellow"><i class="fa-solid fa-bolt"></i></div>
-            <h3>Elektrokimia</h3>
-            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
-        </a>
-
-        <a href="asam-basa.html" class="glow-card">
-            <div class="ti orange"><i class="fa-solid fa-flask"></i></div>
-            <h3>Asam-Basa</h3>
-            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
-        </a>
-
-        <a href="hidrolisis-garam.html" class="glow-card">
-            <div class="ti teal"><i class="fa-solid fa-shield-halved"></i></div>
-            <h3>Larutan Penyangga</h3>
-            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
-        </a>
-
-        <a href="kesetimbangan kimia.html" class="glow-card">
-            <div class="ti indigo"><i class="fa-solid fa-scale-balanced"></i></div>
-            <h3>Kesetimbangan Kimia</h3>
-            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
-        </a>
-
-        <a href="laju-reaksi.html" class="glow-card">
-            <div class="ti pink"><i class="fa-solid fa-gauge-high"></i></div>
-            <h3>Laju Reaksi</h3>
-            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
-        </a>
-
-        <a href="termokimia.html" class="glow-card">
-            <div class="ti rose"><i class="fa-solid fa-fire"></i></div>
-            <h3>Termokimia & Kelarutan</h3>
-            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
-        </a>
-
-        <a href="hidrokarbon.html" class="glow-card">
-            <div class="ti green"><i class="fa-solid fa-oil-can"></i></div>
-            <h3>Hidrokarbon</h3>
-            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
-        </a>
-
-        <a href="stoikiometri.html" class="glow-card">
-            <div class="ti blue"><i class="fa-solid fa-calculator"></i></div>
-            <h3>Stoikiometri</h3>
-            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
-        </a>
-
+        <!-- 03. Ikatan Kimia -->
         <a href="ikatan-kimia.html" class="glow-card">
+            <span class="topic-num">03</span>
             <div class="ti purple"><i class="fa-solid fa-link"></i></div>
             <h3>Ikatan Kimia</h3>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
 
-        <a href="titrasi.html" class="glow-card">
-            <div class="ti pink"><i class="fa-solid fa-vial"></i></div>
-            <h3>Titrasi</h3>
+        <!-- 04. Bentuk Molekul -->
+        <a href="bentuk-molekul.html" class="glow-card">
+            <span class="topic-num">04</span>
+            <div class="ti purple"><i class="fa-solid fa-shapes"></i></div>
+            <h3>Bentuk Molekul</h3>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
 
-        <a href="koligatif.html" class="glow-card">
-            <div class="ti orange"><i class="fa-solid fa-temperature-low"></i></div>
-            <h3>Sifat Koligatif</h3>
+        <!-- 05. Stoikiometri -->
+        <a href="stoikiometri.html" class="glow-card">
+            <span class="topic-num">05</span>
+            <div class="ti blue"><i class="fa-solid fa-calculator"></i></div>
+            <h3>Stoikiometri</h3>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
 
-        <a href="ksp.html" class="glow-card">
-            <div class="ti teal"><i class="fa-solid fa-cube"></i></div>
-            <h3>Kelarutan & Ksp</h3>
+        <!-- 06. Persamaan Reaksi -->
+        <a href="persamaan-reaksi.html" class="glow-card">
+            <span class="topic-num">06</span>
+            <div class="ti blue"><i class="fa-solid fa-equals"></i></div>
+            <h3>Persamaan Reaksi</h3>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
 
-        <a href="biomolekul.html" class="glow-card">
-            <div class="ti teal"><i class="fa-solid fa-dna"></i></div>
-            <h3>Biomolekul</h3>
+        <!-- 07. Larutan -->
+        <a href="larutan.html" class="glow-card">
+            <span class="topic-num">07</span>
+            <div class="ti teal"><i class="fa-solid fa-flask"></i></div>
+            <h3>Larutan</h3>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
 
-        <a href="hidrolisis-garam.html" class="glow-card">
-            <div class="ti blue"><i class="fa-solid fa-water"></i></div>
-            <h3>Hidrolisis Garam</h3>
+        <!-- 08. Asam Basa -->
+        <a href="asam-basa.html" class="glow-card">
+            <span class="topic-num">08</span>
+            <div class="ti orange"><i class="fa-solid fa-vial"></i></div>
+            <h3>Asam Basa</h3>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
 
-        <a href="gugus-fungsi.html" class="glow-card">
-            <div class="ti purple"><i class="fa-solid fa-link"></i></div>
-            <h3>Gugus Fungsi</h3>
+        <!-- 09. pH Larutan -->
+        <a href="ph-larutan.html" class="glow-card">
+            <span class="topic-num">09</span>
+            <div class="ti orange"><i class="fa-solid fa-droplet"></i></div>
+            <h3>pH Larutan</h3>
+            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
+        </a>
+
+        <!-- 10. Koloid -->
+        <a href="koloid.html" class="glow-card">
+            <span class="topic-num">10</span>
+            <div class="ti blue"><i class="fa-solid fa-cloud"></i></div>
+            <h3>Koloid</h3>
+            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
+        </a>
+
+        <!-- 11. Kesetimbangan Kimia -->
+        <a href="kesetimbangan-kimia.html" class="glow-card">
+            <span class="topic-num">11</span>
+            <div class="ti indigo"><i class="fa-solid fa-scale-balanced"></i></div>
+            <h3>Kesetimbangan Kimia</h3>
+            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
+        </a>
+
+        <!-- 12. Laju Reaksi -->
+        <a href="laju-reaksi.html" class="glow-card">
+            <span class="topic-num">12</span>
+            <div class="ti pink"><i class="fa-solid fa-gauge-high"></i></div>
+            <h3>Laju Reaksi</h3>
+            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
+        </a>
+
+        <!-- 13. Termokimia -->
+        <a href="termokimia.html" class="glow-card">
+            <span class="topic-num">13</span>
+            <div class="ti rose"><i class="fa-solid fa-fire"></i></div>
+            <h3>Termokimia</h3>
+            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
+        </a>
+
+        <!-- 14. Elektrokimia -->
+        <a href="elektrokimia.html" class="glow-card">
+            <span class="topic-num">14</span>
+            <div class="ti yellow"><i class="fa-solid fa-bolt"></i></div>
+            <h3>Elektrokimia</h3>
+            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
+        </a>
+
+        <!-- 15. Redoks -->
+        <a href="redoks.html" class="glow-card">
+            <span class="topic-num">15</span>
+            <div class="ti red"><i class="fa-solid fa-right-left"></i></div>
+            <h3>Redoks</h3>
+            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
+        </a>
+
+        <!-- 16. Senyawa Karbon -->
+        <a href="senyawa-karbon.html" class="glow-card">
+            <span class="topic-num">16</span>
+            <div class="ti green"><i class="fa-solid fa-ring"></i></div>
+            <h3>Senyawa Karbon</h3>
+            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
+        </a>
+
+        <!-- 17. Polimer -->
+        <a href="polimer.html" class="glow-card">
+            <span class="topic-num">17</span>
+            <div class="ti purple"><i class="fa-solid fa-cubes"></i></div>
+            <h3>Polimer</h3>
+            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
+        </a>
+
+        <!-- 18. Kimia Lingkungan -->
+        <a href="kimia-lingkungan.html" class="glow-card">
+            <span class="topic-num">18</span>
+            <div class="ti green"><i class="fa-solid fa-leaf"></i></div>
+            <h3>Kimia Lingkungan</h3>
+            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
+        </a>
+
+        <!-- 19. Metode Ilmiah -->
+        <a href="metode-ilmiah.html" class="glow-card">
+            <span class="topic-num">19</span>
+            <div class="ti blue"><i class="fa-solid fa-microscope"></i></div>
+            <h3>Metode Ilmiah</h3>
+            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
+        </a>
+
+        <!-- 20. Analisis Data Kimia -->
+        <a href="analisis-data.html" class="glow-card">
+            <span class="topic-num">20</span>
+            <div class="ti pink"><i class="fa-solid fa-chart-line"></i></div>
+            <h3>Analisis Data Kimia</h3>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
 
         <!-- ========================================================== -->
-        <!-- TRYOUT SECTION - Dipisahkan dengan visual berbeda -->
+        <!-- TRYOUT SECTION -->
         <!-- ========================================================== -->
 
         <div class="col-span-full mt-2 mb-1">
@@ -386,7 +441,7 @@
             <span class="block sm:inline">Dikembangkan oleh MGMP Kimia SMA Negeri 2 Semarang</span>
         </p>
         <p class="mt-1" style="color:var(--muted);opacity:0.6;">
-            <i class="fa-regular fa-circle-check"></i> 19 Topik + 2 Try Out
+            <i class="fa-regular fa-circle-check"></i> 20 Topik + 4 Try Out
         </p>
     </div>
 
