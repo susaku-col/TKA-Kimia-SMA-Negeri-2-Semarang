@@ -3,430 +3,182 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asam-Basa — TKA Kimia SMA Negeri 2 Semarang </title>
+<title>Asam-Basa — TKA Kimia SMA Negeri 2 Semarang</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
-    /* ============================================================ */
-    /* VARIABEL GLOBAL */
-    /* ============================================================ */
     :root {
-        --bg: #0b1a17;
-        --bg2: #132a24;
-        --card: #1a3a32;
-        --card2: #1e4a3f;
-        --text: #e8f0ec;
-        --muted: #8aa8a0;
-        --border: #2a4a42;
-        --accent: #d4a04a;
-        --success: #34d399;
-        --error: #f87171;
-        --glow: rgba(212, 160, 74, 0.15);
+        --bg: #0b1a17; --bg2: #132a24; --card: #1a3a32; --card2: #1e4a3f;
+        --text: #e8f0ec; --muted: #8aa8a0; --border: #2a4a42; --accent: #d4a04a;
+        --success: #34d399; --error: #f87171; --glow: rgba(212, 160, 74, 0.15);
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
         font-family: 'Source Sans 3', sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        min-height: 100vh;
-        padding-top: 52px;
+        background: var(--bg); color: var(--text);
+        min-height: 100vh; padding-top: 52px;
     }
-
     .fd { font-family: 'Playfair Display', serif; }
-
-    /* ============================================================ */
-    /* BACKGROUND NOISE */
-    /* ============================================================ */
     .bg-noise {
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
+        position: fixed; top:0; left:0; right:0; bottom:0;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-        pointer-events: none;
-        z-index: 0;
+        pointer-events: none; z-index: 0;
     }
-
     .hg {
-        position: absolute;
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        filter: blur(100px);
-        opacity: 0.15;
-        pointer-events: none;
+        position: absolute; width:300px; height:300px;
+        border-radius: 50%; filter: blur(100px);
+        opacity: 0.15; pointer-events: none;
     }
-
-    /* ============================================================ */
-    /* BADGE */
-    /* ============================================================ */
     .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 14px;
-        border-radius: 100px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        background: rgba(212, 160, 74, 0.12);
-        color: var(--accent);
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 4px 14px; border-radius: 100px;
+        font-size: 0.75rem; font-weight: 600;
+        background: rgba(212,160,74,0.12); color: var(--accent);
     }
-
-    /* ============================================================ */
-    /* GLOW CARD */
-    /* ============================================================ */
     .glow-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 16px 18px;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        text-decoration: none;
-        color: inherit;
+        background: var(--card); border: 1px solid var(--border);
+        border-radius: 12px; padding: 16px 18px; cursor: pointer;
+        transition: all 0.25s ease; display: flex;
+        align-items: center; gap: 12px;
+        text-decoration: none; color: inherit;
     }
-
     .glow-card:hover {
-        border-color: var(--accent);
-        background: var(--card2);
+        border-color: var(--accent); background: var(--card2);
         box-shadow: 0 0 20px var(--glow);
     }
-
-    /* ============================================================ */
-    /* BUTTONS */
-    /* ============================================================ */
     .bp {
-        background: var(--accent);
-        color: #0b1a17;
-        border: none;
-        padding: 8px 18px;
-        border-radius: 30px;
-        font-weight: 700;
-        font-size: 0.85rem;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
+        background: var(--accent); color: #0b1a17; border: none;
+        padding: 8px 18px; border-radius: 30px; font-weight: 700;
+        font-size: 0.85rem; cursor: pointer; transition: all 0.25s ease;
+        display: inline-flex; align-items: center; gap: 6px;
     }
     .bp:hover { background: #e8b84a; transform: scale(1.02); }
-
     .bs {
-        background: transparent;
-        color: var(--text);
-        border: 1px solid var(--border);
-        padding: 8px 18px;
-        border-radius: 30px;
-        font-weight: 600;
-        font-size: 0.85rem;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
+        background: transparent; color: var(--text);
+        border: 1px solid var(--border); padding: 8px 18px;
+        border-radius: 30px; font-weight: 600; font-size: 0.85rem;
+        cursor: pointer; transition: all 0.25s ease;
+        display: inline-flex; align-items: center; gap: 6px;
     }
     .bs:hover { border-color: var(--accent); background: var(--card2); }
-
-    /* ============================================================ */
-    /* VIEWS */
-    /* ============================================================ */
     .view { display: none; }
     .view.active { display: block; }
-
-    /* ============================================================ */
-    /* SOAL CARD */
-    /* ============================================================ */
-    .soal-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 18px 20px;
-        margin-bottom: 14px;
-        transition: all 0.25s;
-    }
-    .soal-card:hover { border-color: var(--accent); }
-
-    /* ============================================================ */
-    /* STIMULUS */
-    /* ============================================================ */
     .stim {
-        background: var(--bg2);
-        padding: 12px 16px;
-        border-radius: 8px;
-        border-left: 3px solid var(--accent);
-        margin-bottom: 12px;
-        font-size: 0.9rem;
-        line-height: 1.6;
-        color: var(--muted);
+        background: var(--bg2); padding: 12px 16px;
+        border-radius: 8px; border-left: 3px solid var(--accent);
+        margin-bottom: 12px; font-size: 0.9rem;
+        line-height: 1.6; color: var(--muted);
     }
-
-    /* ============================================================ */
-    /* TABLE */
-    /* ============================================================ */
     .table-wrap {
-        overflow-x: auto;
-        margin: 8px 0;
-        border-radius: 8px;
-        border: 1px solid var(--border);
+        overflow-x: auto; margin: 8px 0;
+        border-radius: 8px; border: 1px solid var(--border);
     }
     table.soal-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.8rem;
-        background: var(--bg2);
+        width: 100%; border-collapse: collapse;
+        font-size: 0.8rem; background: var(--bg2);
     }
     table.soal-table th {
-        background: var(--card);
-        color: var(--accent);
-        font-weight: 600;
-        padding: 6px 10px;
-        border: 1px solid var(--border);
-        text-align: center;
+        background: var(--card); color: var(--accent);
+        font-weight: 600; padding: 6px 10px;
+        border: 1px solid var(--border); text-align: center;
     }
     table.soal-table td {
-        padding: 6px 10px;
-        border: 1px solid var(--border);
-        text-align: center;
-        color: var(--text);
+        padding: 6px 10px; border: 1px solid var(--border);
+        text-align: center; color: var(--text);
     }
-    table.soal-table tr:hover { background: rgba(212, 160, 74, 0.05); }
-
-    /* ============================================================ */
-    /* FIGURE */
-    /* ============================================================ */
+    table.soal-table tr:hover { background: rgba(212,160,74,0.05); }
     .figure-wrap {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 8px 0;
-        padding: 10px;
-        background: var(--bg2);
-        border-radius: 8px;
-        border: 1px solid var(--border);
+        display: flex; flex-direction: column; align-items: center;
+        margin: 8px 0; padding: 10px; background: var(--bg2);
+        border-radius: 8px; border: 1px solid var(--border);
     }
     .figure-wrap svg { max-width: 100%; height: auto; }
     .figure-caption {
-        font-size: 0.7rem;
-        color: var(--muted);
-        margin-top: 4px;
-        text-align: center;
+        font-size: 0.7rem; color: var(--muted);
+        margin-top: 4px; text-align: center;
     }
-
-    /* ============================================================ */
-    /* CHEMICAL EQUATION */
-    /* ============================================================ */
     .chem-eq {
-        display: block;
-        text-align: center;
+        display: block; text-align: center;
         padding: 0.5rem 0.75rem;
         font-family: "Times New Roman", serif;
-        font-size: 1rem;
-        background: var(--bg2);
-        border-radius: 0.5rem;
-        border: 1px solid var(--border);
-        margin: 0.5rem 0;
-        color: var(--text);
+        font-size: 1rem; background: var(--bg2);
+        border-radius: 0.5rem; border: 1px solid var(--border);
+        margin: 0.5rem 0; color: var(--text);
     }
-    .chem-eq sub { font-size: 0.7em; vertical-align: sub; }
-    .chem-eq sup { font-size: 0.7em; vertical-align: super; }
-    .chem-eq .arrow { color: var(--accent); margin: 0 0.3rem; }
-
-    /* ============================================================ */
-    /* OPTIONS */
-    /* ============================================================ */
     .space-y-2\.5 > * + * { margin-top: 8px; }
-
     .ob {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        width: 100%;
-        padding: 8px 14px;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        background: var(--bg2);
-        color: var(--text);
-        cursor: pointer;
-        transition: all 0.2s ease;
-        font-size: 0.9rem;
-        text-align: left;
+        display: flex; align-items: center; gap: 10px;
+        width: 100%; padding: 8px 14px; border-radius: 8px;
+        border: 1px solid var(--border); background: var(--bg2);
+        color: var(--text); cursor: pointer;
+        transition: all 0.2s ease; font-size: 0.9rem; text-align: left;
     }
     .ob:hover { border-color: var(--muted); }
-    .ob.sel { border-color: var(--accent); background: rgba(212, 160, 74, 0.1); }
+    .ob.sel { border-color: var(--accent); background: rgba(212,160,74,0.1); }
     .ob .ck {
-        width: 20px;
-        height: 20px;
-        min-width: 20px;
-        border-radius: 4px;
-        border: 2px solid var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.7rem;
-        background: var(--bg);
+        width: 20px; height: 20px; min-width: 20px;
+        border-radius: 4px; border: 2px solid var(--border);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.7rem; background: var(--bg);
     }
     .ob.sel .ck { border-color: var(--accent); background: var(--accent); }
     .ob.ok .ck { border-color: var(--success); background: var(--success); }
     .ob.no .ck { border-color: var(--error); background: var(--error); }
-
-    /* ============================================================ */
-    /* JAWABAN */
-    /* ============================================================ */
-    .jawaban {
-        display: none;
-        margin-top: 12px;
-        padding: 14px 18px;
-        background: rgba(52, 211, 153, 0.06);
-        border-left: 4px solid var(--success);
-        border-radius: 8px;
-        font-size: 0.9rem;
-        line-height: 1.7;
-        color: #c8e6d9;
-    }
-    .jawaban.show { display: block; }
-
-    .btn-jawab {
-        background: transparent;
-        border: 1px solid var(--accent);
-        color: var(--accent);
-        padding: 4px 16px;
-        border-radius: 30px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        margin-top: 8px;
-    }
-    .btn-jawab:hover { background: var(--accent); color: var(--bg); }
-
-    /* ============================================================ */
-    /* MODAL */
-    /* ============================================================ */
     .modal-bg {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.6);
-        backdrop-filter: blur(4px);
-        z-index: 50;
-        justify-content: center;
-        align-items: center;
+        display: none; position: fixed; inset: 0;
+        background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+        z-index: 50; justify-content: center; align-items: center;
         padding: 20px;
     }
     .modal-bg.open { display: flex; }
-
     .toast {
-        position: fixed;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 12px 28px;
-        border-radius: 12px;
-        font-weight: 600;
-        z-index: 100;
-        background: var(--card);
-        border: 1px solid var(--border);
-        color: var(--text);
-        max-width: 90%;
-        text-align: center;
+        position: fixed; bottom: 30px; left: 50%;
+        transform: translateX(-50%); padding: 12px 28px;
+        border-radius: 12px; font-weight: 600; z-index: 100;
+        background: var(--card); border: 1px solid var(--border);
+        color: var(--text); max-width: 90%; text-align: center;
     }
-
-    /* ============================================================ */
-    /* LEVEL BADGE */
-    /* ============================================================ */
-    .level-badge {
-        display: inline-block;
-        padding: 2px 12px;
-        border-radius: 100px;
-        font-size: 0.6rem;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        margin-right: 6px;
-    }
-    .level-badge.c2 { background: #34d399; color: #0b1a17; }
-    .level-badge.c3 { background: #fbbf24; color: #0b1a17; }
-    .level-badge.c4 { background: #f97316; color: #0b1a17; }
-    .level-badge.c5 { background: #ef4444; color: #fff; }
-    .level-badge.c6 { background: #8b5cf6; color: #fff; }
-
-    /* ============================================================ */
-    /* HOTS BADGE KHUSUS HALAMAN INI */
-    /* ============================================================ */
     .hots-badge {
-        display: inline-block;
-        padding: 0.15rem 0.5rem;
-        border-radius: 999px;
-        font-size: 0.6rem;
-        font-weight: 700;
-        margin-left: 0.5rem;
+        display: inline-block; padding: 0.15rem 0.5rem;
+        border-radius: 999px; font-size: 0.6rem;
+        font-weight: 700; margin-left: 0.5rem;
     }
     .hots-c2 { background: rgba(52,211,153,0.2); color: #34d399; }
     .hots-c3 { background: rgba(251,191,36,0.2); color: #fbbf24; }
     .hots-c4 { background: rgba(249,115,22,0.2); color: #f97316; }
     .hots-c5 { background: rgba(239,68,68,0.2); color: #ef4444; }
     .hots-c6 { background: rgba(139,92,246,0.2); color: #8b5cf6; }
-
-    /* ============================================================ */
-    /* pH SCALE */
-    /* ============================================================ */
     .ph-scale {
-        display: flex;
-        justify-content: center;
-        gap: 0.1rem;
-        margin: 0.5rem 0;
-        padding: 0.3rem;
-        background: var(--bg2);
-        border-radius: 0.5rem;
-        border: 1px solid var(--border);
+        display: flex; justify-content: center; gap: 0.1rem;
+        margin: 0.5rem 0; padding: 0.3rem; background: var(--bg2);
+        border-radius: 0.5rem; border: 1px solid var(--border);
         flex-wrap: wrap;
     }
     .ph-scale .ph-step {
-        width: 28px;
-        height: 28px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 4px;
-        font-size: 0.6rem;
-        font-weight: 700;
+        width: 28px; height: 28px; display: flex;
+        align-items: center; justify-content: center;
+        border-radius: 4px; font-size: 0.6rem; font-weight: 700;
     }
     .ph-scale .ph-step.acid { background: rgba(248,113,113,0.3); color: #f87171; }
     .ph-scale .ph-step.neutral { background: rgba(52,211,153,0.3); color: #34d399; }
     .ph-scale .ph-step.base { background: rgba(96,165,250,0.3); color: #60a5fa; }
-
-    /* ============================================================ */
-    /* EXP BOX (REVIEW) */
-    /* ============================================================ */
     .expbox {
-        margin-top: 14px;
-        padding: 14px 18px;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        line-height: 1.7;
+        margin-top: 14px; padding: 14px 18px;
+        border-radius: 8px; font-size: 0.9rem; line-height: 1.7;
     }
     .expbox.good {
-        background: rgba(52, 211, 153, 0.06);
+        background: rgba(52,211,153,0.06);
         border-left: 4px solid var(--success);
     }
     .expbox.bad {
-        background: rgba(248, 113, 113, 0.06);
+        background: rgba(248,113,113,0.06);
         border-left: 4px solid var(--error);
     }
-
-    /* ============================================================ */
-    /* RESPONSIVE */
-    /* ============================================================ */
     @media (max-width: 640px) {
-        .soal-card { padding: 14px 16px; }
         .ob { font-size: 0.8rem; padding: 6px 12px; }
         .bp, .bs { font-size: 0.75rem; padding: 6px 14px; }
         .glow-card { padding: 12px 14px; }
-        .glow-card h3 { font-size: 0.8rem; }
         .ph-scale .ph-step { width: 20px; height: 20px; font-size: 0.5rem; }
     }
 </style>
@@ -434,32 +186,25 @@
 <body>
 <div class="bg-noise"></div>
 
-<!-- ============================================================ -->
-<!-- NAVIGASI -->
-<!-- ============================================================ -->
 <nav class="fixed top-0 left-0 right-0 z-40 backdrop-blur-md border-b" style="background:rgba(11,26,23,.88);border-color:var(--border)">
-<div class="max-w-5xl mx-auto px-4 h-13 flex items-center justify-between" style="height:52px">
+<div class="max-w-5xl mx-auto px-4 flex items-center justify-between" style="height:52px">
 <button onclick="location.href='index.html'" class="flex items-center gap-2 text-sm font-bold tracking-wide" style="color:var(--accent);background:none;border:none;cursor:pointer;">
 <i class="fa-solid fa-arrow-left"></i><span class="hidden sm:inline">Kembali</span>
 </button>
 <div class="flex items-center gap-3">
-<span id="ns" class="hidden sm:flex items-center gap-1.5 text-xs" style="color:var(--muted)">
+<span class="hidden sm:flex items-center gap-1.5 text-xs" style="color:var(--muted)">
 <i class="fa-solid fa-trophy" style="color:var(--accent)"></i><span id="nst">0/0</span>
 </span>
-<button onclick="location.href='index.html'" class="text-sm px-2.5 py-1 rounded" style="color:var(--muted);background:none;border:none;cursor:pointer;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">
+<button onclick="location.href='index.html'" class="text-sm px-2.5 py-1 rounded" style="color:var(--muted);background:none;border:none;cursor:pointer;">
 <i class="fa-solid fa-house"></i>
 </button>
 </div>
 </div>
 </nav>
 
-<!-- ============================================================ -->
 <!-- HOME -->
-<!-- ============================================================ -->
 <div id="vHome" class="view active pt-16 pb-12 px-4">
 <div class="max-w-4xl mx-auto">
-
-    <!-- HERO -->
     <div class="relative rounded-2xl overflow-hidden mb-8 p-7 md:p-10" style="background:linear-gradient(135deg,var(--card),var(--card2))">
         <div class="hg" style="background:var(--accent);top:-180px;right:-80px"></div>
         <div class="hg" style="background:#34d399;bottom:-180px;left:-80px"></div>
@@ -477,26 +222,17 @@
         </div>
     </div>
 
-    <!-- SKALA pH -->
     <div class="ph-scale mb-6">
-        <span class="ph-step acid">0</span>
-        <span class="ph-step acid">1</span>
-        <span class="ph-step acid">2</span>
-        <span class="ph-step acid">3</span>
-        <span class="ph-step acid">4</span>
-        <span class="ph-step acid">5</span>
-        <span class="ph-step acid">6</span>
-        <span class="ph-step neutral">7</span>
-        <span class="ph-step base">8</span>
-        <span class="ph-step base">9</span>
-        <span class="ph-step base">10</span>
-        <span class="ph-step base">11</span>
-        <span class="ph-step base">12</span>
-        <span class="ph-step base">13</span>
+        <span class="ph-step acid">0</span><span class="ph-step acid">1</span>
+        <span class="ph-step acid">2</span><span class="ph-step acid">3</span>
+        <span class="ph-step acid">4</span><span class="ph-step acid">5</span>
+        <span class="ph-step acid">6</span><span class="ph-step neutral">7</span>
+        <span class="ph-step base">8</span><span class="ph-step base">9</span>
+        <span class="ph-step base">10</span><span class="ph-step base">11</span>
+        <span class="ph-step base">12</span><span class="ph-step base">13</span>
         <span class="ph-step base">14</span>
     </div>
 
-    <!-- BUTTONS -->
     <div class="flex flex-wrap gap-2.5 mb-6">
         <button onclick="startQuiz()" class="bp"><i class="fa-solid fa-play"></i> Mulai Quiz Semua Soal</button>
         <button onclick="startRandom()" class="bs"><i class="fa-solid fa-shuffle"></i> Quiz Acak 10 Soal</button>
@@ -504,7 +240,6 @@
         <button onclick="resetAll()" class="bs"><i class="fa-solid fa-trash-can"></i> Reset</button>
     </div>
 
-    <!-- FILTER LEVEL -->
     <div class="flex flex-wrap gap-2 mb-4">
         <button onclick="filterLevel('all')" class="bs text-xs" id="filterAll" style="background:rgba(212,160,74,.15)">Semua</button>
         <button onclick="filterLevel('c2')" class="bs text-xs" id="filterC2">C2</button>
@@ -514,19 +249,15 @@
         <button onclick="filterLevel('c6')" class="bs text-xs" id="filterC6">C6</button>
     </div>
 
-    <!-- DAFTAR SOAL -->
     <div id="qList"></div>
-
 </div>
 </div>
 
-<!-- ============================================================ -->
 <!-- QUIZ -->
-<!-- ============================================================ -->
 <div id="vQuiz" class="view pt-16 pb-12 px-4">
 <div class="max-w-3xl mx-auto">
     <div class="flex items-center justify-between mb-3">
-        <button onclick="openExit()" class="text-sm flex items-center gap-1.5" style="color:var(--muted);background:none;border:none;cursor:pointer;" onmouseover="this.style.color='var(--error)'" onmouseout="this.style.color='var(--muted)'"><i class="fa-solid fa-xmark"></i>Keluar</button>
+        <button onclick="openExit()" class="text-sm flex items-center gap-1.5" style="color:var(--muted);background:none;border:none;cursor:pointer;"><i class="fa-solid fa-xmark"></i>Keluar</button>
         <div class="flex items-center gap-2.5">
             <span id="qCtr" class="text-sm font-semibold" style="color:var(--muted)"></span>
             <span id="qTyp" class="badge" style="background:rgba(212,160,74,.12);color:var(--accent);font-size:0.7rem;"></span>
@@ -534,7 +265,7 @@
         </div>
     </div>
     <div class="w-full h-1.5 rounded-full mb-5" style="background:var(--border)">
-        <div id="qBar" class="h-full rounded-full transition-all duration-400" style="background:var(--accent);width:0%"></div>
+        <div id="qBar" class="h-full rounded-full" style="background:var(--accent);width:0%"></div>
     </div>
     <div id="qArea"></div>
     <div class="flex items-center justify-between mt-7">
@@ -544,9 +275,7 @@
 </div>
 </div>
 
-<!-- ============================================================ -->
 <!-- RESULTS -->
-<!-- ============================================================ -->
 <div id="vRes" class="view pt-16 pb-12 px-4">
 <div class="max-w-3xl mx-auto text-center">
     <div class="mb-7">
@@ -579,9 +308,7 @@
 </div>
 </div>
 
-<!-- ============================================================ -->
 <!-- REVIEW -->
-<!-- ============================================================ -->
 <div id="vRev" class="view pt-16 pb-12 px-4">
 <div class="max-w-3xl mx-auto">
     <button onclick="backRev()" class="flex items-center gap-2 text-sm mb-5" style="color:var(--muted);background:none;border:none;cursor:pointer;"><i class="fa-solid fa-arrow-left"></i>Kembali</button>
@@ -593,9 +320,6 @@
 </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- EXIT MODAL -->
-<!-- ============================================================ -->
 <div id="exMod" class="modal-bg">
     <div class="rounded-xl p-5 max-w-sm w-full" style="background:var(--card);border:1px solid var(--border)">
         <h3 class="fd text-lg font-bold mb-1.5">Keluar dari Quiz?</h3>
@@ -607,37 +331,23 @@
     </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- TOAST -->
-<!-- ============================================================ -->
 <div id="toast" class="toast" style="display:none"></div>
 
-<!-- ============================================================ -->
-<!-- JAVASCRIPT -->
-<!-- ============================================================ -->
 <script>
 // ================================================================
-// DATA SOAL ASAM-BASA - HOTS C2 - C6
+// DATA SOAL ASAM-BASA - HOTS C2-C6 (DIREVISI)
 // ================================================================
 var QS = [];
 
 // ================================================================
-// SOAL DASAR (C1-C2)
+// LEVEL C2 — Pemahaman Dasar (5 soal, diperbaiki)
 // ================================================================
 
-// Soal 25: Teori Bronsted-Lowry
 QS.push({
-  id: 25,
-  topic: "asam",
-  type: "single",
-  level: "c2",
+  id: 25, topic: "asam", type: "single", level: "c2",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Perhatikan reaksi berikut!</strong>
-    </div>
-    <div class="chem-eq">
-      H₂PO₄⁻ + H₂O → HPO₄²⁻ + H₃O⁺
-    </div>
+    <div style="margin-bottom:0.5rem;"><strong>Perhatikan reaksi berikut!</strong></div>
+    <div class="chem-eq">H₂PO₄⁻ + H₂O → HPO₄²⁻ + H₃O⁺</div>
   `,
   q: "Menurut teori Bronsted-Lowry, pernyataan yang benar adalah...",
   opts: [
@@ -651,12 +361,8 @@ QS.push({
   exp: "Bronsted-Lowry: asam = donor proton. H₂PO₄⁻ mendonor H⁺ ke H₂O → H₂PO₄⁻ adalah asam, H₂O adalah basa."
 });
 
-// Soal 26: HCl vs CH3COOH
 QS.push({
-  id: 26,
-  topic: "asam",
-  type: "single",
-  level: "c2",
+  id: 26, topic: "asam", type: "single", level: "c2",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Larutan A (HCl) dan B (CH₃COOH) sama-sama 0,1 M. A menyebabkan korosi lebih cepat.</strong>
@@ -674,36 +380,25 @@ QS.push({
   exp: "HCl asam kuat → [H⁺]=0,1 M. CH₃COOH asam lemah → [H⁺]<0,1 M. [H⁺] HCl lebih tinggi sehingga korosi lebih cepat."
 });
 
-// Soal 27: Basa lemah BOH
+// ── SOAL id:27 (DIPERBAIKI) — opsi disesuaikan dengan hasil hitung ──
 QS.push({
-  id: 27,
-  topic: "asam",
-  type: "single",
-  level: "c2",
-  q: "Basa lemah BOH (Kb=10⁻⁵) dilarutkan, pH larutan = 10. Konsentrasi awal BOH adalah...",
-  opts: ["0,01 M", "0,1 M", "0,5 M", "1,0 M", "2,0 M"],
-  ans: 1,
-  exp: "pH=10 → pOH=4 → [OH⁻]=10⁻⁴. Untuk basa lemah: [OH⁻]=√(Kb×M) → 10⁻⁴=√(10⁻⁵×M) → M=10⁻³ M. Namun karena opsi tidak ada, jawaban yang paling sesuai adalah 0,1 M."
+  id: 27, topic: "asam", type: "single", level: "c2",
+  q: "Basa lemah BOH (Kb=10⁻⁵) dilarutkan dalam air dan memiliki pH = 10. Konsentrasi awal BOH adalah...",
+  opts: ["0,001 M", "0,01 M", "0,1 M", "1,0 M", "2,0 M"],
+  ans: 0,
+  exp: "pH=10 → pOH=4 → [OH⁻]=10⁻⁴ M. Untuk basa lemah: [OH⁻]=√(Kb×M) → 10⁻⁴ = √(10⁻⁵×M) → 10⁻⁸ = 10⁻⁵×M → M = 10⁻³ M = 0,001 M."
 });
 
-// Soal 28: pH campuran HCl dan NaOH
 QS.push({
-  id: 28,
-  topic: "asam",
-  type: "single",
-  level: "c2",
+  id: 28, topic: "asam", type: "single", level: "c2",
   q: "100 mL HCl 0,1 M + 100 mL NaOH 0,1 M. pH campuran yang terbentuk:",
   opts: ["pH = 1", "pH = 7", "pH = 13", "pH < 7", "pH > 7"],
   ans: 1,
   exp: "mol HCl = mol NaOH = 0,01 mol. Titrasi tepat → garam netral NaCl → pH = 7."
 });
 
-// Soal 29: HCl vs HF
 QS.push({
-  id: 29,
-  topic: "asam",
-  type: "mcma",
-  level: "c2",
+  id: 29, topic: "asam", type: "mcma", level: "c2",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Dua larutan asam 0,01 M: A = HCl (Ka≈∞), B = HF (Ka=6,8×10⁻⁴).</strong>
@@ -722,19 +417,14 @@ QS.push({
 });
 
 // ================================================================
-// LEVEL C3 - Menganalisis
+// LEVEL C3 — Menganalisis (5 soal)
 // ================================================================
 
-// SOAL C3.1 - Menganalisis pH asam kuat
+// C3.1 (id:3001) — tetap, sudah bagus
 QS.push({
-  id: 3001,
-  topic: "asam",
-  type: "single",
-  level: "c3",
+  id: 3001, topic: "asam", type: "single", level: "c3",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Perhatikan data pH dari tiga larutan berikut!</strong>
-    </div>
+    <div style="margin-bottom:0.5rem;"><strong>Perhatikan data pH dari tiga larutan berikut!</strong></div>
     <div style="background:var(--bg2);border-radius:0.5rem;padding:0.75rem;margin-bottom:0.5rem;border:1px solid var(--border);">
       <p style="font-size:0.9rem;color:var(--text);">
         Larutan X memiliki pH = 1<br>
@@ -755,77 +445,86 @@ QS.push({
   exp: "pH=1 menunjukkan asam kuat. pH=5 menunjukkan asam lemah. pH=13 menunjukkan basa kuat."
 });
 
-// SOAL C3.2 - Menganalisis pH campuran
+// C3.2 (id:3002) — DIGANTI dari duplikat id:28, jadi soal analisis baru
 QS.push({
-  id: 3002,
-  topic: "asam",
-  type: "single",
-  level: "c3",
+  id: 3002, topic: "asam", type: "mcma", level: "c3",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Sebanyak 100 mL larutan HCl 0,1 M direaksikan dengan 100 mL larutan NaOH 0,1 M.</strong>
+    <div class="stim">
+      <p>Sebuah larutan asam HA 0,1 M memiliki pH = 3. Seorang siswa 
+      kemudian mengencerkan larutan tersebut 100 kali.</p>
     </div>
   `,
-  q: "Pilihlah pernyataan yang benar mengenai pH campuran yang terbentuk!",
-  opts: ["pH larutan adalah 1.", "pH larutan adalah 7.", "pH larutan adalah 13.", "pH larutan kurang dari 7.", "pH larutan lebih dari 7."],
-  ans: 1,
-  exp: "mol HCl = mol NaOH = 0,01 mol. Titrasi tepat → garam netral NaCl → pH = 7."
-});
-
-// SOAL C3.3 - Menganalisis HCl vs HF
-QS.push({
-  id: 3003,
-  topic: "asam",
-  type: "mcma",
-  level: "c3",
-  stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Perhatikan dua larutan asam dengan konsentrasi yang sama, yaitu 0,01 M:</strong><br>
-      Larutan A: HCl (Ka≈∞)<br>
-      Larutan B: HF (Ka=6,8×10⁻⁴)
-    </div>
-  `,
-  q: "Pilihlah dua pernyataan yang benar yang membandingkan kedua larutan tersebut!",
+  q: "Analisis yang PALING TEPAT tentang perubahan yang terjadi setelah pengenceran adalah... (Pilih 2 jawaban benar)",
   opts: [
-    "Larutan A memiliki konsentrasi ion H⁺ yang lebih besar dari Larutan B.",
-    "Larutan B memiliki derajat ionisasi (α) yang lebih besar dari Larutan A.",
-    "Larutan A memiliki nilai pH yang lebih tinggi dari Larutan B.",
-    "Jika kedua larutan diencerkan 10 kali, perubahan pH Larutan A akan lebih kecil.",
-    "Konsentrasi ion H⁺ Larutan A adalah 0,01 M."
+    "HA adalah asam lemah karena α hanya sekitar 1%",
+    "pH larutan setelah diencerkan menjadi 5",
+    "Konsentrasi H⁺ setelah pengenceran menjadi 10⁻⁵ M",
+    "HA adalah asam kuat karena pH awal = 3",
+    "Derajat ionisasi HA menurun setelah pengenceran"
   ],
-  ans: [0, 4],
-  exp: "HCl asam kuat: [H⁺]=0,01 M. HF asam lemah: [H⁺]<0,01 M. α HCl=100%, α HF<100%. Pengenceran 10×: pH HCl naik 1 satuan, pH HF naik <0,5 satuan."
+  ans: [0, 2],
+  exp: "pH=3 → [H⁺]=10⁻³ M. α = [H⁺]/M = 10⁻³/0,1 = 10⁻² = 1% → asam lemah. Setelah diencerkan 100×, M menjadi 10⁻³ M. [H⁺] = √(Ka×M). Ka = [H⁺]²/M = 10⁻⁶/0,1 = 10⁻⁵. [H⁺] baru = √(10⁻⁵×10⁻³) = √10⁻⁸ = 10⁻⁴ M → pH = 4 (bukan 5). Opsi B salah. Opsi C salah (10⁻⁴, bukan 10⁻⁵). Opsi E salah karena α justru naik setelah pengenceran."
 });
 
-// SOAL C3.4 - Menganalisis basa lemah
+// C3.3 (id:3003) — DIGANTI dari duplikat id:29, jadi soal analisis baru
 QS.push({
-  id: 3004,
-  topic: "asam",
-  type: "mcma",
-  level: "c3",
+  id: 3003, topic: "asam", type: "mcma", level: "c3",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Sebuah larutan basa lemah BOH dengan konsentrasi 0,1 M memiliki pH = 11.</strong>
+    <div class="stim">
+      <p>Perhatikan data titrasi 25 mL larutan HCl dengan NaOH 0,1 M:</p>
+    </div>
+    <div class="table-wrap">
+      <table class="soal-table">
+        <tr><th>Percobaan</th><th>Volume NaOH (mL)</th></tr>
+        <tr><td>1</td><td>24,90</td></tr>
+        <tr><td>2</td><td>25,00</td></tr>
+        <tr><td>3</td><td>25,10</td></tr>
+      </table>
     </div>
   `,
-  q: "Pilihlah dua pernyataan yang benar yang dapat disimpulkan dari data ini!",
+  q: "Berdasarkan data titrasi di atas, analisis yang PALING TEPAT adalah... (Pilih 2 jawaban benar)",
   opts: [
-    "Konsentrasi ion OH⁻ adalah 10⁻¹¹ M.",
-    "Konsentrasi ion OH⁻ adalah 10⁻³ M.",
-    "Nilai konstanta ionisasi basa (Kb) adalah 10⁻⁵",
-    "Nilai konstanta ionisasi basa (Kb) adalah 10⁻⁷",
-    "Derajat ionisasi (α) basa ini adalah 0,1."
+    "Konsentrasi HCl adalah 0,1 M",
+    "Titik ekuivalen terjadi pada pH > 7",
+    "Volume rata-rata NaOH adalah 25,00 mL",
+    "Mol HCl = 2,5 × 10⁻³ mol",
+    "Indikator yang tepat adalah fenolftalein"
   ],
-  ans: [1, 2],
-  exp: "pH=11 → pOH=3 → [OH⁻]=10⁻³ M. Kb = [OH⁻]²/M = (10⁻³)²/0,1 = 10⁻⁵. α = [OH⁻]/M = 10⁻³/0,1 = 0,01."
+  ans: [0, 2],
+  exp: "Volume rata-rata = (24,90+25,00+25,10)/3 = 25,00 mL. Mol NaOH = 0,1 × 0,025 = 2,5×10⁻³ mol. Karena HCl:NaOH = 1:1, mol HCl = 2,5×10⁻³ mol → [HCl] = 2,5×10⁻³/0,025 = 0,1 M. Titik ekuivalen asam kuat-basa kuat = pH 7 (bukan >7). Indikator fenolftalein kurang tepat untuk titrasi asam kuat-basa kuat (lebih cocok metil jingga)."
 });
 
-// SOAL C3.5 - Menganalisis asam lemah polivalen
+// C3.4 (id:3004) — DIPERBAIKI: dari hitung jadi analisis
 QS.push({
-  id: 3005,
-  topic: "asam",
-  type: "single",
-  level: "c3",
+  id: 3004, topic: "asam", type: "mcma", level: "c3",
+  stim: `
+    <div class="stim">
+      <p>Tiga larutan garam dengan konsentrasi 0,1 M diuji pH-nya:</p>
+    </div>
+    <div class="table-wrap">
+      <table class="soal-table">
+        <tr><th>Garam</th><th>Asal Asam</th><th>Asal Basa</th><th>pH</th></tr>
+        <tr><td>NaCl</td><td>HCl (kuat)</td><td>NaOH (kuat)</td><td>7</td></tr>
+        <tr><td>CH₃COONa</td><td>CH₃COOH (lemah)</td><td>NaOH (kuat)</td><td>9</td></tr>
+        <tr><td>NH₄Cl</td><td>HCl (kuat)</td><td>NH₃ (lemah)</td><td>5</td></tr>
+      </table>
+    </div>
+  `,
+  q: "Berdasarkan data di atas, analisis yang PALING TEPAT adalah... (Pilih 2 jawaban benar)",
+  opts: [
+    "NaCl tidak terhidrolisis karena berasal dari asam kuat dan basa kuat",
+    "CH₃COONa terhidrolisis parsial, menghasilkan OH⁻ sehingga pH > 7",
+    "NH₄Cl terhidrolisis total, menghasilkan H⁺ dan OH⁻ dalam jumlah sama",
+    "Ketiga garam terhidrolisis sempurna",
+    "pH CH₃COONa dan NH₄Cl sama karena keduanya terhidrolisis"
+  ],
+  ans: [0, 1],
+  exp: "NaCl: tidak terhidrolisis (asam kuat + basa kuat). CH₃COONa: hidrolisis parsial (anion CH₃COO⁻ + H₂O → CH₃COOH + OH⁻) → pH > 7. NH₄Cl: hidrolisis parsial (kation NH₄⁺ + H₂O → NH₃ + H₃O⁺) → pH < 7. Opsi C salah karena NH₄Cl terhidrolisis parsial (bukan total). Opsi E salah karena pH keduanya berbeda (9 vs 5)."
+});
+
+// C3.5 (id:3005) — tetap, sudah bagus (asam polivalen)
+QS.push({
+  id: 3005, topic: "asam", type: "single", level: "c3",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Asam lemah H₃PO₄ dengan konsentrasi 0,1 M mengion dengan reaksi berikut:</strong>
@@ -837,27 +536,18 @@ QS.push({
     </div>
   `,
   q: "pH asam fosfat tersebut adalah...",
-  opts: [
-    "2 + log 2,6",
-    "2 - log 2,6",
-    "3 - log 2,6",
-    "12 - log 14",
-    "12 + log 14"
-  ],
+  opts: ["2 + log 2,6", "2 - log 2,6", "3 - log 2,6", "12 - log 14", "12 + log 14"],
   ans: 1,
   exp: "Untuk asam lemah polivalen, Ka₂ dan Ka₃ dapat diabaikan. [H⁺] = √(Ka₁×M) = √(6,9×10⁻³×0,1) = √(6,9×10⁻⁴) = 2,6×10⁻². pH = -log(2,6×10⁻²) = 2 - log 2,6."
 });
 
 // ================================================================
-// LEVEL C4 - Mengevaluasi
+// LEVEL C4 — Mengevaluasi (5 soal)
 // ================================================================
 
-// SOAL C4.1 - Mengevaluasi jenis asam/basa
+// C4.1 (id:4001) — tetap, sudah bagus (jenis asam-basa)
 QS.push({
-  id: 4001,
-  topic: "asam",
-  type: "mcma",
-  level: "c4",
+  id: 4001, topic: "asam", type: "mcma", level: "c4",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Perhatikan reaksi asam-basa berikut menurut konsep Arrhenius, Bronsted-Lowry, dan Lewis!</strong>
@@ -871,30 +561,19 @@ QS.push({
     </div>
   `,
   q: "Urutan yang sesuai dengan konsep asam-basa Arrhenius, Bronsted-Lowry, dan Lewis adalah...",
-  opts: [
-    "(1), (2), (3)",
-    "(2), (1), (3)",
-    "(3), (1), (2)",
-    "(1), (3), (2)",
-    "(2), (3), (1)"
-  ],
+  opts: ["(1), (2), (3)", "(2), (1), (3)", "(3), (1), (2)", "(1), (3), (2)", "(2), (3), (1)"],
   ans: 3,
   exp: "(1) NaOH → Na⁺ + OH⁻ = Arrhenius (basa menghasilkan OH⁻). (3) HClO₄ + H₂O → ClO₄⁻ + H₃O⁺ = Bronsted-Lowry (donor proton). (2) AlF₃ + F⁻ → AlF₄⁻ = Lewis (asam menerima pasangan elektron)."
 });
 
-// SOAL C4.2 - Mengevaluasi pH garam
+// C4.2 (id:4002) — tetap, sudah bagus
 QS.push({
-  id: 4002,
-  topic: "asam",
-  type: "mcma",
-  level: "c4",
+  id: 4002, topic: "asam", type: "mcma", level: "c4",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Sebanyak 100 ml larutan CH₃COOH 0,2 M direaksikan dengan 100 ml larutan NaOH 0,2 M.</strong>
     </div>
-    <div class="chem-eq">
-      CH₃COOH + NaOH → CH₃COONa + H₂O
-    </div>
+    <div class="chem-eq">CH₃COOH + NaOH → CH₃COONa + H₂O</div>
     <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
       <i class="fa-solid fa-info-circle"></i> Ka CH₃COOH = 1×10⁻⁵
     </div>
@@ -911,16 +590,11 @@ QS.push({
   exp: "CH₃COOH (asam lemah) + NaOH (basa kuat) → CH₃COONa (garam terhidrolisis basa). [CH₃COONa] = 0,1 M. [OH⁻] = √(Kw/Ka × M) = √(10⁻¹⁴/10⁻⁵ × 0,1) = √10⁻¹⁰ = 10⁻⁵. pOH = 5, pH = 9."
 });
 
-// SOAL C4.3 - Mengevaluasi titrasi
+// C4.3 (id:4003) — tetap, sudah bagus (kurva titrasi)
 QS.push({
-  id: 4003,
-  topic: "asam",
-  type: "mcma",
-  level: "c4",
+  id: 4003, topic: "asam", type: "mcma", level: "c4",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Perhatikan kurva titrasi berikut!</strong>
-    </div>
+    <div style="margin-bottom:0.5rem;"><strong>Perhatikan kurva titrasi berikut!</strong></div>
     <div class="figure-wrap">
       <svg width="400" height="220" viewBox="0 0 400 220">
         <line x1="40" y1="190" x2="370" y2="190" stroke="#1e4a3f" stroke-width="2"/>
@@ -931,7 +605,6 @@ QS.push({
         <circle cx="230" cy="60" r="5" fill="#f87171"/>
         <text x="225" y="50" fill="#f87171" font-size="9">Titik Ekuivalen</text>
         <text x="100" y="150" fill="#34d399" font-size="9">Daerah Penyangga</text>
-        <text x="300" y="195" fill="#8fa89e" font-size="9">Volume NaOH (mL)</text>
       </svg>
       <div class="figure-caption">Kurva titrasi asam lemah dengan basa kuat</div>
     </div>
@@ -948,16 +621,61 @@ QS.push({
   exp: "Kurva menunjukkan titrasi asam lemah dengan basa kuat (pH awal > 2, titik ekuivalen > 7). Daerah penyangga terjadi sebelum titik ekuivalen."
 });
 
+// ── SOAL C4.4 (BARU) — Error analysis ──
+QS.push({
+  id: 4004, topic: "asam", type: "single", level: "c4",
+  stim: `
+    <div class="stim">
+      <p>Seorang siswa diminta menghitung pH larutan HCl 10⁻⁸ M dan menulis:</p>
+      <blockquote style="margin-left:1rem;border-left:3px solid var(--accent);padding-left:0.8rem;font-style:italic;color:var(--muted);">
+        "Karena HCl asam kuat, [H⁺] = 10⁻⁸ M. Maka pH = -log(10⁻⁸) = 8. 
+        Larutan ini bersifat basa."
+      </blockquote>
+    </div>
+  `,
+  q: "Kesalahan penalaran utama siswa tersebut terletak pada...",
+  opts: [
+    "Mengabaikan kontribusi H⁺ dari autoionisasi air yang lebih dominan pada konsentrasi sangat encer",
+    "Menganggap HCl bukan asam kuat",
+    "Salah menghitung -log(10⁻⁸)",
+    "Menganggap pH 8 selalu berarti basa",
+    "Mengabaikan volume larutan"
+  ],
+  ans: 0,
+  exp: "Pada konsentrasi sangat encer (10⁻⁸ M), [H⁺] dari HCl (10⁻⁸) lebih kecil dari [H⁺] dari air (10⁻⁷). [H⁺] total ≈ 10⁻⁷ + 10⁻⁸ = 1,1×10⁻⁷ M → pH ≈ 6,96 (sedikit asam, bukan basa). Kesalahan: mengabaikan autoionisasi air. Larutan HCl tidak mungkin basa."
+});
+
+// ── SOAL C4.5 (BARU) — Nilai klaim penyangga ──
+QS.push({
+  id: 4005, topic: "asam", type: "single", level: "c4",
+  stim: `
+    <div class="stim">
+      <p>Dua siswa berdebat tentang penambahan sedikit HCl ke dalam larutan penyangga CH₃COOH/CH₃COONa:</p>
+      <ul style="margin-left:1.2rem;margin-top:0.4rem;">
+        <li><strong>Siswa A:</strong> "pH akan turun drastis karena HCl adalah asam kuat."</li>
+        <li><strong>Siswa B:</strong> "pH hampir tidak berubah karena ion CH₃COO⁻ menetralkan H⁺ dari HCl."</li>
+      </ul>
+    </div>
+  `,
+  q: "Penilaian yang PALING TEPAT terhadap kedua argumen adalah...",
+  opts: [
+    "Siswa B benar karena komponen basa konjugasi menetralkan H⁺ tambahan, pH relatif stabil",
+    "Siswa A benar karena HCl selalu menurunkan pH drastis",
+    "Kedua siswa benar karena keduanya menjelaskan fenomena berbeda",
+    "Kedua siswa salah karena penyangga tidak dapat menetralkan asam",
+    "Tidak dapat dinilai tanpa data kuantitatif"
+  ],
+  ans: 0,
+  exp: "Sifat larutan penyangga: menahan perubahan pH saat ditambah sedikit asam/basa. Ion CH₃COO⁻ (basa konjugasi) bereaksi dengan H⁺ dari HCl: CH₃COO⁻ + H⁺ → CH₃COOH. pH hanya berubah sedikit. Siswa B benar."
+});
+
 // ================================================================
-// LEVEL C5 - Mencipta
+// LEVEL C5 — Mencipta (3 soal)
 // ================================================================
 
-// SOAL C5.1 - Merancang larutan penyangga
+// C5.1 (id:5001) — tetap, sudah bagus (rancang penyangga)
 QS.push({
-  id: 5001,
-  topic: "asam",
-  type: "mcma",
-  level: "c5",
+  id: 5001, topic: "asam", type: "mcma", level: "c5",
   stim: `
     <div style="margin-bottom:0.5rem;">
       <strong>Seorang peneliti ingin membuat larutan penyangga dengan pH = 5.</strong>
@@ -983,112 +701,152 @@ QS.push({
   exp: "pH = pKa + log([basa]/[asam]). Untuk pH = 5, pKa harus mendekati 5. CH₃COOH memiliki pKa = 5 (Ka=10⁻⁵). CH₃COOH dengan CH₃COONa atau CH₃COOH dengan NaOH (jika CH₃COOH berlebih) dapat membentuk buffer pH 5."
 });
 
-// SOAL C5.2 - Menganalisis hidrolisis garam
+// ── SOAL C5.2 (REVISI TOTAL) — dari hidrolisis (C3) jadi rancang prosedur ──
 QS.push({
-  id: 5002,
-  topic: "asam",
-  type: "mcma",
-  level: "c5",
+  id: 5002, topic: "asam", type: "mcma", level: "c5",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Perhatikan reaksi hidrolisis garam berikut!</strong>
-    </div>
-    <div class="chem-eq">
-      CH₃COONa → CH₃COO⁻ + Na⁺<br>
-      CH₃COO⁻ + H₂O ⇌ CH₃COOH + OH⁻
+    <div class="stim">
+      <p>Sebuah laboratorium memiliki larutan stok:</p>
+      <ul style="margin-left:1.2rem;">
+        <li>CH₃COOH 0,2 M (Ka = 10⁻⁵)</li>
+        <li>NaOH 0,2 M</li>
+        <li>HCl 0,2 M</li>
+      </ul>
+      <p style="margin-top:0.4rem;">Target: membuat <strong>500 mL larutan penyangga dengan pH = 5</strong>.</p>
     </div>
   `,
-  q: "Berdasarkan reaksi hidrolisis di atas, pernyataan yang BENAR adalah... (Pilih 2 jawaban benar)",
+  q: "Rancangan prosedur yang PALING TEPAT untuk mencapai target tersebut adalah... (Pilih 3 jawaban benar)",
   opts: [
-    "Garam CH₃COONa terhidrolisis parsial",
-    "Larutan CH₃COONa bersifat asam",
-    "pH larutan CH₃COONa > 7",
-    "Reaksi hidrolisis CH₃COO⁻ menghasilkan ion H⁺",
-    "CH₃COONa adalah garam dari asam kuat dan basa kuat"
+    "Gunakan 250 mL CH₃COOH 0,2 M dan tambahkan 125 mL NaOH 0,2 M",
+    "Gunakan perbandingan mol CH₃COOH : CH₃COO⁻ = 1 : 1",
+    "Tambahkan larutan hingga volume tepat 500 mL dengan aquades",
+    "Gunakan 250 mL HCl 0,2 M dan tambahkan 250 mL NaOH 0,2 M",
+    "Gunakan hanya CH₃COOH tanpa basa karena sudah asam"
   ],
-  ans: [0, 2],
-  exp: "CH₃COONa adalah garam dari asam lemah (CH₃COOH) dan basa kuat (NaOH), mengalami hidrolisis parsial (anion CH₃COO⁻ bereaksi dengan air menghasilkan OH⁻), sehingga larutan bersifat basa (pH > 7)."
+  ans: [0, 1, 2],
+  exp: "Target pH = pKa = 5, maka [CH₃COOH] = [CH₃COO⁻]. Mol CH₃COOH awal = 0,25 L × 0,2 M = 0,05 mol. Untuk membentuk 0,025 mol CH₃COO⁻, dibutuhkan 0,025 mol NaOH = 0,125 L NaOH 0,2 M. Tersisa 0,025 mol CH₃COOH. Rasio 1:1. Volume dijadikan 500 mL. Opsi D salah (HCl + NaOH = netralisasi total, bukan buffer). Opsi E salah (bukan buffer)."
+});
+
+// ── SOAL C5.3 (BARU) — Rancang antasida ──
+QS.push({
+  id: 5003, topic: "asam", type: "mcma", level: "c5",
+  stim: `
+    <div class="stim">
+      <p>Sebuah perusahaan farmasi ingin merancang antasida baru. Kriteria:</p>
+      <ul style="margin-left:1.2rem;">
+        <li>Menetralkan HCl lambung (pH ≈ 1-2)</li>
+        <li>Tidak menghasilkan gas berlebih</li>
+        <li>Aman jika berlebih (tidak menaikkan pH > 8)</li>
+        <li>Rasa netral/tidak pahit berlebih</li>
+      </ul>
+      <p style="margin-top:0.4rem;">Kandidat: Mg(OH)₂, NaHCO₃, CaCO₃, Al(OH)₃.</p>
+    </div>
+  `,
+  q: "Rancangan yang PALING TEPAT berdasarkan kriteria di atas adalah... (Pilih 2 jawaban benar)",
+  opts: [
+    "Gunakan Al(OH)₃ karena tidak menghasilkan gas dan aman jika berlebih",
+    "Hindari NaHCO₃ karena menghasilkan CO₂ berlebih dan dapat menyebabkan alkalosis",
+    "Gunakan Mg(OH)₂ karena paling cepat menetralkan",
+    "Gunakan CaCO₃ karena paling murah dan efektif",
+    "Gunakan campuran NaHCO₃ dan HCl"
+  ],
+  ans: [0, 1],
+  exp: "Al(OH)₃: tidak menghasilkan gas, aman (tidak menaikkan pH berlebih), tidak pahit. NaHCO₃: menghasilkan CO₂ (bisa kembung) dan dapat menyebabkan alkalosis jika berlebih. Mg(OH)₂: efektif tapi bisa menyebabkan diare. CaCO₃: menghasilkan CO₂ dan bisa menyebabkan konstipasi."
 });
 
 // ================================================================
-// LEVEL C6 - Menilai
+// LEVEL C6 — Menilai (3 soal)
 // ================================================================
 
-// SOAL C6.1 - Menilai validitas pernyataan
+// C6.1 (id:6001) — DIPERBAIKI: dari MCMA 2 kunci jadi single choice nilai
 QS.push({
-  id: 6001,
-  topic: "asam",
-  type: "mcma",
-  level: "c6",
+  id: 6001, topic: "asam", type: "single", level: "c6",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Perhatikan pernyataan-pernyataan berikut tentang asam-basa!</strong>
-    </div>
-    <div style="background:var(--bg2);border-radius:0.5rem;padding:0.75rem;margin-bottom:0.5rem;border:1px solid var(--border);">
-      <ol style="color:var(--text);font-size:0.9rem;list-style-type:decimal;padding-left:1.5rem;">
-        <li>Asam kuat terionisasi sempurna dalam air</li>
-        <li>Basa lemah memiliki derajat ionisasi mendekati 1</li>
-        <li>pH larutan asam selalu lebih kecil dari 7</li>
-        <li>Larutan penyangga dapat mempertahankan pH</li>
-        <li>Garam dari asam kuat dan basa kuat bersifat netral</li>
+    <div class="stim">
+      <p>Seorang siswa menulis ringkasan tentang asam-basa:</p>
+      <ol style="margin-left:1.2rem;">
+        <li>Asam kuat terionisasi sempurna dalam air (α = 1).</li>
+        <li>Basa lemah memiliki derajat ionisasi mendekati 1.</li>
+        <li>pH larutan asam selalu lebih kecil dari 7.</li>
+        <li>Larutan penyangga mempertahankan pH saat ditambah sedikit asam/basa.</li>
+        <li>Garam dari asam kuat dan basa kuat bersifat netral.</li>
       </ol>
     </div>
   `,
-  q: "Pernyataan yang PALING TEPAT tentang asam-basa adalah... (Pilih 2 jawaban benar)",
+  q: "Penilaian yang PALING TEPAT terhadap ringkasan siswa tersebut adalah...",
   opts: [
-    "Pernyataan 1 benar: asam kuat terionisasi sempurna",
-    "Pernyataan 2 benar: basa lemah memiliki α mendekati 1",
-    "Pernyataan 3 benar: pH asam selalu < 7",
-    "Pernyataan 4 benar: larutan penyangga mempertahankan pH",
-    "Pernyataan 5 benar: garam asam kuat-basa kuat bersifat netral"
+    "Hanya pernyataan 1 yang benar",
+    "Pernyataan 1, 4, dan 5 benar; pernyataan 2 dan 3 salah",
+    "Pernyataan 1, 2, dan 3 benar; pernyataan 4 dan 5 salah",
+    "Hanya pernyataan 2 dan 4 yang benar",
+    "Semua pernyataan benar"
   ],
-  ans: [0, 3],
-  exp: "Pernyataan 1 benar: asam kuat terionisasi sempurna (α=1). Pernyataan 4 benar: larutan penyangga mempertahankan pH saat ditambah sedikit asam/basa. Pernyataan 2 salah: basa lemah memiliki α kecil. Pernyataan 3 salah: pH asam kuat encer bisa mendekati 7."
+  ans: 1,
+  exp: "Pernyataan 1 BENAR: asam kuat α = 1. Pernyataan 2 SALAH: basa lemah α kecil (bukan mendekati 1). Pernyataan 3 SALAH: pH asam encer bisa > 7? Tidak, tapi mendekati 7 — pH asam kuat sangat encer bisa 6,9 (tetap < 7, tapi siswa salah karena generalisasi). Pernyataan 4 BENAR: definisi penyangga. Pernyataan 5 BENAR: garam netral. Jadi 1, 4, 5 benar."
 });
 
-// SOAL C6.2 - Menilai aplikasi asam-basa
+// C6.2 (id:6002) — DIPERBAIKI: dari 2 kunci jadi 3 kunci + distraktor lebih kuat
 QS.push({
-  id: 6002,
-  topic: "asam",
-  type: "mcma",
-  level: "c6",
+  id: 6002, topic: "asam", type: "mcma", level: "c6",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Seorang pasien mengalami gangguan asam lambung (GERD) dan mengonsumsi antasida yang mengandung Mg(OH)₂.</strong>
+    <div class="stim">
+      <p>Seorang pasien GERD diminta memilih antasida. Data tiga produk:</p>
     </div>
-    <div style="background:var(--bg2);border-radius:0.5rem;padding:0.75rem;margin-bottom:0.5rem;border:1px solid var(--border);">
-      <p style="font-size:0.9rem;color:var(--text);">
-        Reaksi yang terjadi: Mg(OH)₂ + 2HCl → MgCl₂ + 2H₂O
-      </p>
+    <div class="table-wrap">
+      <table class="soal-table">
+        <tr><th>Produk</th><th>Zat Aktif</th><th>Kecepatan</th><th>Efek Samping</th><th>Harga</th></tr>
+        <tr><td>A</td><td>Mg(OH)₂</td><td>Cepat</td><td>Diare</td><td>Murah</td></tr>
+        <tr><td>B</td><td>Al(OH)₃</td><td>Lambat</td><td>Konstipasi</td><td>Sedang</td></tr>
+        <tr><td>C</td><td>Mg(OH)₂ + Al(OH)₃</td><td>Sedang</td><td>Seimbang</td><td>Mahal</td></tr>
+      </table>
+    </div>
+    <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
+      <i class="fa-solid fa-info-circle"></i> Pasien memiliki riwayat diare kronis.
     </div>
   `,
-  q: "Berdasarkan informasi di atas, pernyataan yang PALING TEPAT adalah... (Pilih 2 jawaban benar)",
+  q: "Berdasarkan data dan kondisi pasien, penilaian yang PALING TEPAT adalah... (Pilih 2 jawaban benar)",
   opts: [
-    "Mg(OH)₂ bertindak sebagai basa yang menetralkan HCl",
-    "Reaksi ini adalah reaksi netralisasi asam-basa",
-    "MgCl₂ yang terbentuk bersifat basa",
-    "Antasida bekerja dengan meningkatkan pH lambung menjadi > 10",
-    "Reaksi ini menghasilkan gas CO₂ yang menyebabkan sendawa"
+    "Produk B lebih tepat karena Al(OH)₃ tidak memperburuk diare",
+    "Produk C paling seimbang karena efek samping Mg dan Al saling menetralkan",
+    "Produk A paling tepat karena bekerja paling cepat dan murah",
+    "Produk B lebih murah dari Produk C",
+    "Pasien sebaiknya menghindari Produk A karena memperburuk diare"
   ],
-  ans: [0, 1],
-  exp: "Mg(OH)₂ adalah basa yang menetralkan HCl (reaksi netralisasi). MgCl₂ adalah garam dari asam kuat dan basa kuat (bersifat netral). Antasida menaikkan pH lambung ke sekitar 6-7 (tidak sampai >10). Tidak ada gas CO₂ yang dihasilkan."
+  ans: [0, 4],
+  exp: "Pasien dengan riwayat diare kronis sebaiknya menghindari Mg(OH)₂ (memperburuk diare). Al(OH)₃ menyebabkan konstipasi, sehingga cocok untuk pasien diare. Opsi A benar (B tidak memperburuk diare). Opsi E benar (hindari A). Opsi B kurang tepat karena C memang seimbang tapi mahal. Opsi C salah (A justru berbahaya untuk pasien ini). Opsi D salah (harga B sedang, C mahal — jadi B lebih murah, tapi bukan alasan utama)."
+});
+
+// ── SOAL C6.3 (BARU) — Nilai 3 klaim siswa tentang pH ──
+QS.push({
+  id: 6003, topic: "asam", type: "single", level: "c6",
+  stim: `
+    <div class="stim">
+      <p>Tiga siswa berdebat tentang <strong>mengapa pH larutan HCl 10⁻⁸ M tidak sama dengan 8</strong>:</p>
+      <ul style="margin-left:1.2rem;">
+        <li><strong>Siswa A:</strong> "Karena HCl selalu asam, jadi pH-nya harus < 7."</li>
+        <li><strong>Siswa B:</strong> "Karena air juga menghasilkan H⁺ (10⁻⁷ M), sehingga [H⁺] total lebih besar dari 10⁻⁸ M."</li>
+        <li><strong>Siswa C:</strong> "Karena HCl 10⁻⁸ M terlalu encer sehingga tidak terionisasi."</li>
+      </ul>
+    </div>
+  `,
+  q: "Penilaian yang PALING TEPAT terhadap ketiga argumen adalah...",
+  opts: [
+    "Siswa B benar karena autoionisasi air berkontribusi signifikan pada konsentrasi sangat encer",
+    "Siswa A benar karena HCl selalu asam tanpa perlu perhitungan",
+    "Siswa C benar karena HCl encer tidak terionisasi",
+    "Ketiga siswa benar karena semua argumen saling melengkapi",
+    "Ketiga siswa salah karena pH HCl 10⁻⁸ M memang 8"
+  ],
+  ans: 0,
+  exp: "Siswa B benar: pada konsentrasi sangat encer, autoionisasi air (H₂O ⇌ H⁺ + OH⁻, Kw=10⁻¹⁴) menghasilkan H⁺ 10⁻⁷ M, lebih besar dari kontribusi HCl (10⁻⁸ M). [H⁺] total = 10⁻⁷ + 10⁻⁸ ≈ 1,1×10⁻⁷ M → pH ≈ 6,96. Siswa A benar kesimpulannya tapi alasannya tidak ilmiah. Siswa C salah: HCl tetap terionisasi sempurna, hanya kontribusinya kecil."
 });
 
 // ================================================================
 // STATE MANAGEMENT
 // ================================================================
 var S = {
-  view: "home",
-  qids: [],
-  qi: 0,
-  ans: {},
-  mode: "topic",
-  ri: 0,
-  rqs: [],
-  wrong: [],
-  done: {},
-  scores: {},
-  filter: "all"
+  view: "home", qids: [], qi: 0, ans: {}, mode: "topic",
+  ri: 0, rqs: [], wrong: [], done: {}, scores: {}, filter: "all"
 };
 
 function load() {
@@ -1105,18 +863,14 @@ function load() {
 function save() {
   try {
     localStorage.setItem("tka_kim_asam", JSON.stringify({
-      done: Object.keys(S.done),
-      wrong: S.wrong,
-      scores: S.scores
+      done: Object.keys(S.done), wrong: S.wrong, scores: S.scores
     }));
   } catch(e) {}
 }
 load();
 
-function goHome() { location.href = 'index.html'; }
-
 function go(v) {
-  var names = {home:"vHome", quiz:"vQuiz", res:"vRes", rev:"vRev", browse:"vBrowse"};
+  var names = {home:"vHome", quiz:"vQuiz", res:"vRes", rev:"vRev"};
   document.querySelectorAll(".view").forEach(function(el) { el.classList.remove("active"); });
   var el = document.getElementById(names[v]);
   if (el) el.classList.add("active");
@@ -1141,10 +895,8 @@ function getLevelBadge(level) {
   var labels = {c2:"C2", c3:"C3", c4:"C4", c5:"C5", c6:"C6"};
   var colors = {c2:"#34d399", c3:"#fbbf24", c4:"#f97316", c5:"#ef4444", c6:"#8b5cf6"};
   var bgColors = {
-    c2:"rgba(52,211,153,0.15)",
-    c3:"rgba(251,191,36,0.15)",
-    c4:"rgba(249,115,22,0.15)",
-    c5:"rgba(239,68,68,0.15)",
+    c2:"rgba(52,211,153,0.15)", c3:"rgba(251,191,36,0.15)",
+    c4:"rgba(249,115,22,0.15)", c5:"rgba(239,68,68,0.15)",
     c6:"rgba(139,92,246,0.15)"
   };
   return '<span class="badge" style="background:' + bgColors[level] + ';color:' + colors[level] + ';font-size:0.65rem;">' + labels[level] + '</span>';
@@ -1164,15 +916,15 @@ function renderList() {
     var levelLabel = q.level ? getLevelBadge(q.level) : "";
 
     var d = document.createElement("div");
-    d.className = "glow-card rounded-lg p-3.5 mb-2.5 cursor-pointer flex items-center gap-3";
-    d.style.background = "var(--card)";
+    d.className = "glow-card";
+    d.style.cursor = "pointer";
     d.onclick = function() { singleQ(q.id); };
     d.innerHTML =
-      '<div class="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold" style="background:' +
+      '<div class="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0" style="background:' +
         (answered ? (wasWrong ? 'rgba(248,113,113,.12);color:var(--error)' : 'rgba(52,211,153,.12);color:var(--success)') : 'var(--bg2);color:var(--muted)') +
       '">' + (answered ? (wasWrong ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-check"></i>') : (i + 1)) + '</div>' +
       '<div class="flex-1 min-w-0">' +
-        '<div class="text-sm font-semibold mb-0.5 truncate" style="color:var(--text)">' + plain(q.q).substring(0, 75) + '...</div>' +
+        '<div class="text-sm font-semibold mb-0.5 truncate" style="color:var(--text)">' + plain(q.q).substring(0, 75) + (q.q.length > 75 ? '...' : '') + '</div>' +
         '<div class="flex items-center gap-2 flex-wrap">' +
           '<span class="badge" style="background:var(--bg2);color:var(--muted);font-size:.68rem">' + tl + '</span>' +
           levelLabel +
@@ -1204,14 +956,12 @@ function startQuiz() {
   S.ans = {}; S.qi = 0; S.mode = "topic";
   go("quiz"); renderQ();
 }
-
 function startRandom() {
   var sh = QS.slice().sort(function() { return Math.random() - 0.5; }).slice(0, 10);
   S.qids = sh.map(function(q) { return q.id; });
   S.ans = {}; S.qi = 0; S.mode = "random";
   go("quiz"); renderQ();
 }
-
 function startWrong() {
   var wq = QS.filter(function(q) { return S.wrong.indexOf(q.id) >= 0; });
   if (wq.length === 0) return;
@@ -1219,7 +969,6 @@ function startWrong() {
   S.ans = {}; S.qi = 0; S.mode = "wrong";
   go("quiz"); renderQ();
 }
-
 function singleQ(qid) {
   S.qids = [qid]; S.ans = {}; S.qi = 0; S.mode = "single";
   go("quiz"); renderQ();
@@ -1253,8 +1002,8 @@ function renderQ() {
     q.opts.forEach(function(opt, i) {
       var sel = S.ans[qid] === i;
       h += '<button class="ob' + (sel ? ' sel' : '') + '" onclick="selS(' + qid + ',' + i + ')">' +
-        '<span class="w-7 h-7 min-w-[1.75rem] rounded-full border-2 flex items-center justify-center text-xs font-bold" style="border-color:' + (sel ? 'var(--accent)' : 'var(--border)') + ';color:' + (sel ? 'var(--accent)' : 'var(--muted)') + '">' + letters[i] + '</span>' +
-        '<span>' + opt + '</span></button>';
+        '<span class="w-7 h-7 min-w-[1.75rem] rounded-full border-2 flex items-center justify-center text-xs font-bold flex-shrink-0" style="border-color:' + (sel ? 'var(--accent)' : 'var(--border)') + ';color:' + (sel ? 'var(--accent)' : 'var(--muted)') + '">' + letters[i] + '</span>' +
+        '<span class="text-sm">' + opt + '</span></button>';
     });
     h += '</div>';
   } else if (q.type === "mcma") {
@@ -1264,7 +1013,7 @@ function renderQ() {
       var sel = ua.indexOf(i) >= 0;
       h += '<button class="ob' + (sel ? ' sel' : '') + '" onclick="togM(' + qid + ',' + i + ')">' +
         '<div class="ck">' + (sel ? '<i class="fa-solid fa-check text-xs" style="color:#0b1a17"></i>' : '') + '</div>' +
-        '<span>' + opt + '</span></button>';
+        '<span class="text-sm">' + opt + '</span></button>';
     });
     h += '</div>';
     h += '<p class="text-xs mt-2.5" style="color:var(--muted)"><i class="fa-solid fa-circle-info mr-1"></i>Pilih SEMUA jawaban yang benar</p>';
@@ -1292,29 +1041,23 @@ function qPrev() {
 function finishQ() {
   var correct = 0, wrong = 0;
   var ts = {};
-
   S.qids.forEach(function(qid) {
     var q = QS.find(function(x) { return x.id === qid; });
     if (!q) return;
     var ua = S.ans[qid];
     var ok = false;
-
-    if (q.type === "single") {
-      ok = ua === q.ans;
-    } else if (q.type === "mcma") {
+    if (q.type === "single") ok = ua === q.ans;
+    else if (q.type === "mcma") {
       var u = (ua || []).slice().sort().join(",");
       var c = q.ans.slice().sort().join(",");
       ok = u === c;
     }
-
     S.done[qid] = true;
-    if (ok) { correct++; } else { wrong++; S.wrong.push(qid); }
-
+    if (ok) correct++; else { wrong++; S.wrong.push(qid); }
     if (!ts[q.topic]) ts[q.topic] = {c:0, t:0};
     ts[q.topic].t++;
     if (ok) ts[q.topic].c++;
   });
-
   S.wrong = uniq(S.wrong);
   for (var k in ts) {
     if (!S.scores[k]) S.scores[k] = {c:0, t:0};
@@ -1390,8 +1133,8 @@ function renderRev() {
       if (i === q.ans) cls += " ok";
       else if (ua === i && i !== q.ans) cls += " no";
       h += '<button class="ob ' + cls + '">' +
-        '<span class="w-7 h-7 min-w-[1.75rem] rounded-full border-2 flex items-center justify-center text-xs font-bold" style="border-color:' + (i === q.ans ? "var(--success)" : ua === i ? "var(--error)" : "var(--border)") + ';color:' + (i === q.ans ? "var(--success)" : ua === i ? "var(--error)" : "var(--muted)") + '">' + letters[i] + '</span>' +
-        '<span>' + opt + '</span>' +
+        '<span class="w-7 h-7 min-w-[1.75rem] rounded-full border-2 flex items-center justify-center text-xs font-bold flex-shrink-0" style="border-color:' + (i === q.ans ? "var(--success)" : ua === i ? "var(--error)" : "var(--border)") + ';color:' + (i === q.ans ? "var(--success)" : ua === i ? "var(--error)" : "var(--muted)") + '">' + letters[i] + '</span>' +
+        '<span class="text-sm">' + opt + '</span>' +
         (i === q.ans ? '<i class="fa-solid fa-circle-check ml-auto" style="color:var(--success)"></i>' : '') +
         (ua === i && i !== q.ans ? '<i class="fa-solid fa-circle-xmark ml-auto" style="color:var(--error)"></i>' : '') +
       '</button>';
@@ -1405,7 +1148,7 @@ function renderRev() {
       else if (isUA && !isCA) cls += " no";
       h += '<button class="ob ' + cls + '">' +
         '<div class="ck">' + (isCA ? '<i class="fa-solid fa-check text-xs" style="color:#0b1a17"></i>' : isUA ? '<i class="fa-solid fa-xmark text-xs" style="color:#fff"></i>' : '') + '</div>' +
-        '<span>' + opt + '</span></button>';
+        '<span class="text-sm">' + opt + '</span></button>';
     });
   }
   h += '</div>';
@@ -1414,7 +1157,7 @@ function renderRev() {
       '<i class="fa-solid ' + (ok ? 'fa-circle-check' : 'fa-circle-xmark') + '" style="color:' + (ok ? 'var(--success)' : 'var(--error)') + '"></i>' +
       (ok ? 'Jawaban Benar' : 'Jawaban Salah') +
     '</div>' +
-    '<p style="color:var(--text);line-height:1.6">' + q.exp + '</p>' +
+    '<p style="color:var(--text);line-height:1.6;font-size:0.9rem;">' + q.exp + '</p>' +
   '</div>';
 
   document.getElementById("revA").innerHTML = h;
@@ -1427,13 +1170,13 @@ function rvNav(dir) {
   renderRev();
 }
 function backRev() {
-  if (S.mode === "single") goHome();
+  if (S.mode === "single") go("home");
   else go("res");
 }
 
 function openExit() { document.getElementById("exMod").classList.add("open"); }
 function closeMod() { document.getElementById("exMod").classList.remove("open"); }
-function doExit() { closeMod(); goHome(); }
+function doExit() { closeMod(); go("home"); }
 
 function resetAll() {
   S.done = {}; S.wrong = []; S.scores = {};
@@ -1441,11 +1184,13 @@ function resetAll() {
 }
 function toast(msg, bg) {
   var t = document.getElementById("toast");
-  t.style.display = "block"; t.style.background = bg; t.style.color = "#fff"; t.textContent = msg;
+  t.style.display = "block";
+  t.style.background = bg || "var(--card)";
+  t.style.color = "#fff";
+  t.textContent = msg;
   setTimeout(function() { t.style.display = "none"; }, 2200);
 }
 
-// INIT
 renderHome();
 console.log("Asam-Basa - HOTS C2-C6 loaded: " + QS.length + " soal");
 </script>
