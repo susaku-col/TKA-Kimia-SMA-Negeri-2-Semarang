@@ -3,473 +3,202 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elektrokimia — TKA Kimia SMA Negeri 2 Semarang </title>
+<title>Elektrokimia — TKA Kimia SMA Negeri 2 Semarang</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
-    /* ============================================================ */
-    /* VARIABEL GLOBAL */
-    /* ============================================================ */
     :root {
-        --bg: #0b1a17;
-        --bg2: #132a24;
-        --card: #1a3a32;
-        --card2: #1e4a3f;
-        --text: #e8f0ec;
-        --muted: #8aa8a0;
-        --border: #2a4a42;
-        --accent: #d4a04a;
-        --success: #34d399;
-        --error: #f87171;
-        --glow: rgba(212, 160, 74, 0.15);
+        --bg: #0b1a17; --bg2: #132a24; --card: #1a3a32; --card2: #1e4a3f;
+        --text: #e8f0ec; --muted: #8aa8a0; --border: #2a4a42; --accent: #d4a04a;
+        --success: #34d399; --error: #f87171; --glow: rgba(212, 160, 74, 0.15);
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
         font-family: 'Source Sans 3', sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        min-height: 100vh;
-        padding-top: 52px;
+        background: var(--bg); color: var(--text);
+        min-height: 100vh; padding-top: 52px;
     }
-
     .fd { font-family: 'Playfair Display', serif; }
-
-    /* ============================================================ */
-    /* BACKGROUND NOISE */
-    /* ============================================================ */
     .bg-noise {
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
+        position: fixed; top:0; left:0; right:0; bottom:0;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-        pointer-events: none;
-        z-index: 0;
+        pointer-events: none; z-index: 0;
     }
-
     .hg {
-        position: absolute;
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        filter: blur(100px);
-        opacity: 0.15;
-        pointer-events: none;
+        position: absolute; width:300px; height:300px;
+        border-radius: 50%; filter: blur(100px);
+        opacity: 0.15; pointer-events: none;
     }
-
-    /* ============================================================ */
-    /* BADGE */
-    /* ============================================================ */
     .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 14px;
-        border-radius: 100px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        background: rgba(212, 160, 74, 0.12);
-        color: var(--accent);
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 4px 14px; border-radius: 100px;
+        font-size: 0.75rem; font-weight: 600;
+        background: rgba(212,160,74,0.12); color: var(--accent);
     }
-
-    /* ============================================================ */
-    /* GLOW CARD */
-    /* ============================================================ */
     .glow-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 16px 18px;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        text-decoration: none;
-        color: inherit;
+        background: var(--card); border: 1px solid var(--border);
+        border-radius: 12px; padding: 16px 18px; cursor: pointer;
+        transition: all 0.25s ease; display: flex;
+        align-items: center; gap: 12px;
+        text-decoration: none; color: inherit;
     }
-
     .glow-card:hover {
-        border-color: var(--accent);
-        background: var(--card2);
+        border-color: var(--accent); background: var(--card2);
         box-shadow: 0 0 20px var(--glow);
     }
-
-    /* ============================================================ */
-    /* BUTTONS */
-    /* ============================================================ */
     .bp {
-        background: var(--accent);
-        color: #0b1a17;
-        border: none;
-        padding: 8px 18px;
-        border-radius: 30px;
-        font-weight: 700;
-        font-size: 0.85rem;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
+        background: var(--accent); color: #0b1a17; border: none;
+        padding: 8px 18px; border-radius: 30px; font-weight: 700;
+        font-size: 0.85rem; cursor: pointer; transition: all 0.25s ease;
+        display: inline-flex; align-items: center; gap: 6px;
     }
     .bp:hover { background: #e8b84a; transform: scale(1.02); }
-
     .bs {
-        background: transparent;
-        color: var(--text);
-        border: 1px solid var(--border);
-        padding: 8px 18px;
-        border-radius: 30px;
-        font-weight: 600;
-        font-size: 0.85rem;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
+        background: transparent; color: var(--text);
+        border: 1px solid var(--border); padding: 8px 18px;
+        border-radius: 30px; font-weight: 600; font-size: 0.85rem;
+        cursor: pointer; transition: all 0.25s ease;
+        display: inline-flex; align-items: center; gap: 6px;
     }
     .bs:hover { border-color: var(--accent); background: var(--card2); }
-
-    /* ============================================================ */
-    /* VIEWS */
-    /* ============================================================ */
     .view { display: none; }
     .view.active { display: block; }
-
-    /* ============================================================ */
-    /* SOAL CARD */
-    /* ============================================================ */
-    .soal-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 18px 20px;
-        margin-bottom: 14px;
-        transition: all 0.25s;
-    }
-    .soal-card:hover { border-color: var(--accent); }
-
-    /* ============================================================ */
-    /* STIMULUS */
-    /* ============================================================ */
     .stim {
-        background: var(--bg2);
-        padding: 12px 16px;
-        border-radius: 8px;
-        border-left: 3px solid var(--accent);
-        margin-bottom: 12px;
-        font-size: 0.9rem;
-        line-height: 1.6;
-        color: var(--muted);
+        background: var(--bg2); padding: 12px 16px;
+        border-radius: 8px; border-left: 3px solid var(--accent);
+        margin-bottom: 12px; font-size: 0.9rem;
+        line-height: 1.6; color: var(--muted);
     }
-
-    /* ============================================================ */
-    /* TABLE */
-    /* ============================================================ */
     .table-wrap {
-        overflow-x: auto;
-        margin: 8px 0;
-        border-radius: 8px;
-        border: 1px solid var(--border);
+        overflow-x: auto; margin: 8px 0;
+        border-radius: 8px; border: 1px solid var(--border);
     }
     table.soal-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.8rem;
-        background: var(--bg2);
+        width: 100%; border-collapse: collapse;
+        font-size: 0.8rem; background: var(--bg2);
     }
     table.soal-table th {
-        background: var(--card);
-        color: var(--accent);
-        font-weight: 600;
-        padding: 6px 10px;
-        border: 1px solid var(--border);
-        text-align: center;
+        background: var(--card); color: var(--accent);
+        font-weight: 600; padding: 6px 10px;
+        border: 1px solid var(--border); text-align: center;
     }
     table.soal-table td {
-        padding: 6px 10px;
-        border: 1px solid var(--border);
-        text-align: center;
-        color: var(--text);
+        padding: 6px 10px; border: 1px solid var(--border);
+        text-align: center; color: var(--text);
     }
-    table.soal-table tr:hover { background: rgba(212, 160, 74, 0.05); }
-
-    /* ============================================================ */
-    /* FIGURE */
-    /* ============================================================ */
+    table.soal-table tr:hover { background: rgba(212,160,74,0.05); }
     .figure-wrap {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 8px 0;
-        padding: 10px;
-        background: var(--bg2);
-        border-radius: 8px;
-        border: 1px solid var(--border);
+        display: flex; flex-direction: column; align-items: center;
+        margin: 8px 0; padding: 10px; background: var(--bg2);
+        border-radius: 8px; border: 1px solid var(--border);
     }
     .figure-wrap svg { max-width: 100%; height: auto; }
     .figure-caption {
-        font-size: 0.7rem;
-        color: var(--muted);
-        margin-top: 4px;
-        text-align: center;
+        font-size: 0.7rem; color: var(--muted);
+        margin-top: 4px; text-align: center;
     }
-
-    /* ============================================================ */
-    /* CHEMICAL EQUATION */
-    /* ============================================================ */
     .chem-eq {
-        display: block;
-        text-align: center;
+        display: block; text-align: center;
         padding: 0.5rem 0.75rem;
         font-family: "Times New Roman", serif;
-        font-size: 1rem;
-        background: var(--bg2);
-        border-radius: 0.5rem;
-        border: 1px solid var(--border);
-        margin: 0.5rem 0;
-        color: var(--text);
+        font-size: 1rem; background: var(--bg2);
+        border-radius: 0.5rem; border: 1px solid var(--border);
+        margin: 0.5rem 0; color: var(--text);
     }
-    .chem-eq sub { font-size: 0.7em; vertical-align: sub; }
-    .chem-eq sup { font-size: 0.7em; vertical-align: super; }
-    .chem-eq .arrow { color: var(--accent); margin: 0 0.3rem; }
-
-    /* ============================================================ */
-    /* OPTIONS */
-    /* ============================================================ */
     .space-y-2\.5 > * + * { margin-top: 8px; }
-
     .ob {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        width: 100%;
-        padding: 8px 14px;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        background: var(--bg2);
-        color: var(--text);
-        cursor: pointer;
-        transition: all 0.2s ease;
-        font-size: 0.9rem;
-        text-align: left;
+        display: flex; align-items: center; gap: 10px;
+        width: 100%; padding: 8px 14px; border-radius: 8px;
+        border: 1px solid var(--border); background: var(--bg2);
+        color: var(--text); cursor: pointer;
+        transition: all 0.2s ease; font-size: 0.9rem; text-align: left;
     }
     .ob:hover { border-color: var(--muted); }
-    .ob.sel { border-color: var(--accent); background: rgba(212, 160, 74, 0.1); }
+    .ob.sel { border-color: var(--accent); background: rgba(212,160,74,0.1); }
     .ob .ck {
-        width: 20px;
-        height: 20px;
-        min-width: 20px;
-        border-radius: 4px;
-        border: 2px solid var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.7rem;
-        background: var(--bg);
+        width: 20px; height: 20px; min-width: 20px;
+        border-radius: 4px; border: 2px solid var(--border);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.7rem; background: var(--bg);
     }
     .ob.sel .ck { border-color: var(--accent); background: var(--accent); }
     .ob.ok .ck { border-color: var(--success); background: var(--success); }
     .ob.no .ck { border-color: var(--error); background: var(--error); }
-
-    /* ============================================================ */
-    /* JAWABAN */
-    /* ============================================================ */
-    .jawaban {
-        display: none;
-        margin-top: 12px;
-        padding: 14px 18px;
-        background: rgba(52, 211, 153, 0.06);
-        border-left: 4px solid var(--success);
-        border-radius: 8px;
-        font-size: 0.9rem;
-        line-height: 1.7;
-        color: #c8e6d9;
-    }
-    .jawaban.show { display: block; }
-
-    .btn-jawab {
-        background: transparent;
-        border: 1px solid var(--accent);
-        color: var(--accent);
-        padding: 4px 16px;
-        border-radius: 30px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        margin-top: 8px;
-    }
-    .btn-jawab:hover { background: var(--accent); color: var(--bg); }
-
-    /* ============================================================ */
-    /* MODAL */
-    /* ============================================================ */
     .modal-bg {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.6);
-        backdrop-filter: blur(4px);
-        z-index: 50;
-        justify-content: center;
-        align-items: center;
+        display: none; position: fixed; inset: 0;
+        background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+        z-index: 50; justify-content: center; align-items: center;
         padding: 20px;
     }
     .modal-bg.open { display: flex; }
-
     .toast {
-        position: fixed;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 12px 28px;
-        border-radius: 12px;
-        font-weight: 600;
-        z-index: 100;
-        background: var(--card);
-        border: 1px solid var(--border);
-        color: var(--text);
-        max-width: 90%;
-        text-align: center;
+        position: fixed; bottom: 30px; left: 50%;
+        transform: translateX(-50%); padding: 12px 28px;
+        border-radius: 12px; font-weight: 600; z-index: 100;
+        background: var(--card); border: 1px solid var(--border);
+        color: var(--text); max-width: 90%; text-align: center;
     }
-
-    /* ============================================================ */
-    /* LEVEL BADGE */
-    /* ============================================================ */
-    .level-badge {
-        display: inline-block;
-        padding: 2px 12px;
-        border-radius: 100px;
-        font-size: 0.6rem;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        margin-right: 6px;
-    }
-    .level-badge.c2 { background: #34d399; color: #0b1a17; }
-    .level-badge.c3 { background: #fbbf24; color: #0b1a17; }
-    .level-badge.c4 { background: #f97316; color: #0b1a17; }
-    .level-badge.c5 { background: #ef4444; color: #fff; }
-    .level-badge.c6 { background: #8b5cf6; color: #fff; }
-
-    /* ============================================================ */
-    /* HOTS BADGE KHUSUS HALAMAN INI */
-    /* ============================================================ */
     .hots-badge {
-        display: inline-block;
-        padding: 0.15rem 0.5rem;
-        border-radius: 999px;
-        font-size: 0.6rem;
-        font-weight: 700;
-        margin-left: 0.5rem;
+        display: inline-block; padding: 0.15rem 0.5rem;
+        border-radius: 999px; font-size: 0.6rem;
+        font-weight: 700; margin-left: 0.5rem;
     }
+    .hots-c2 { background: rgba(52,211,153,0.2); color: #34d399; }
     .hots-c3 { background: rgba(251,191,36,0.2); color: #fbbf24; }
     .hots-c4 { background: rgba(249,115,22,0.2); color: #f97316; }
     .hots-c5 { background: rgba(239,68,68,0.2); color: #ef4444; }
     .hots-c6 { background: rgba(139,92,246,0.2); color: #8b5cf6; }
-
-    /* ============================================================ */
-    /* ELECTROCHEMICAL CELL STYLES */
-    /* ============================================================ */
-    .electrode {
-        stroke: var(--border);
-        stroke-width: 2;
-    }
-    .electrode.active {
-        stroke: var(--accent);
-        stroke-width: 3;
-    }
-    .electrolyte {
-        fill: rgba(96, 165, 250, 0.08);
-        stroke: rgba(96, 165, 250, 0.3);
-        stroke-width: 1;
-    }
-    .salt-bridge {
-        fill: rgba(212, 160, 74, 0.15);
-        stroke: var(--accent);
-        stroke-width: 2;
-        stroke-dasharray: 4;
-    }
-    .electron-flow {
-        stroke: var(--accent);
-        stroke-width: 2;
-    }
-    .ion-flow {
-        stroke: var(--muted);
-        stroke-width: 1.5;
-        stroke-dasharray: 4;
-    }
-
-    /* ============================================================ */
-    /* EXP BOX (REVIEW) */
-    /* ============================================================ */
     .expbox {
-        margin-top: 14px;
-        padding: 14px 18px;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        line-height: 1.7;
+        margin-top: 14px; padding: 14px 18px;
+        border-radius: 8px; font-size: 0.9rem; line-height: 1.7;
     }
     .expbox.good {
-        background: rgba(52, 211, 153, 0.06);
+        background: rgba(52,211,153,0.06);
         border-left: 4px solid var(--success);
     }
     .expbox.bad {
-        background: rgba(248, 113, 113, 0.06);
+        background: rgba(248,113,113,0.06);
         border-left: 4px solid var(--error);
     }
-
-    /* ============================================================ */
-    /* RESPONSIVE */
-    /* ============================================================ */
     @media (max-width: 640px) {
-        .soal-card { padding: 14px 16px; }
         .ob { font-size: 0.8rem; padding: 6px 12px; }
         .bp, .bs { font-size: 0.75rem; padding: 6px 14px; }
         .glow-card { padding: 12px 14px; }
-        .glow-card h3 { font-size: 0.8rem; }
     }
 </style>
 </head>
 <body>
 <div class="bg-noise"></div>
 
-<!-- ============================================================ -->
-<!-- NAVIGASI -->
-<!-- ============================================================ -->
 <nav class="fixed top-0 left-0 right-0 z-40 backdrop-blur-md border-b" style="background:rgba(11,26,23,.88);border-color:var(--border)">
-<div class="max-w-5xl mx-auto px-4 h-13 flex items-center justify-between" style="height:52px">
+<div class="max-w-5xl mx-auto px-4 flex items-center justify-between" style="height:52px">
 <button onclick="location.href='index.html'" class="flex items-center gap-2 text-sm font-bold tracking-wide" style="color:var(--accent);background:none;border:none;cursor:pointer;">
 <i class="fa-solid fa-arrow-left"></i><span class="hidden sm:inline">Kembali</span>
 </button>
 <div class="flex items-center gap-3">
-<span id="ns" class="hidden sm:flex items-center gap-1.5 text-xs" style="color:var(--muted)">
+<span class="hidden sm:flex items-center gap-1.5 text-xs" style="color:var(--muted)">
 <i class="fa-solid fa-trophy" style="color:var(--accent)"></i><span id="nst">0/0</span>
 </span>
-<button onclick="location.href='index.html'" class="text-sm px-2.5 py-1 rounded" style="color:var(--muted);background:none;border:none;cursor:pointer;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">
+<button onclick="location.href='index.html'" class="text-sm px-2.5 py-1 rounded" style="color:var(--muted);background:none;border:none;cursor:pointer;">
 <i class="fa-solid fa-house"></i>
 </button>
 </div>
 </div>
 </nav>
 
-<!-- ============================================================ -->
 <!-- HOME -->
-<!-- ============================================================ -->
 <div id="vHome" class="view active pt-16 pb-12 px-4">
 <div class="max-w-4xl mx-auto">
-
-    <!-- HERO -->
     <div class="relative rounded-2xl overflow-hidden mb-8 p-7 md:p-10" style="background:linear-gradient(135deg,var(--card),var(--card2))">
         <div class="hg" style="background:var(--accent);top:-180px;right:-80px"></div>
         <div class="hg" style="background:#34d399;bottom:-180px;left:-80px"></div>
         <div class="relative z-10">
             <div class="badge mb-3"><i class="fa-solid fa-bolt"></i> Elektrokimia</div>
-            <h1 class="fd text-3xl md:text-4xl font-black mb-2 leading-tight"><span style="color:var(--accent)">Elektrokimia</span></h1>
+            <h1 class="fd text-3xl md:text-4xl font-black mb-2 leading-tight">Elektro<span style="color:var(--accent)">kimia</span></h1>
             <p class="text-sm md:text-base max-w-lg" style="color:var(--muted);line-height:1.65">Latihan soal HOTS level C2-C6 tentang sel volta, sel elektrolisis, hukum Faraday, dan aplikasi elektrokimia.</p>
             <div class="flex flex-wrap gap-2 mt-4">
+                <span class="badge hots-badge hots-c2">C2 - Pemahaman</span>
                 <span class="badge hots-badge hots-c3">C3 - Menganalisis</span>
                 <span class="badge hots-badge hots-c4">C4 - Mengevaluasi</span>
                 <span class="badge hots-badge hots-c5">C5 - Mencipta</span>
@@ -478,7 +207,6 @@
         </div>
     </div>
 
-    <!-- BUTTONS -->
     <div class="flex flex-wrap gap-2.5 mb-6">
         <button onclick="startQuiz()" class="bp"><i class="fa-solid fa-play"></i> Mulai Quiz Semua Soal</button>
         <button onclick="startRandom()" class="bs"><i class="fa-solid fa-shuffle"></i> Quiz Acak 10 Soal</button>
@@ -486,28 +214,24 @@
         <button onclick="resetAll()" class="bs"><i class="fa-solid fa-trash-can"></i> Reset</button>
     </div>
 
-    <!-- FILTER LEVEL -->
     <div class="flex flex-wrap gap-2 mb-4">
         <button onclick="filterLevel('all')" class="bs text-xs" id="filterAll" style="background:rgba(212,160,74,.15)">Semua</button>
+        <button onclick="filterLevel('c2')" class="bs text-xs" id="filterC2">C2</button>
         <button onclick="filterLevel('c3')" class="bs text-xs" id="filterC3">C3</button>
         <button onclick="filterLevel('c4')" class="bs text-xs" id="filterC4">C4</button>
         <button onclick="filterLevel('c5')" class="bs text-xs" id="filterC5">C5</button>
         <button onclick="filterLevel('c6')" class="bs text-xs" id="filterC6">C6</button>
     </div>
 
-    <!-- DAFTAR SOAL -->
     <div id="qList"></div>
-
 </div>
 </div>
 
-<!-- ============================================================ -->
 <!-- QUIZ -->
-<!-- ============================================================ -->
 <div id="vQuiz" class="view pt-16 pb-12 px-4">
 <div class="max-w-3xl mx-auto">
     <div class="flex items-center justify-between mb-3">
-        <button onclick="openExit()" class="text-sm flex items-center gap-1.5" style="color:var(--muted);background:none;border:none;cursor:pointer;" onmouseover="this.style.color='var(--error)'" onmouseout="this.style.color='var(--muted)'"><i class="fa-solid fa-xmark"></i>Keluar</button>
+        <button onclick="openExit()" class="text-sm flex items-center gap-1.5" style="color:var(--muted);background:none;border:none;cursor:pointer;"><i class="fa-solid fa-xmark"></i>Keluar</button>
         <div class="flex items-center gap-2.5">
             <span id="qCtr" class="text-sm font-semibold" style="color:var(--muted)"></span>
             <span id="qTyp" class="badge" style="background:rgba(212,160,74,.12);color:var(--accent);font-size:0.7rem;"></span>
@@ -515,7 +239,7 @@
         </div>
     </div>
     <div class="w-full h-1.5 rounded-full mb-5" style="background:var(--border)">
-        <div id="qBar" class="h-full rounded-full transition-all duration-400" style="background:var(--accent);width:0%"></div>
+        <div id="qBar" class="h-full rounded-full" style="background:var(--accent);width:0%"></div>
     </div>
     <div id="qArea"></div>
     <div class="flex items-center justify-between mt-7">
@@ -525,9 +249,7 @@
 </div>
 </div>
 
-<!-- ============================================================ -->
 <!-- RESULTS -->
-<!-- ============================================================ -->
 <div id="vRes" class="view pt-16 pb-12 px-4">
 <div class="max-w-3xl mx-auto text-center">
     <div class="mb-7">
@@ -560,9 +282,7 @@
 </div>
 </div>
 
-<!-- ============================================================ -->
 <!-- REVIEW -->
-<!-- ============================================================ -->
 <div id="vRev" class="view pt-16 pb-12 px-4">
 <div class="max-w-3xl mx-auto">
     <button onclick="backRev()" class="flex items-center gap-2 text-sm mb-5" style="color:var(--muted);background:none;border:none;cursor:pointer;"><i class="fa-solid fa-arrow-left"></i>Kembali</button>
@@ -574,9 +294,6 @@
 </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- EXIT MODAL -->
-<!-- ============================================================ -->
 <div id="exMod" class="modal-bg">
     <div class="rounded-xl p-5 max-w-sm w-full" style="background:var(--card);border:1px solid var(--border)">
         <h3 class="fd text-lg font-bold mb-1.5">Keluar dari Quiz?</h3>
@@ -588,33 +305,24 @@
     </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- TOAST -->
-<!-- ============================================================ -->
 <div id="toast" class="toast" style="display:none"></div>
 
-<!-- ============================================================ -->
-<!-- JAVASCRIPT -->
-<!-- ============================================================ -->
 <script>
 // ================================================================
-// DATA SOAL ELEKTROKIMIA - HOTS C2 - C6
+// DATA SOAL ELEKTROKIMIA - HOTS C2-C6 (DIREVISI)
 // ================================================================
 var QS = [];
 
 // ================================================================
-// SOAL DASAR (C1-C2)
+// LEVEL C2 — Pemahaman Dasar (4 soal)
 // ================================================================
 
-// Soal 20: Baterai seng-karbon
+// id:20 — tetap, sudah bagus
 QS.push({
-  id: 20,
-  topic: "elektro",
-  type: "single",
-  level: "c2",
+  id: 20, topic: "elektro", type: "single", level: "c2",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Baterai seng-karbon (sel Leclanche): seng teroksidasi di anoda, MnO₂ direduksi di katoda.</strong>
+    <div class="stim">
+      <p>Baterai seng-karbon (sel Leclanche): seng teroksidasi di anoda, MnO₂ direduksi di katoda.</p>
     </div>
   `,
   q: "Peristiwa pada anoda baterai tersebut adalah...",
@@ -626,33 +334,15 @@ QS.push({
     "Pembentukan gas NH₃ akibat oksidasi NH₄⁺"
   ],
   ans: 2,
-  exp: "Anoda = tempat oksidasi. Zn(s) → Zn²⁺ + 2e⁻. Logam seng kehilangan elektron (teroksidasi), elektron mengalir ke katoda."
+  exp: "Anoda = oksidasi. Zn(s) → Zn²⁺ + 2e⁻. Logam seng kehilangan elektron (teroksidasi)."
 });
 
-// Soal 21: Proteksi katodik
+// id:21 — tetap, sudah bagus
 QS.push({
-  id: 21,
-  topic: "elektro",
-  type: "single",
-  level: "c2",
+  id: 21, topic: "elektro", type: "single", level: "c2",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Proteksi katodik: pipa baja dihubungkan ke Mg batangan yang lebih reaktif.</strong>
-    </div>
-    <div class="figure-wrap">
-      <svg width="400" height="150" viewBox="0 0 400 150">
-        <rect x="50" y="40" width="150" height="30" rx="3" fill="rgba(96,165,250,0.2)" stroke="#60a5fa" stroke-width="2"/>
-        <text x="90" y="60" fill="#60a5fa" font-size="10" font-weight="bold">Pipa Baja (Fe)</text>
-        <text x="80" y="85" fill="#8fa89e" font-size="9">Katoda (terlindungi)</text>
-        <rect x="270" y="40" width="60" height="30" rx="3" fill="rgba(52,211,153,0.3)" stroke="#34d399" stroke-width="2"/>
-        <text x="285" y="60" fill="#34d399" font-size="10" font-weight="bold">Mg</text>
-        <text x="275" y="85" fill="#8fa89e" font-size="9">Anoda (korban)</text>
-        <line x1="200" y1="50" x2="270" y2="50" stroke="#d4a04a" stroke-width="2"/>
-        <text x="220" y="40" fill="#d4a04a" font-size="9">e⁻ →</text>
-        <rect x="30" y="100" width="340" height="30" rx="3" fill="rgba(139,92,246,0.1)" stroke="#8b5cf6"/>
-        <text x="170" y="120" fill="#8fa89e" font-size="9">Tanah (elektrolit)</text>
-      </svg>
-      <div class="figure-caption">Proteksi katodik pipa baja dengan Mg</div>
+    <div class="stim">
+      <p>Proteksi katodik: pipa baja dihubungkan ke Mg batangan yang lebih reaktif.</p>
     </div>
   `,
   q: "Peran magnesium dalam sistem ini adalah...",
@@ -667,15 +357,15 @@ QS.push({
   exp: "Logam kurban (Mg) menjadi anoda: Mg → Mg²⁺ + 2e⁻. Elektron mengalir ke baja (katoda), mencegah oksidasi Fe."
 });
 
-// Soal 22: Elektroplating perak
+// id:22 — tetap, sudah bagus
 QS.push({
-  id: 22,
-  topic: "elektro",
-  type: "single",
-  level: "c2",
+  id: 22, topic: "elektro", type: "single", level: "c2",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Elektroplating cincin tembaga dengan perak dari larutan AgNO₃. Arus 0,5 A selama 3 menit. (Ar Ag = 108, F = 96485 C/mol)</strong>
+    <div class="stim">
+      <p>Elektroplating cincin tembaga dengan perak dari larutan AgNO₃. Arus 0,5 A selama 3 menit.</p>
+    </div>
+    <div style="font-size:0.85rem;color:var(--muted);">
+      <i class="fa-solid fa-info-circle"></i> Ar Ag = 108, F = 96485 C/mol
     </div>
   `,
   q: "Massa perak yang melapisi cincin adalah sekitar...",
@@ -684,18 +374,13 @@ QS.push({
   exp: "Q = 0,5 × 180 = 90 C. mol e⁻ = 90/96485 ≈ 0,000933. Ag⁺ + e⁻ → Ag, m = 0,000933 × 108 ≈ 0,101 g ≈ 0,100 g."
 });
 
-// Soal 23: Elektrolisis AgNO3
+// id:23 — DIPERBAIKI: dari MCMA 1 kunci jadi single choice
 QS.push({
-  id: 23,
-  topic: "elektro",
-  type: "mcma",
-  level: "c2",
+  id: 23, topic: "elektro", type: "single", level: "c2",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Elektrolisis larutan AgNO₃ dengan elektroda Pt (inert).</strong>
-    </div>
+    <div class="chem-eq">Elektrolisis larutan AgNO₃ dengan elektroda Pt (inert)</div>
   `,
-  q: "Reaksi dan produk utama pada KATODA:",
+  q: "Reaksi dan produk utama pada KATODA adalah...",
   opts: [
     "Ion nitrat teroksidasi menghasilkan NO₂",
     "Air teroksidasi menghasilkan O₂",
@@ -703,56 +388,44 @@ QS.push({
     "Pt teroksidasi membentuk ion platina",
     "Ion perak mengalami oksidasi menjadi perak oksida"
   ],
-  ans: [2],
+  ans: 2,
   exp: "Katoda = reduksi. Ag⁺ lebih mudah tereduksi (E° = +0,80 V) dibanding air. Reaksi: Ag⁺ + e⁻ → Ag(s). Pt inert, tidak bereaksi."
 });
 
-// Soal 24: Sel volta
+// id:24 — DIPERBAIKI: dari MCMA 2 kunci jadi 3 kunci
 QS.push({
-  id: 24,
-  topic: "elektro",
-  type: "mcma",
-  level: "c2",
-  q: "Karakteristik utama sel volta yang benar:",
+  id: 24, topic: "elektro", type: "mcma", level: "c2",
+  q: "Karakteristik utama sel volta yang BENAR adalah... (Pilih 3 jawaban benar)",
   opts: [
-    "Mengubah energi listrik menjadi energi kimia (reaksi tidak spontan)",
+    "Mengubah energi kimia menjadi energi listrik (reaksi spontan)",
     "Anoda pada sel volta = tempat oksidasi dan bermuatan negatif",
     "Elektron bergerak dari katoda ke anoda melalui sirkuit eksternal",
     "Reaksi redoks berlangsung spontan, menghasilkan arus listrik",
-    "Sel volta selalu menggunakan elektroda sama dengan larutan elektrolit"
+    "Sel volta selalu menggunakan elektroda sama dengan larutan elektrolit",
+    "Katoda pada sel volta = tempat reduksi dan bermuatan positif"
   ],
-  ans: [1, 3],
-  exp: "Sel volta: reaksi spontan, kimia→listrik. Anoda = oksidasi, muatan NEGATIF. Elektron mengalir anoda→katoda. Tidak harus elektroda sama dengan elektrolit."
+  ans: [0, 1, 3, 5],
+  exp: "Sel volta: reaksi spontan, kimia→listrik. Anoda = oksidasi, muatan NEGATIF. Katoda = reduksi, muatan POSITIF. Elektron mengalir anoda→katoda (opsi C salah). Elektroda tidak harus sama dengan elektrolit."
 });
 
 // ================================================================
-// LEVEL C3 - Menganalisis
+// LEVEL C3 — Menganalisis (5 soal)
 // ================================================================
 
-// SOAL C3.1 - Menganalisis sel volta
+// C3.1 (id:3001) — tetap, sudah bagus
 QS.push({
-  id: 3001,
-  topic: "elektro",
-  type: "single",
-  level: "c3",
+  id: 3001, topic: "elektro", type: "single", level: "c3",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Perhatikan gambar rangkaian sel volta berikut!</strong>
-    </div>
     <div class="figure-wrap">
       <svg width="400" height="220" viewBox="0 0 400 220">
         <rect x="40" y="60" width="100" height="100" rx="5" fill="rgba(96,165,250,0.05)" stroke="rgba(96,165,250,0.3)" stroke-width="1.5"/>
-        <rect x="45" y="70" width="90" height="85" rx="3" fill="rgba(96,165,250,0.08)" stroke="rgba(96,165,250,0.2)" stroke-width="1"/>
         <text x="65" y="115" fill="#8fa89e" font-size="9">ZnSO₄</text>
         <rect x="80" y="30" width="20" height="80" rx="2" fill="rgba(52,211,153,0.4)" stroke="#34d399" stroke-width="2"/>
         <text x="78" y="25" fill="#34d399" font-size="10" font-weight="bold">Zn</text>
-        <text x="140" y="95" fill="#8fa89e" font-size="9">Zn²⁺</text>
         <rect x="240" y="60" width="100" height="100" rx="5" fill="rgba(96,165,250,0.05)" stroke="rgba(96,165,250,0.3)" stroke-width="1.5"/>
-        <rect x="245" y="70" width="90" height="85" rx="3" fill="rgba(96,165,250,0.08)" stroke="rgba(96,165,250,0.2)" stroke-width="1"/>
         <text x="265" y="115" fill="#8fa89e" font-size="9">CuSO₄</text>
         <rect x="280" y="30" width="20" height="80" rx="2" fill="rgba(251,191,36,0.4)" stroke="#fbbf24" stroke-width="2"/>
         <text x="278" y="25" fill="#fbbf24" font-size="10" font-weight="bold">Cu</text>
-        <text x="200" y="95" fill="#8fa89e" font-size="9">Cu²⁺</text>
         <rect x="145" y="120" width="90" height="15" rx="3" fill="rgba(212,160,74,0.2)" stroke="#d4a04a" stroke-width="1.5"/>
         <text x="160" y="131" fill="#d4a04a" font-size="7">Jembatan garam</text>
         <line x1="100" y1="35" x2="280" y2="35" stroke="#d4a04a" stroke-width="2"/>
@@ -777,15 +450,12 @@ QS.push({
     "Jembatan garam berfungsi sebagai sumber elektron"
   ],
   ans: 2,
-  exp: "Reaksi sel: Zn + Cu²⁺ → Zn²⁺ + Cu. E°sel = E°katoda - E°anoda = 0,34 - (-0,76) = 1,10 V. Zn adalah anoda (oksidasi), Cu adalah katoda (reduksi). Elektron mengalir Zn → Cu."
+  exp: "Reaksi sel: Zn + Cu²⁺ → Zn²⁺ + Cu. E°sel = E°katoda - E°anoda = 0,34 - (-0,76) = 1,10 V. Zn = anoda (oksidasi), Cu = katoda (reduksi). Elektron mengalir Zn → Cu."
 });
 
-// SOAL C3.2 - Menganalisis deret volta
+// C3.2 (id:3002) — DIPERBAIKI: dari baca tabel jadi analisis
 QS.push({
-  id: 3002,
-  topic: "elektro",
-  type: "single",
-  level: "c3",
+  id: 3002, topic: "elektro", type: "single", level: "c3",
   stim: `
     <div class="table-wrap">
       <table class="soal-table">
@@ -799,18 +469,21 @@ QS.push({
       </table>
     </div>
   `,
-  q: "Berdasarkan data potensial reduksi di atas, logam yang paling kuat sebagai reduktor adalah...",
-  opts: ["Li", "Mg", "Al", "Zn", "Cu"],
+  q: "Analisis yang PALING TEPAT berdasarkan data potensial reduksi di atas adalah...",
+  opts: [
+    "Li adalah reduktor terkuat karena E° paling negatif",
+    "Ag adalah reduktor terkuat karena E° paling positif",
+    "Cu adalah oksidator terkuat karena E° positif",
+    "Zn tidak dapat mereduksi Cu²⁺ karena E° lebih negatif",
+    "Semua logam dapat mereduksi Ag⁺"
+  ],
   ans: 0,
-  exp: "Semakin negatif potensial reduksi, semakin mudah logam melepas elektron (semakin kuat reduktor). Li memiliki E° paling negatif (-3,04 V), sehingga merupakan reduktor terkuat."
+  exp: "Semakin negatif E°, semakin mudah logam melepas elektron (reduktor kuat). Li (-3,04 V) = reduktor terkuat. Ag = oksidator terkuat. Zn dapat mereduksi Cu²⁺ (E°sel = 1,10 V)."
 });
 
-// SOAL C3.3 - Menganalisis elektrolisis
+// C3.3 (id:3003) — DIPERBAIKI: kunci 2 dari 5 → 3 dari 6
 QS.push({
-  id: 3003,
-  topic: "elektro",
-  type: "mcma",
-  level: "c3",
+  id: 3003, topic: "elektro", type: "mcma", level: "c3",
   stim: `
     <div class="figure-wrap">
       <svg width="400" height="170" viewBox="0 0 400 170">
@@ -825,58 +498,45 @@ QS.push({
         <text x="175" y="85" fill="#8fa89e" font-size="10">Larutan elektrolit</text>
         <line x1="127" y1="30" x2="180" y2="30" stroke="#d4a04a" stroke-width="2"/>
         <line x1="247" y1="30" x2="210" y2="30" stroke="#d4a04a" stroke-width="2"/>
-        <circle cx="240" cy="55" r="4" fill="none" stroke="#60a5fa" stroke-width="1"/>
-        <circle cx="250" cy="48" r="3" fill="none" stroke="#60a5fa" stroke-width="1"/>
-        <text x="252" y="52" fill="#60a5fa" font-size="7">H₂</text>
-        <circle cx="120" cy="55" r="4" fill="none" stroke="#f87171" stroke-width="1"/>
-        <circle cx="115" cy="48" r="3" fill="none" stroke="#f87171" stroke-width="1"/>
-        <text x="100" y="52" fill="#f87171" font-size="7">O₂</text>
       </svg>
       <div class="figure-caption">Sel elektrolisis</div>
     </div>
   `,
-  q: "Berdasarkan gambar sel elektrolisis di atas, pernyataan yang BENAR adalah... (Pilih 2 jawaban benar)",
+  q: "Berdasarkan gambar sel elektrolisis di atas, pernyataan yang BENAR adalah... (Pilih 3 jawaban benar)",
   opts: [
     "Anoda adalah tempat terjadinya oksidasi",
     "Katoda adalah tempat terjadinya reduksi",
     "Elektron mengalir dari katoda ke anoda melalui sirkuit eksternal",
-    "Ion positif bergerak menuju anoda",
-    "Reaksi pada anoda selalu menghasilkan gas H₂"
+    "Ion positif (kation) bergerak menuju katoda",
+    "Reaksi pada anoda selalu menghasilkan gas H₂",
+    "Anoda terhubung ke kutub positif sumber listrik"
   ],
-  ans: [0, 1],
-  exp: "Pada sel elektrolisis: Anoda = oksidasi (terhubung ke kutub positif). Katoda = reduksi (terhubung ke kutub negatif). Elektron mengalir dari anoda ke katoda melalui sirkuit eksternal. Ion positif (kation) bergerak menuju katoda."
+  ans: [0, 1, 3, 5],
+  exp: "Sel elektrolisis: Anoda = oksidasi (kutub +). Katoda = reduksi (kutub -). Elektron mengalir dari anoda ke katoda (opsi C salah). Kation bergerak ke katoda (+). Anoda tidak selalu menghasilkan H₂."
 });
 
-// SOAL C3.4 - Menganalisis Hukum Faraday
+// C3.4 (id:3004) — tetap, sudah bagus
 QS.push({
-  id: 3004,
-  topic: "elektro",
-  type: "single",
-  level: "c3",
+  id: 3004, topic: "elektro", type: "single", level: "c3",
   stim: `
-    <div style="margin-bottom:0.5rem;">
-      <strong>Elektrolisis larutan CuSO₄ dengan elektroda Pt menggunakan arus 2 A selama 965 detik.</strong>
+    <div class="stim">
+      <p>Elektrolisis larutan CuSO₄ dengan elektroda Pt menggunakan arus 2 A selama 965 detik.</p>
     </div>
-    <div style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem;">
+    <div style="font-size:0.85rem;color:var(--muted);">
       <i class="fa-solid fa-info-circle"></i> Ar Cu = 63,5, F = 96500 C/mol
     </div>
   `,
   q: "Massa tembaga yang diendapkan di katoda adalah...",
   opts: ["0,635 gram", "1,270 gram", "2,540 gram", "0,317 gram", "6,350 gram"],
   ans: 0,
-  exp: "Q = i × t = 2 × 965 = 1930 C. mol e⁻ = 1930/96500 = 0,02 mol. Cu²⁺ + 2e⁻ → Cu. mol Cu = 0,02/2 = 0,01 mol. m = 0,01 × 63,5 = 0,635 gram."
+  exp: "Q = 2 × 965 = 1930 C. mol e⁻ = 1930/96500 = 0,02. Cu²⁺ + 2e⁻ → Cu. mol Cu = 0,01. m = 0,01 × 63,5 = 0,635 g."
 });
 
-// SOAL C3.5 - Menganalisis notasi sel
+// C3.5 (id:3005) — DIPERBAIKI: opsi E yang membingungkan diganti
 QS.push({
-  id: 3005,
-  topic: "elektro",
-  type: "single",
-  level: "c3",
+  id: 3005, topic: "elektro", type: "single", level: "c3",
   stim: `
-    <div class="chem-eq">
-      Mg(s) + Cu²⁺(aq) → Mg²⁺(aq) + Cu(s)
-    </div>
+    <div class="chem-eq">Mg(s) + Cu²⁺(aq) → Mg²⁺(aq) + Cu(s)</div>
   `,
   q: "Notasi sel yang benar untuk reaksi di atas adalah...",
   opts: [
@@ -884,22 +544,19 @@ QS.push({
     "Cu | Cu²⁺ || Mg²⁺ | Mg",
     "Mg²⁺ | Mg || Cu | Cu²⁺",
     "Cu²⁺ | Cu || Mg | Mg²⁺",
-    "Mg | Mg²⁺ || Cu | Cu²⁺"
+    "Mg | Cu || Mg²⁺ | Cu²⁺"
   ],
   ans: 0,
   exp: "Notasi sel: Anoda (oksidasi) | Ion || Ion | Katoda (reduksi). Mg → Mg²⁺ + 2e⁻ (anoda). Cu²⁺ + 2e⁻ → Cu (katoda). Notasi: Mg | Mg²⁺ || Cu²⁺ | Cu."
 });
 
 // ================================================================
-// LEVEL C4 - Mengevaluasi
+// LEVEL C4 — Mengevaluasi (5 soal)
 // ================================================================
 
-// SOAL C4.1 - Mengevaluasi potensial sel
+// C4.1 (id:4001) — DIPERBAIKI: kunci ditambah (A juga spontan)
 QS.push({
-  id: 4001,
-  topic: "elektro",
-  type: "mcma",
-  level: "c4",
+  id: 4001, topic: "elektro", type: "mcma", level: "c4",
   stim: `
     <div class="table-wrap">
       <table class="soal-table">
@@ -911,7 +568,7 @@ QS.push({
       </table>
     </div>
   `,
-  q: "Berdasarkan data potensial reduksi di atas, reaksi yang dapat berlangsung spontan adalah... (Pilih 2 jawaban benar)",
+  q: "Berdasarkan data potensial reduksi di atas, reaksi yang dapat berlangsung spontan adalah... (Pilih 3 jawaban benar)",
   opts: [
     "Fe + Pb²⁺ → Fe²⁺ + Pb (E°sel = +0,31 V)",
     "Pb + Cu²⁺ → Pb²⁺ + Cu (E°sel = +0,47 V)",
@@ -919,16 +576,13 @@ QS.push({
     "Fe + Ag⁺ → Fe²⁺ + Ag (E°sel = +1,24 V)",
     "Ag + Fe²⁺ → Ag⁺ + Fe (E°sel = -1,24 V)"
   ],
-  ans: [1, 3],
-  exp: "Reaksi spontan jika E°sel > 0. Pb + Cu²⁺: E°sel = 0,34 - (-0,13) = 0,47 V. Fe + Ag⁺: E°sel = 0,80 - (-0,44) = 1,24 V."
+  ans: [0, 1, 2, 3],
+  exp: "Reaksi spontan jika E°sel > 0. Fe+Pb²⁺: 0,31 V. Pb+Cu²⁺: 0,47 V. Cu+Ag⁺: 0,46 V. Fe+Ag⁺: 1,24 V. Ag+Fe²⁺: -1,24 V (tidak spontan)."
 });
 
-// SOAL C4.2 - Mengevaluasi sel elektrolisis
+// C4.2 (id:4002) — tetap, sudah bagus
 QS.push({
-  id: 4002,
-  topic: "elektro",
-  type: "mcma",
-  level: "c4",
+  id: 4002, topic: "elektro", type: "mcma", level: "c4",
   stim: `
     <div style="background:var(--bg2);border-radius:0.5rem;padding:0.75rem;margin-bottom:0.5rem;border:1px solid var(--border);">
       <ol style="color:var(--text);font-size:0.9rem;list-style-type:decimal;padding-left:1.5rem;">
@@ -941,42 +595,39 @@ QS.push({
     </div>
   `,
   q: "Pernyataan yang BENAR tentang elektrolisis larutan NaCl adalah... (Pilih 3 jawaban benar)",
-  opts: ["(1)", "(2)", "(3)", "(4)", "(5)"],
+  opts: ["(1) Katoda: 2H₂O + 2e⁻ → H₂ + 2OH⁻", "(2) Anoda: 2Cl⁻ → Cl₂ + 2e⁻", "(3) Gas di katoda adalah O₂", "(4) Larutan di sekitar katoda bersifat basa", "(5) Gas di anoda adalah Cl₂"],
   ans: [0, 1, 4],
-  exp: "Elektrolisis larutan NaCl: Katoda: 2H₂O + 2e⁻ → H₂ + 2OH⁻ (gas H₂, larutan basa). Anoda: 2Cl⁻ → Cl₂ + 2e⁻ (gas Cl₂). Pernyataan 3 salah (gas H₂, bukan O₂)."
+  exp: "Elektrolisis larutan NaCl: Katoda: 2H₂O + 2e⁻ → H₂ + 2OH⁻ (gas H₂, larutan basa). Anoda: 2Cl⁻ → Cl₂ + 2e⁻ (gas Cl₂). Pernyataan (3) salah."
 });
 
-// SOAL C4.3 - Mengevaluasi korosi
+// C4.3 (id:4003) — tetap, sudah bagus
 QS.push({
-  id: 4003,
-  topic: "elektro",
-  type: "mcma",
-  level: "c4",
+  id: 4003, topic: "elektro", type: "mcma", level: "c4",
   stim: `
     <div class="figure-wrap">
       <svg width="450" height="160" viewBox="0 0 450 160">
         <rect x="20" y="30" width="55" height="90" rx="3" fill="rgba(96,165,250,0.05)" stroke="rgba(96,165,250,0.3)" stroke-width="1.5"/>
-        <rect x="25" y="80" width="45" height="35" fill="rgba(96,165,250,0.15)" stroke="rgba(96,165,250,0.2)"/>
+        <rect x="25" y="80" width="45" height="35" fill="rgba(96,165,250,0.15)"/>
         <rect x="35" y="55" width="25" height="8" rx="2" fill="rgba(248,113,113,0.6)" stroke="#f87171"/>
         <text x="20" y="135" fill="#8fa89e" font-size="8">Air + O₂</text>
         <text x="30" y="20" fill="#d4a04a" font-size="10" font-weight="bold">(1)</text>
         <rect x="95" y="30" width="55" height="90" rx="3" fill="rgba(96,165,250,0.05)" stroke="rgba(96,165,250,0.3)" stroke-width="1.5"/>
-        <rect x="100" y="80" width="45" height="35" fill="rgba(96,165,250,0.15)" stroke="rgba(96,165,250,0.2)"/>
+        <rect x="100" y="80" width="45" height="35" fill="rgba(96,165,250,0.15)"/>
         <rect x="110" y="55" width="25" height="8" rx="2" fill="rgba(248,113,113,0.8)" stroke="#f87171" stroke-width="2"/>
         <text x="95" y="135" fill="#8fa89e" font-size="8">Air + NaCl</text>
         <text x="105" y="20" fill="#d4a04a" font-size="10" font-weight="bold">(2)</text>
         <rect x="170" y="30" width="55" height="90" rx="3" fill="rgba(96,165,250,0.05)" stroke="rgba(96,165,250,0.3)" stroke-width="1.5"/>
-        <rect x="175" y="80" width="45" height="35" fill="rgba(96,165,250,0.15)" stroke="rgba(96,165,250,0.2)"/>
+        <rect x="175" y="80" width="45" height="35" fill="rgba(96,165,250,0.15)"/>
         <rect x="185" y="55" width="25" height="8" rx="2" fill="rgba(52,211,153,0.4)" stroke="#34d399"/>
         <text x="170" y="135" fill="#8fa89e" font-size="8">Air + NaOH</text>
         <text x="180" y="20" fill="#d4a04a" font-size="10" font-weight="bold">(3)</text>
         <rect x="245" y="30" width="55" height="90" rx="3" fill="rgba(96,165,250,0.05)" stroke="rgba(96,165,250,0.3)" stroke-width="1.5"/>
-        <rect x="250" y="80" width="45" height="35" fill="rgba(139,92,246,0.1)" stroke="rgba(139,92,246,0.2)"/>
+        <rect x="250" y="80" width="45" height="35" fill="rgba(139,92,246,0.1)"/>
         <rect x="260" y="55" width="25" height="8" rx="2" fill="rgba(96,165,250,0.3)" stroke="#60a5fa"/>
         <text x="245" y="135" fill="#8fa89e" font-size="8">Udara kering</text>
         <text x="255" y="20" fill="#d4a04a" font-size="10" font-weight="bold">(4)</text>
         <rect x="320" y="30" width="55" height="90" rx="3" fill="rgba(96,165,250,0.05)" stroke="rgba(96,165,250,0.3)" stroke-width="1.5"/>
-        <rect x="325" y="80" width="45" height="35" fill="rgba(96,165,250,0.15)" stroke="rgba(96,165,250,0.2)"/>
+        <rect x="325" y="80" width="45" height="35" fill="rgba(96,165,250,0.15)"/>
         <rect x="335" y="55" width="25" height="8" rx="2" fill="rgba(52,211,153,0.6)" stroke="#34d399" stroke-width="2"/>
         <text x="320" y="135" fill="#8fa89e" font-size="8">Air + Zn</text>
         <text x="330" y="20" fill="#d4a04a" font-size="10" font-weight="bold">(5)</text>
@@ -993,19 +644,64 @@ QS.push({
     "Semua tabung mengalami korosi dengan kecepatan yang sama"
   ],
   ans: [0, 1],
-  exp: "Korosi paling cepat pada tabung (2) karena ion Cl⁻ mempercepat oksidasi besi. Korosi paling lambat pada tabung (4) karena tidak ada air (korosi memerlukan air dan oksigen). Tabung (5) lebih lambat karena Zn melindungi besi (proteksi katodik)."
+  exp: "Korosi paling cepat pada (2) karena ion Cl⁻ mempercepat oksidasi. Paling lambat pada (4) karena tidak ada air. Tabung (5) lebih lambat karena Zn melindungi besi (proteksi katodik)."
+});
+
+// C4.4 (BARU) — Error analysis
+QS.push({
+  id: 4004, topic: "elektro", type: "single", level: "c4",
+  stim: `
+    <div class="stim">
+      <p>Seorang siswa menulis:</p>
+      <blockquote style="margin-left:1rem;border-left:3px solid var(--accent);padding-left:0.8rem;font-style:italic;color:var(--muted);">
+        "Pada sel volta, anoda bermuatan positif dan katoda bermuatan negatif. 
+        Elektron mengalir dari katoda ke anoda melalui kawat penghantar."
+      </blockquote>
+    </div>
+  `,
+  q: "Kesalahan penalaran utama siswa tersebut terletak pada...",
+  opts: [
+    "Menganggap anoda sel volta bermuatan positif, padahal anoda sel volta bermuatan NEGATIF",
+    "Menganggap elektron mengalir dari katoda ke anoda, padahal seharusnya dari anoda ke katoda",
+    "Kedua pernyataan siswa salah",
+    "Menganggap sel volta memiliki anoda dan katoda",
+    "Menganggap elektron mengalir melalui kawat"
+  ],
+  ans: 0,
+  exp: "Kesalahan ganda: (1) Anoda sel volta bermuatan NEGATIF (bukan positif) karena menjadi sumber elektron. (2) Elektron mengalir dari anoda (negatif) ke katoda (positif)."
+});
+
+// C4.5 (BARU) — Nilai klaim
+QS.push({
+  id: 4005, topic: "elektro", type: "single", level: "c4",
+  stim: `
+    <div class="stim">
+      <p>Dua siswa berdebat tentang korosi besi:</p>
+      <ul style="margin-left:1.2rem;">
+        <li><strong>Siswa A:</strong> "Korosi besi hanya terjadi jika ada oksigen, tidak perlu air."</li>
+        <li><strong>Siswa B:</strong> "Korosi besi memerlukan air DAN oksigen. Tanpa salah satunya, korosi tidak terjadi."</li>
+      </ul>
+    </div>
+  `,
+  q: "Penilaian yang PALING TEPAT terhadap kedua argumen adalah...",
+  opts: [
+    "Siswa B benar karena korosi besi (karat) memerlukan air dan oksigen secara bersamaan",
+    "Siswa A benar karena oksigen cukup untuk korosi",
+    "Kedua siswa benar karena keduanya menjelaskan korosi",
+    "Kedua siswa salah karena korosi tidak memerlukan oksigen",
+    "Tidak dapat dinilai tanpa data kuantitatif"
+  ],
+  ans: 0,
+  exp: "Siswa B benar. Reaksi korosi besi: 4Fe + 3O₂ + 6H₂O → 4Fe(OH)₃ → Fe₂O₃·nH₂O (karat). Korosi memerlukan air DAN oksigen. Tanpa salah satunya (misalnya besi dalam udara kering), korosi tidak terjadi."
 });
 
 // ================================================================
-// LEVEL C5 - Mencipta
+// LEVEL C5 — Mencipta (3 soal)
 // ================================================================
 
-// SOAL C5.1 - Merancang sel volta
+// C5.1 (id:5001) — DIPERBAIKI: kunci ditambah (C juga benar)
 QS.push({
-  id: 5001,
-  topic: "elektro",
-  type: "mcma",
-  level: "c5",
+  id: 5001, topic: "elektro", type: "mcma", level: "c5",
   stim: `
     <div class="table-wrap">
       <table class="soal-table">
@@ -1016,12 +712,11 @@ QS.push({
         <tr><td>Zn</td><td>-0,76</td></tr>
         <tr><td>Cu</td><td>+0,34</td></tr>
         <tr><td>Ag</td><td>+0,80</td></tr>
-        <tr><td>Pt</td><td>+1,20</td></tr>
         <tr><td>Au</td><td>+1,50</td></tr>
       </table>
     </div>
   `,
-  q: "Berdasarkan data di atas, kombinasi elektroda yang menghasilkan potensial sel PALING TINGGI adalah... (Pilih 2 pasangan yang benar)",
+  q: "Berdasarkan data di atas, kombinasi elektroda yang menghasilkan potensial sel PALING TINGGI adalah... (Pilih 3 pasangan yang benar)",
   opts: [
     "Li | Li⁺ || Au³⁺ | Au (E°sel = 4,54 V)",
     "Mg | Mg²⁺ || Ag⁺ | Ag (E°sel = 3,17 V)",
@@ -1029,27 +724,25 @@ QS.push({
     "Zn | Zn²⁺ || Pt²⁺ | Pt (E°sel = 1,96 V)",
     "Cu | Cu²⁺ || Ag⁺ | Ag (E°sel = 0,46 V)"
   ],
-  ans: [0, 1],
-  exp: "E°sel = E°katoda - E°anoda. Li/Au: 1,50 - (-3,04) = 4,54 V (tertinggi). Mg/Ag: 0,80 - (-2,37) = 3,17 V."
+  ans: [0, 1, 2],
+  exp: "E°sel = E°katoda - E°anoda. Li/Au: 1,50 - (-3,04) = 4,54 V. Mg/Ag: 0,80 - (-2,37) = 3,17 V. Al/Cu: 0,34 - (-1,66) = 2,00 V. Zn/Pt: 1,20 - (-0,76) = 1,96 V. Cu/Ag: 0,80 - 0,34 = 0,46 V."
 });
 
-// SOAL C5.2 - Menganalisis elektroplating
+// C5.2 (id:5002) — tetap, sudah bagus
 QS.push({
-  id: 5002,
-  topic: "elektro",
-  type: "mcma",
-  level: "c5",
+  id: 5002, topic: "elektro", type: "mcma", level: "c5",
   stim: `
-    <div style="background:var(--bg2);border-radius:0.5rem;padding:0.75rem;margin-bottom:0.5rem;border:1px solid var(--border);">
-      <p style="font-size:0.9rem;color:var(--text);">
-        Larutan yang digunakan: AgNO₃<br>
-        Arus: 5 A<br>
-        Waktu: 30 menit<br>
-        Ar Ag = 108, F = 96500 C/mol
-      </p>
+    <div class="stim">
+      <p>Elektroplating perak pada sendok besi:</p>
+      <ul style="margin-left:1.2rem;">
+        <li>Larutan: AgNO₃</li>
+        <li>Arus: 5 A</li>
+        <li>Waktu: 30 menit</li>
+        <li>Ar Ag = 108, F = 96500 C/mol</li>
+      </ul>
     </div>
   `,
-  q: "Berdasarkan data di atas, pernyataan yang BENAR adalah... (Pilih 2 jawaban benar)",
+  q: "Pernyataan yang BENAR tentang elektroplating tersebut adalah... (Pilih 2 jawaban benar)",
   opts: [
     "Sendok besi dihubungkan sebagai katoda",
     "Massa perak yang mengendap sekitar 10,08 gram",
@@ -1058,54 +751,68 @@ QS.push({
     "Massa perak yang mengendap sekitar 5,04 gram"
   ],
   ans: [0, 1],
-  exp: "Elektroplating: benda yang dilapisi (sendok besi) dihubungkan sebagai katoda. Q = i × t = 5 × 1800 = 9000 C. mol e⁻ = 9000/96500 = 0,0933 mol. Ag⁺ + e⁻ → Ag. mol Ag = 0,0933 mol. m = 0,0933 × 108 = 10,08 gram."
+  exp: "Elektroplating: benda yang dilapisi (sendok) = katoda. Q = 5 × 1800 = 9000 C. mol e⁻ = 9000/96500 = 0,0933. mol Ag = 0,0933. m = 0,0933 × 108 = 10,08 g. Reaksi anoda: Ag → Ag⁺ + e⁻."
+});
+
+// C5.3 (BARU) — Rancang sel volta
+QS.push({
+  id: 5003, topic: "elektro", type: "mcma", level: "c5",
+  stim: `
+    <div class="stim">
+      <p>Seorang siswa ingin merancang sel volta dengan potensial sel sekitar 1,5 V untuk menyalakan lampu LED kecil. Tersedia:</p>
+      <ul style="margin-left:1.2rem;">
+        <li>Logam: Zn, Fe, Cu, Ag</li>
+        <li>Larutan: ZnSO₄, FeSO₄, CuSO₄, AgNO₃</li>
+      </ul>
+    </div>
+  `,
+  q: "Rancangan sel volta yang PALING TEPAT adalah... (Pilih 3 jawaban benar)",
+  opts: [
+    "Gunakan Zn sebagai anoda (Zn → Zn²⁺ + 2e⁻)",
+    "Gunakan Ag sebagai katoda (Ag⁺ + e⁻ → Ag)",
+    "Gunakan ZnSO₄ dan AgNO₃ sebagai elektrolit",
+    "Gunakan Cu sebagai anoda karena E° positif",
+    "Gunakan larutan yang sama untuk kedua elektroda"
+  ],
+  ans: [0, 1, 2],
+  exp: "E°sel = E°katoda - E°anoda. Untuk E°sel ≈ 1,5 V: Zn/Ag → 0,80 - (-0,76) = 1,56 V. Anoda = Zn (oksidasi), Katoda = Ag (reduksi). Elektrolit: ZnSO₄ dan AgNO₃."
 });
 
 // ================================================================
-// LEVEL C6 - Menilai
+// LEVEL C6 — Menilai (3 soal)
 // ================================================================
 
-// SOAL C6.1 - Menilai validitas pernyataan
+// C6.1 (id:6001) — DIPERBAIKI: single choice nilai 5 pernyataan
 QS.push({
-  id: 6001,
-  topic: "elektro",
-  type: "mcma",
-  level: "c6",
+  id: 6001, topic: "elektro", type: "single", level: "c6",
   stim: `
-    <div style="background:var(--bg2);border-radius:0.5rem;padding:0.75rem;margin-bottom:0.5rem;border:1px solid var(--border);">
-      <ol style="color:var(--text);font-size:0.9rem;list-style-type:decimal;padding-left:1.5rem;">
-        <li>Sel volta mengubah energi kimia menjadi energi listrik</li>
-        <li>Sel elektrolisis mengubah energi listrik menjadi energi kimia</li>
-        <li>Pada sel volta, anoda bermuatan positif</li>
-        <li>Pada sel elektrolisis, katoda bermuatan negatif</li>
-        <li>Reaksi pada sel volta berlangsung tidak spontan</li>
+    <div class="stim">
+      <p>Seorang siswa menulis ringkasan tentang elektrokimia:</p>
+      <ol style="margin-left:1.2rem;">
+        <li>Sel volta mengubah energi kimia menjadi energi listrik.</li>
+        <li>Sel elektrolisis mengubah energi listrik menjadi energi kimia.</li>
+        <li>Pada sel volta, anoda bermuatan positif.</li>
+        <li>Pada sel elektrolisis, katoda bermuatan negatif.</li>
+        <li>Reaksi pada sel volta berlangsung spontan.</li>
       </ol>
     </div>
   `,
-  q: "Pernyataan yang PALING TEPAT tentang sel volta dan sel elektrolisis adalah... (Pilih 2 jawaban benar)",
+  q: "Penilaian yang PALING TEPAT terhadap ringkasan siswa adalah...",
   opts: [
-    "Pernyataan 1 benar: sel volta mengubah kimia → listrik",
-    "Pernyataan 2 benar: sel elektrolisis mengubah listrik → kimia",
-    "Pernyataan 3 benar: anoda sel volta bermuatan positif",
-    "Pernyataan 4 benar: katoda sel elektrolisis bermuatan negatif",
-    "Pernyataan 5 benar: reaksi sel volta tidak spontan"
+    "Pernyataan 1, 2, 4, dan 5 benar; pernyataan 3 salah",
+    "Pernyataan 1, 2, dan 3 benar; pernyataan 4 dan 5 salah",
+    "Hanya pernyataan 1 dan 3 yang benar",
+    "Semua pernyataan benar",
+    "Semua pernyataan salah"
   ],
-  ans: [0, 3],
-  exp: "Sel volta: kimia → listrik (spontan), anoda (-) oksidasi, katoda (+) reduksi. Sel elektrolisis: listrik → kimia (non-spontan), anoda (+) oksidasi, katoda (-) reduksi."
+  ans: 0,
+  exp: "Pernyataan 1, 2, 4, 5 benar. Pernyataan 3 SALAH: pada sel volta, anoda bermuatan NEGATIF (bukan positif). Pada sel elektrolisis, anoda bermuatan positif."
 });
 
-// SOAL C6.2 - Menilai aplikasi elektrokimia
+// C6.2 (id:6002) — DIPERBAIKI: kunci ditambah (C juga benar)
 QS.push({
-  id: 6002,
-  topic: "elektro",
-  type: "mcma",
-  level: "c6",
+  id: 6002, topic: "elektro", type: "mcma", level: "c6",
   stim: `
-    <div style="background:var(--bg2);border-radius:0.5rem;padding:0.75rem;margin-bottom:0.5rem;border:1px solid var(--border);">
-      <p style="font-size:0.9rem;color:var(--text);">
-        Data potensial reduksi:
-      </p>
-    </div>
     <div class="table-wrap">
       <table class="soal-table">
         <tr><th>Logam</th><th>E° Reduksi (V)</th><th>Biaya</th><th>Ketersediaan</th></tr>
@@ -1117,7 +824,7 @@ QS.push({
       </table>
     </div>
   `,
-  q: "Berdasarkan data di atas, rekomendasi logam yang PALING TEPAT untuk anoda korban adalah... (Pilih 2 logam yang tepat)",
+  q: "Berdasarkan data di atas, rekomendasi logam yang PALING TEPAT untuk anoda korban adalah... (Pilih 3 logam yang tepat)",
   opts: [
     "Mg karena memiliki potensial paling negatif",
     "Zn karena murah dan efektif",
@@ -1125,25 +832,41 @@ QS.push({
     "Cu karena tahan korosi",
     "Ag karena memiliki potensial positif"
   ],
-  ans: [0, 1],
-  exp: "Anoda korban harus memiliki potensial lebih negatif dari besi (Fe, E° = -0,44 V) agar teroksidasi lebih dulu. Mg (-2,37 V) dan Zn (-0,76 V) memiliki potensial lebih negatif dari Fe. Mg lebih efektif, Zn lebih murah."
+  ans: [0, 1, 2],
+  exp: "Anoda korban harus memiliki E° lebih negatif dari Fe (-0,44 V). Mg (-2,37 V), Zn (-0,76 V), dan Al (-1,66 V) memenuhi. Mg paling efektif, Zn dan Al lebih ekonomis. Cu dan Ag (E° positif) tidak dapat menjadi anoda korban."
+});
+
+// C6.3 (BARU) — Nilai klaim efisiensi
+QS.push({
+  id: 6003, topic: "elektro", type: "single", level: "c6",
+  stim: `
+    <div class="stim">
+      <p>Tiga siswa berdebat tentang pemilihan metode perlindungan besi dari korosi:</p>
+      <ul style="margin-left:1.2rem;">
+        <li><strong>Siswa A:</strong> "Pengecatan adalah solusi terbaik karena murah dan mudah."</li>
+        <li><strong>Siswa B:</strong> "Proteksi katodik dengan Mg lebih baik untuk pipa bawah tanah karena tidak perlu perawatan ulang."</li>
+        <li><strong>Siswa C:</strong> "Galvanisasi dengan Zn adalah kompromi terbaik: murah dan Zn juga melindungi besi jika lapisan tergores."</li>
+      </ul>
+    </div>
+  `,
+  q: "Penilaian yang PALING TEPAT untuk pipa besi bawah tanah adalah...",
+  opts: [
+    "Siswa B dan C benar karena keduanya memberikan perlindungan berkelanjutan, sedangkan pengecatan perlu perawatan",
+    "Siswa A benar karena pengecatan paling murah",
+    "Siswa A dan B sama-sama benar untuk semua kondisi",
+    "Ketiga siswa benar untuk semua kondisi",
+    "Ketiga siswa salah karena besi tidak dapat dilindungi"
+  ],
+  ans: 0,
+  exp: "Siswa B dan C benar untuk pipa bawah tanah. Pengecatan (A) kurang efektif karena sulit dirawat ulang. Proteksi katodik (B) dan galvanisasi (C) memberikan perlindungan berkelanjutan. Galvanisasi lebih ekonomis."
 });
 
 // ================================================================
 // STATE MANAGEMENT
 // ================================================================
 var S = {
-  view: "home",
-  qids: [],
-  qi: 0,
-  ans: {},
-  mode: "topic",
-  ri: 0,
-  rqs: [],
-  wrong: [],
-  done: {},
-  scores: {},
-  filter: "all"
+  view: "home", qids: [], qi: 0, ans: {}, mode: "topic",
+  ri: 0, rqs: [], wrong: [], done: {}, scores: {}, filter: "all"
 };
 
 function load() {
@@ -1160,16 +883,14 @@ function load() {
 function save() {
   try {
     localStorage.setItem("tka_kim_elektro", JSON.stringify({
-      done: Object.keys(S.done),
-      wrong: S.wrong,
-      scores: S.scores
+      done: Object.keys(S.done), wrong: S.wrong, scores: S.scores
     }));
   } catch(e) {}
 }
 load();
 
 function go(v) {
-  var names = {home:"vHome",quiz:"vQuiz",res:"vRes",rev:"vRev",browse:"vBrowse"};
+  var names = {home:"vHome", quiz:"vQuiz", res:"vRes", rev:"vRev"};
   document.querySelectorAll(".view").forEach(function(el) { el.classList.remove("active"); });
   var el = document.getElementById(names[v]);
   if (el) el.classList.add("active");
@@ -1194,10 +915,8 @@ function getLevelBadge(level) {
   var labels = {c2:"C2", c3:"C3", c4:"C4", c5:"C5", c6:"C6"};
   var colors = {c2:"#34d399", c3:"#fbbf24", c4:"#f97316", c5:"#ef4444", c6:"#8b5cf6"};
   var bgColors = {
-    c2:"rgba(52,211,153,0.15)",
-    c3:"rgba(251,191,36,0.15)",
-    c4:"rgba(249,115,22,0.15)",
-    c5:"rgba(239,68,68,0.15)",
+    c2:"rgba(52,211,153,0.15)", c3:"rgba(251,191,36,0.15)",
+    c4:"rgba(249,115,22,0.15)", c5:"rgba(239,68,68,0.15)",
     c6:"rgba(139,92,246,0.15)"
   };
   return '<span class="badge" style="background:' + bgColors[level] + ';color:' + colors[level] + ';font-size:0.65rem;">' + labels[level] + '</span>';
@@ -1257,14 +976,12 @@ function startQuiz() {
   S.ans = {}; S.qi = 0; S.mode = "topic";
   go("quiz"); renderQ();
 }
-
 function startRandom() {
   var sh = QS.slice().sort(function() { return Math.random() - 0.5; }).slice(0, 10);
   S.qids = sh.map(function(q) { return q.id; });
   S.ans = {}; S.qi = 0; S.mode = "random";
   go("quiz"); renderQ();
 }
-
 function startWrong() {
   var wq = QS.filter(function(q) { return S.wrong.indexOf(q.id) >= 0; });
   if (wq.length === 0) return;
@@ -1272,7 +989,6 @@ function startWrong() {
   S.ans = {}; S.qi = 0; S.mode = "wrong";
   go("quiz"); renderQ();
 }
-
 function singleQ(qid) {
   S.qids = [qid]; S.ans = {}; S.qi = 0; S.mode = "single";
   go("quiz"); renderQ();
@@ -1345,29 +1061,23 @@ function qPrev() {
 function finishQ() {
   var correct = 0, wrong = 0;
   var ts = {};
-
   S.qids.forEach(function(qid) {
     var q = QS.find(function(x) { return x.id === qid; });
     if (!q) return;
     var ua = S.ans[qid];
     var ok = false;
-
-    if (q.type === "single") {
-      ok = ua === q.ans;
-    } else if (q.type === "mcma") {
+    if (q.type === "single") ok = ua === q.ans;
+    else if (q.type === "mcma") {
       var u = (ua || []).slice().sort().join(",");
       var c = q.ans.slice().sort().join(",");
       ok = u === c;
     }
-
     S.done[qid] = true;
-    if (ok) { correct++; } else { wrong++; S.wrong.push(qid); }
-
+    if (ok) correct++; else { wrong++; S.wrong.push(qid); }
     if (!ts[q.topic]) ts[q.topic] = {c:0, t:0};
     ts[q.topic].t++;
     if (ok) ts[q.topic].c++;
   });
-
   S.wrong = uniq(S.wrong);
   for (var k in ts) {
     if (!S.scores[k]) S.scores[k] = {c:0, t:0};
@@ -1494,14 +1204,13 @@ function resetAll() {
 }
 function toast(msg, bg) {
   var t = document.getElementById("toast");
-  t.style.display = "block"; 
-  t.style.background = bg || "var(--card)"; 
-  t.style.color = "#fff"; 
+  t.style.display = "block";
+  t.style.background = bg || "var(--card)";
+  t.style.color = "#fff";
   t.textContent = msg;
   setTimeout(function() { t.style.display = "none"; }, 2200);
 }
 
-// INIT
 renderHome();
 console.log("Elektrokimia - HOTS C2-C6 loaded: " + QS.length + " soal");
 </script>
