@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Senyawa Karbon — TKA Kimia SMA Negeri 2 Semarang</title>
+<title>Senyawa Karbon (Hidrokarbon, Gugus Fungsi & Biomolekul) — TKA Kimia SMA Negeri 2 Semarang</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -114,22 +114,22 @@
         text-align: center; color: var(--text);
         margin: 0.5rem 0; white-space: pre;
     }
-    .fg-table {
-        display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 0.3rem; margin: 0.5rem 0;
+    .bio-icon-row {
+        display: flex; justify-content: center; gap: 0.5rem;
+        flex-wrap: wrap; margin: 0.5rem 0;
     }
-    .fg-item {
-        padding: 0.3rem 0.5rem; background: var(--bg2);
-        border-radius: 0.3rem; border: 1px solid var(--border);
-        text-align: center; font-size: 0.7rem; color: var(--text);
+    .bio-icon {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 50px; height: 50px; border-radius: 50%;
+        background: var(--bg2); border: 2px solid var(--border);
+        font-size: 1.5rem; transition: all 0.25s;
     }
-    .fg-item .fg-structure {
-        font-family: "Times New Roman", serif;
-        font-size: 0.9rem; color: var(--accent);
-    }
-    .fg-item .fg-name {
-        font-size: 0.6rem; color: var(--muted); margin-top: 0.1rem;
-    }
+    .bio-icon.carbo { border-color: #34d399; color: #34d399; }
+    .bio-icon.protein { border-color: #60a5fa; color: #60a5fa; }
+    .bio-icon.lipid { border-color: #fbbf24; color: #fbbf24; }
+    .bio-icon.polymer { border-color: #a78bfa; color: #a78bfa; }
+    .bio-icon.hidro { border-color: #f87171; color: #f87171; }
+    .bio-icon.gugus { border-color: #d4a04a; color: #d4a04a; }
     .space-y-2\.5 > * + * { margin-top: 8px; }
     .ob {
         display: flex; align-items: center; gap: 10px;
@@ -189,7 +189,7 @@
         .ob { font-size: 0.8rem; padding: 6px 12px; }
         .bp, .bs { font-size: 0.75rem; padding: 6px 14px; }
         .glow-card { padding: 12px 14px; }
-        .fg-table { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); }
+        .bio-icon { width: 40px; height: 40px; font-size: 1.2rem; }
     }
 </style>
 </head>
@@ -219,9 +219,9 @@
         <div class="hg" style="background:var(--accent);top:-180px;right:-80px"></div>
         <div class="hg" style="background:#34d399;bottom:-180px;left:-80px"></div>
         <div class="relative z-10">
-            <div class="badge mb-3"><i class="fa-solid fa-link"></i> Gugus Fungsi & Hidrokarbon</div>
-            <h1 class="fd text-3xl md:text-4xl font-black mb-2 leading-tight">Gugus Fungsi <span style="color:var(--accent)">& Hidrokarbon</span></h1>
-            <p class="text-sm md:text-base max-w-lg" style="color:var(--muted);line-height:1.65">Latihan soal HOTS level C2-C6 tentang gugus fungsi senyawa karbon dan hidrokarbon: tata nama, isomer, identifikasi, reaksi, dan aplikasi.</p>
+            <div class="badge mb-3"><i class="fa-solid fa-ring"></i> Senyawa Karbon</div>
+            <h1 class="fd text-3xl md:text-4xl font-black mb-2 leading-tight">Senyawa <span style="color:var(--accent)">Karbon</span></h1>
+            <p class="text-sm md:text-base max-w-lg" style="color:var(--muted);line-height:1.65">Latihan soal HOTS level C2-C6 tentang <strong>Hidrokarbon</strong>, <strong>Gugus Fungsi</strong>, dan <strong>Biomolekul</strong>: tata nama, isomer, identifikasi, reaksi, dan aplikasi dalam kehidupan.</p>
             <div class="flex flex-wrap gap-2 mt-4">
                 <span class="badge hots-badge hots-c2">C2 - Pemahaman</span>
                 <span class="badge hots-badge hots-c3">C3 - Menganalisis</span>
@@ -232,14 +232,14 @@
         </div>
     </div>
 
-    <!-- FUNCTIONAL GROUP TABLE -->
-    <div class="fg-table mb-6">
-        <div class="fg-item"><div class="fg-structure">-OH</div><div class="fg-name">Alkohol</div></div>
-        <div class="fg-item"><div class="fg-structure">-O-</div><div class="fg-name">Eter</div></div>
-        <div class="fg-item"><div class="fg-structure">-CHO</div><div class="fg-name">Aldehida</div></div>
-        <div class="fg-item"><div class="fg-structure">-CO-</div><div class="fg-name">Keton</div></div>
-        <div class="fg-item"><div class="fg-structure">-COOH</div><div class="fg-name">Asam Karboksilat</div></div>
-        <div class="fg-item"><div class="fg-structure">-COOR</div><div class="fg-name">Ester</div></div>
+    <!-- BIO ICON ROW (3 topics) -->
+    <div class="bio-icon-row mb-6">
+        <div class="bio-icon hidro" title="Hidrokarbon"><i class="fa-solid fa-oil-can"></i></div>
+        <div class="bio-icon gugus" title="Gugus Fungsi"><i class="fa-solid fa-link"></i></div>
+        <div class="bio-icon carbo" title="Karbohidrat"><i class="fa-solid fa-bread-slice"></i></div>
+        <div class="bio-icon protein" title="Protein"><i class="fa-solid fa-egg"></i></div>
+        <div class="bio-icon lipid" title="Lemak"><i class="fa-solid fa-droplet"></i></div>
+        <div class="bio-icon polymer" title="Polimer"><i class="fa-solid fa-cubes"></i></div>
     </div>
 
     <div class="flex flex-wrap gap-2.5 mb-6">
@@ -344,8 +344,8 @@
 
 <script>
 // ================================================================
-// DATA SOAL GABUNGAN: HIDROKARBON + GUGUS FUNGSI
-// Total: 24 soal (4 C2, 7 C3, 6 C4, 4 C5, 3 C6)
+// DATA SOAL SENYAWA KARBON (HIDROKARBON + GUGUS FUNGSI + BIOMOLEKUL)
+// HOTS C2-C6 | Total: 24 soal (4 C2, 6 C3, 6 C4, 4 C5, 4 C6)
 // ================================================================
 var QS = [];
 
@@ -355,7 +355,7 @@ var QS = [];
 
 // C2.1 — Jenis hidrokarbon (dari Hidrokarbon)
 QS.push({
-  id: 1001, topic: "gabungan", type: "mcma", level: "c2",
+  id: 1001, topic: "karbon", type: "mcma", level: "c2",
   q: "Pernyataan BENAR tentang jenis-jenis hidrokarbon adalah... (Pilih 3 jawaban benar)",
   opts: [
     "Alkana adalah hidrokarbon jenuh dengan semua ikatan tunggal",
@@ -369,9 +369,9 @@ QS.push({
   exp: "Alkana (jenuh, ikatan tunggal), alkena (C=C), alkuna (C≡C). Hidrokarbon nonpolar, tidak larut air. Alkana reaktif terhadap halogen hanya dengan UV."
 });
 
-// C2.2 — Titik didih isomer (dari Hidrokarbon)
+// C2.2 — Titik didih isomer hidrokarbon (dari Hidrokarbon)
 QS.push({
-  id: 1002, topic: "gabungan", type: "single", level: "c2",
+  id: 1002, topic: "karbon", type: "single", level: "c2",
   stim: `
     <div class="table-wrap">
       <table class="soal-table">
@@ -396,7 +396,7 @@ QS.push({
 
 // C2.3 — Gugus fungsi dasar (dari Gugus Fungsi)
 QS.push({
-  id: 1003, topic: "gabungan", type: "mcma", level: "c2",
+  id: 1003, topic: "karbon", type: "mcma", level: "c2",
   q: "Pernyataan BENAR tentang gugus fungsi senyawa karbon adalah... (Pilih 3 jawaban benar)",
   opts: [
     "Alkohol memiliki gugus fungsi -OH",
@@ -410,25 +410,29 @@ QS.push({
   exp: "Alkohol: -OH. Eter: -O-. Aldehida: -CHO. Keton: -CO-. Asam karboksilat: -COOH. Ester: -COOR."
 });
 
-// C2.4 — Nama aldehida (dari Gugus Fungsi)
+// C2.4 — Identifikasi karbohidrat (dari Biomolekul) — DIPERBAIKI jadi MCMA 3 kunci
 QS.push({
-  id: 1004, topic: "gabungan", type: "single", level: "c2",
-  stim: `
-    <div class="structure-display">CH₃-CH₂-CH₂-CHO</div>
-  `,
-  q: "Nama senyawa tersebut adalah...",
-  opts: ["1-butanol", "Butanal", "2-butanol", "Butanon", "Asam butanoat"],
-  ans: 1,
-  exp: "CH₃-CH₂-CH₂-CHO adalah butanal (aldehida dengan 4 atom C)."
+  id: 1004, topic: "karbon", type: "mcma", level: "c2",
+  q: "Pernyataan BENAR tentang karbohidrat adalah... (Pilih 3 jawaban benar)",
+  opts: [
+    "Monosakarida adalah karbohidrat paling sederhana yang tidak dapat dihidrolisis",
+    "Glukosa dan fruktosa adalah contoh monosakarida",
+    "Sukrosa adalah disakarida yang tersusun dari glukosa + fruktosa",
+    "Selulosa dapat dicerna oleh enzim pencernaan manusia",
+    "Amilum adalah monosakarida",
+    "Semua karbohidrat bersifat mereduksi"
+  ],
+  ans: [0, 1, 2],
+  exp: "Monosakarida tidak dapat dihidrolisis (glukosa, fruktosa). Sukrosa = glukosa + fruktosa. Selulosa tidak dapat dicerna manusia. Amilum = polisakarida. Sukrosa bukan gula pereduksi."
 });
 
 // ================================================================
-// LEVEL C3 — Menganalisis (7 soal)
+// LEVEL C3 — Menganalisis (6 soal)
 // ================================================================
 
 // C3.1 — Analisis isomer hidrokarbon (dari Hidrokarbon)
 QS.push({
-  id: 3001, topic: "gabungan", type: "single", level: "c3",
+  id: 3001, topic: "karbon", type: "single", level: "c3",
   stim: `
     <div class="structure-display">CH₃-CH₂-C(CH₃)=CH₂</div>
   `,
@@ -440,7 +444,7 @@ QS.push({
 
 // C3.2 — Analisis reaksi adisi (dari Hidrokarbon)
 QS.push({
-  id: 3002, topic: "gabungan", type: "single", level: "c3",
+  id: 3002, topic: "karbon", type: "single", level: "c3",
   stim: `
     <div class="chem-eq">CH₂=CH-CH₂-CH₂-CH₃ + HBr → Z</div>
   `,
@@ -456,25 +460,9 @@ QS.push({
   exp: "Aturan Markovnikov: H terikat pada C yang lebih banyak H, Br pada C yang lebih sedikit H. Produk: CH₃-CH(Br)-CH₂-CH₂-CH₃."
 });
 
-// C3.3 — Analisis reaktivitas (dari Hidrokarbon)
+// C3.3 — Analisis reaksi eliminasi (dari Hidrokarbon)
 QS.push({
-  id: 3003, topic: "gabungan", type: "mcma", level: "c3",
-  q: "Pernyataan yang BENAR tentang perbedaan reaktivitas alkana dan alkena adalah... (Pilih 3 jawaban benar)",
-  opts: [
-    "Alkana mengalami reaksi substitusi dengan halogen (dengan UV)",
-    "Alkena mengalami reaksi adisi karena memiliki awan elektron pi",
-    "Alkena lebih reaktif dari alkana",
-    "Alkana mengalami reaksi adisi dengan HBr",
-    "Alkena tidak dapat berpolimerisasi",
-    "Alkana lebih reaktif dari alkena"
-  ],
-  ans: [0, 1, 2],
-  exp: "Alkana: substitusi radikal bebas (UV). Alkena: adisi elektrofilik (awan pi). Alkena lebih reaktif. Alkena dapat polimerisasi adisi."
-});
-
-// C3.4 — Analisis reaksi eliminasi (dari Hidrokarbon)
-QS.push({
-  id: 3004, topic: "gabungan", type: "single", level: "c3",
+  id: 3003, topic: "karbon", type: "single", level: "c3",
   stim: `
     <div class="stim">
       <p>2-klorobutana (CH₃-CH(Cl)-CH₂-CH₃) direaksikan dengan KOH dalam etanol panas.</p>
@@ -486,21 +474,9 @@ QS.push({
   exp: "Reaksi eliminasi 2-klorobutana menghasilkan alkena dengan ikatan rangkap di C yang lebih tersubstitusi (aturan Zaitsev). Produk utama: 2-butena."
 });
 
-// C3.5 — Analisis isomer fungsi (dari Gugus Fungsi)
+// C3.4 — Analisis identifikasi aldehida (dari Gugus Fungsi)
 QS.push({
-  id: 3005, topic: "gabungan", type: "single", level: "c3",
-  stim: `
-    <div class="structure-display">CH₃-CH₂-CH₂-OH</div>
-  `,
-  q: "Nama senyawa yang merupakan isomer fungsi dari senyawa tersebut adalah...",
-  opts: ["Metoksi propana", "Metil propanoat", "Etil etanoat", "Asam butanoat", "Propanon"],
-  ans: 0,
-  exp: "CH₃-CH₂-CH₂-OH (1-propanol) memiliki isomer fungsi eter. Metoksi propana (CH₃-O-CH₂-CH₂-CH₃) adalah isomer fungsi dari 1-propanol."
-});
-
-// C3.6 — Analisis identifikasi aldehida (dari Gugus Fungsi)
-QS.push({
-  id: 3006, topic: "gabungan", type: "single", level: "c3",
+  id: 3004, topic: "karbon", type: "single", level: "c3",
   stim: `
     <div class="stim">
       <p>Suatu senyawa dengan rumus molekul C₃H₆O diuji:</p>
@@ -516,9 +492,9 @@ QS.push({
   exp: "Senyawa yang bereaksi positif dengan Fehling dan Tollens adalah aldehida (propanal) dengan gugus fungsi -CHO."
 });
 
-// C3.7 — Analisis eter (dari Gugus Fungsi)
+// C3.5 — Analisis eter (dari Gugus Fungsi)
 QS.push({
-  id: 3007, topic: "gabungan", type: "single", level: "c3",
+  id: 3005, topic: "karbon", type: "single", level: "c3",
   stim: `
     <div class="stim">
       <p>Suatu senyawa C₃H₈O tidak bereaksi dengan logam natrium.</p>
@@ -530,13 +506,33 @@ QS.push({
   exp: "Senyawa C₃H₈O yang tidak bereaksi dengan logam Na (tidak memiliki gugus -OH) adalah eter."
 });
 
+// C3.6 — Analisis uji karbohidrat (dari Biomolekul) — DIPERBAIKI jadi single choice
+QS.push({
+  id: 3006, topic: "karbon", type: "single", level: "c3",
+  stim: `
+    <div class="stim">
+      <p>Hasil uji suatu senyawa karbohidrat:</p>
+      <ul style="margin-left:1.2rem;">
+        <li>Uji Molisch: positif (warna merah-ungu)</li>
+        <li>Uji iodin: negatif (tidak biru-ungu)</li>
+        <li>Uji Fehling: negatif (tidak ada endapan merah)</li>
+        <li>Hidrolisis: menghasilkan dua molekul monosakarida berbeda</li>
+      </ul>
+    </div>
+  `,
+  q: "Senyawa yang diuji tersebut adalah...",
+  opts: ["Maltosa", "Laktosa", "Sukrosa", "Amilum", "Glukosa"],
+  ans: 2,
+  exp: "Sukrosa: uji Molisch positif (karbohidrat), uji iodin negatif (bukan amilum), uji Fehling negatif (bukan gula pereduksi), hidrolisis menghasilkan glukosa + fruktosa (dua monosakarida berbeda)."
+});
+
 // ================================================================
 // LEVEL C4 — Mengevaluasi (6 soal)
 // ================================================================
 
 // C4.1 — Evaluasi isomer (dari Hidrokarbon)
 QS.push({
-  id: 4001, topic: "gabungan", type: "mcma", level: "c4",
+  id: 4001, topic: "karbon", type: "mcma", level: "c4",
   stim: `
     <div class="table-wrap">
       <table class="soal-table">
@@ -556,7 +552,7 @@ QS.push({
 
 // C4.2 — Evaluasi jenis reaksi (dari Hidrokarbon)
 QS.push({
-  id: 4002, topic: "gabungan", type: "mcma", level: "c4",
+  id: 4002, topic: "karbon", type: "mcma", level: "c4",
   stim: `
     <div class="stim">
       <p>Perhatikan reaksi:</p>
@@ -576,68 +572,33 @@ QS.push({
   exp: "Reaksi (1): adisi (Br₂ ditambahkan ke ikatan rangkap). Reaksi (2): eliminasi (HCl lepas, terbentuk ikatan rangkap)."
 });
 
-// C4.3 — Evaluasi titik didih (dari Hidrokarbon)
+// C4.3 — Error analysis (dari Gugus Fungsi) — DIPERBAIKI jadi single choice
 QS.push({
-  id: 4003, topic: "gabungan", type: "single", level: "c4",
-  stim: `
-    <div class="figure-wrap">
-      <svg width="400" height="200" viewBox="0 0 400 200">
-        <line x1="40" y1="170" x2="370" y2="170" stroke="#1e4a3f" stroke-width="2"/>
-        <line x1="40" y1="170" x2="40" y2="20" stroke="#1e4a3f" stroke-width="2"/>
-        <text x="180" y="190" fill="#8fa89e" font-size="10">Senyawa</text>
-        <text x="10" y="100" fill="#8fa89e" font-size="10" transform="rotate(-90,10,100)">Titik Didih (°C)</text>
-        <rect x="60" y="110" width="60" height="60" fill="rgba(52,211,153,0.6)" stroke="#34d399"/>
-        <text x="75" y="185" fill="#34d399" font-size="10" font-weight="bold">R</text>
-        <text x="70" y="105" fill="#8fa89e" font-size="9">36°C</text>
-        <rect x="160" y="130" width="60" height="40" fill="rgba(251,191,36,0.6)" stroke="#fbbf24"/>
-        <text x="175" y="185" fill="#fbbf24" font-size="10" font-weight="bold">S</text>
-        <text x="170" y="125" fill="#8fa89e" font-size="9">28°C</text>
-        <rect x="260" y="150" width="60" height="20" fill="rgba(248,113,113,0.6)" stroke="#f87171"/>
-        <text x="275" y="185" fill="#f87171" font-size="10" font-weight="bold">T</text>
-        <text x="270" y="145" fill="#8fa89e" font-size="9">10°C</text>
-      </svg>
-      <div class="figure-caption">Titik didih isomer C₅H₁₂</div>
-    </div>
-  `,
-  q: "Berdasarkan grafik, senyawa R, S, dan T berturut-turut adalah...",
-  opts: [
-    "n-pentana, 2-metilbutana, 2,2-dimetilpropana",
-    "n-pentana, 2,2-dimetilpropana, 2-metilbutana",
-    "2-metilbutana, 2,2-dimetilpropana, n-pentana",
-    "2,2-dimetilpropana, 2-metilbutana, n-pentana",
-    "2-metilbutana, n-pentana, 2,2-dimetilpropana"
-  ],
-  ans: 0,
-  exp: "Titik didih: n-pentana (lurus) > 2-metilbutana > 2,2-dimetilpropana."
-});
-
-// C4.4 — Evaluasi identifikasi eter (dari Gugus Fungsi)
-QS.push({
-  id: 4004, topic: "gabungan", type: "mcma", level: "c4",
+  id: 4003, topic: "karbon", type: "single", level: "c4",
   stim: `
     <div class="stim">
-      <p>Suatu senyawa C₅H₁₂O:</p>
-      <ul style="margin-left:1.2rem;">
-        <li>Tidak bereaksi dengan logam Na</li>
-        <li>Dengan HI berlebih menghasilkan etanol dan propil yodida</li>
-      </ul>
+      <p>Seorang siswa menulis:</p>
+      <blockquote style="margin-left:1rem;border-left:3px solid var(--accent);padding-left:0.8rem;font-style:italic;color:var(--muted);">
+        "Aldehida dan keton adalah senyawa yang sama karena keduanya memiliki gugus karbonil (C=O). 
+        Keduanya dapat bereaksi dengan pereaksi Tollens menghasilkan cermin perak."
+      </blockquote>
     </div>
   `,
-  q: "Pernyataan yang BENAR tentang senyawa tersebut adalah... (Pilih 2 jawaban benar)",
+  q: "Kesalahan penalaran utama siswa tersebut terletak pada...",
   opts: [
-    "Senyawa tersebut adalah eter",
-    "Rumus struktur: CH₃-CH₂-O-CH₂-CH₂-CH₃",
-    "Senyawa tersebut adalah alkohol",
-    "Senyawa tersebut adalah 1-pentanol",
-    "Senyawa tersebut adalah 2-pentanol"
+    "Menganggap aldehida dan keton sama, padahal aldehida memiliki H pada C karbonil sedangkan keton tidak, dan Tollens hanya bereaksi dengan aldehida",
+    "Menganggap aldehida tidak memiliki gugus karbonil",
+    "Menganggap Tollens tidak bereaksi dengan aldehida",
+    "Menganggap keton tidak memiliki gugus karbonil",
+    "Semua pernyataan siswa benar"
   ],
-  ans: [0, 1],
-  exp: "Tidak bereaksi dengan Na → bukan alkohol (eter). Dengan HI menghasilkan etanol + propil yodida → etoksi propana."
+  ans: 0,
+  exp: "Kesalahan ganda: (1) Aldehida (R-CHO) dan keton (R-CO-R') berbeda pada substituen C karbonil. (2) Tollens hanya bereaksi dengan aldehida, tidak dengan keton."
 });
 
-// C4.5 — Evaluasi kegunaan (dari Gugus Fungsi)
+// C4.4 — Evaluasi kegunaan senyawa (dari Gugus Fungsi)
 QS.push({
-  id: 4005, topic: "gabungan", type: "mcma", level: "c4",
+  id: 4004, topic: "karbon", type: "mcma", level: "c4",
   stim: `
     <div class="table-wrap">
       <table class="soal-table">
@@ -653,31 +614,49 @@ QS.push({
   q: "Pasangan senyawa dengan kegunaannya yang TIDAK TEPAT adalah... (Pilih 2 jawaban benar)",
   opts: ["(1) Metil salisilat - obat gosok", "(2) Formaldehida - antiseptik", "(3) Eter - obat bius", "(4) Alkohol 70% - pelarut", "(5) Gliserol - pelembab"],
   ans: [1, 3],
-  exp: "Formaldehida (2) seharusnya pengawet preparat. Alkohol 70% (4) seharusnya antiseptik."
+  exp: "Formaldehida (2) seharusnya pengawet preparat biologi. Alkohol 70% (4) seharusnya antiseptik."
 });
 
-// C4.6 — Error analysis (dari Gugus Fungsi)
+// C4.5 — Evaluasi identifikasi protein (dari Biomolekul) — DIPERBAIKI jadi MCMA 2 kunci
 QS.push({
-  id: 4006, topic: "gabungan", type: "single", level: "c4",
+  id: 4005, topic: "karbon", type: "mcma", level: "c4",
   stim: `
-    <div class="stim">
-      <p>Seorang siswa menulis:</p>
-      <blockquote style="margin-left:1rem;border-left:3px solid var(--accent);padding-left:0.8rem;font-style:italic;color:var(--muted);">
-        "Aldehida dan keton adalah senyawa yang sama karena keduanya memiliki gugus karbonil (C=O). 
-        Keduanya dapat bereaksi dengan pereaksi Tollens menghasilkan cermin perak."
-      </blockquote>
+    <div class="table-wrap">
+      <table class="soal-table">
+        <tr><th>Bahan</th><th>Biuret</th><th>Xantoproteat</th><th>Timbal(II) asetat</th></tr>
+        <tr><td>K</td><td>Ungu</td><td>Jingga</td><td>Coklat kehitaman</td></tr>
+        <tr><td>L</td><td>Biru Muda</td><td>Kuning</td><td>Coklat kehitaman</td></tr>
+        <tr><td>M</td><td>Ungu</td><td>Jingga</td><td>Coklat kehitaman</td></tr>
+        <tr><td>N</td><td>Ungu</td><td>Kuning</td><td>Tak Berubah</td></tr>
+        <tr><td>O</td><td>Biru Muda</td><td>Tak Berubah</td><td>Tak Berubah</td></tr>
+      </table>
     </div>
   `,
-  q: "Kesalahan penalaran utama siswa tersebut terletak pada...",
-  opts: [
-    "Menganggap aldehida dan keton sama, padahal aldehida memiliki H pada C karbonil sedangkan keton tidak",
-    "Menganggap aldehida tidak memiliki gugus karbonil",
-    "Menganggap Tollens bereaksi dengan keton, padahal Tollens hanya bereaksi dengan aldehida",
-    "Pilihan A dan C benar",
-    "Semua pernyataan siswa benar"
-  ],
-  ans: 3,
-  exp: "Kesalahan ganda: (1) Aldehida (R-CHO) dan keton (R-CO-R') berbeda. (2) Tollens hanya bereaksi dengan aldehida. Jadi opsi A dan C benar."
+  q: "Bahan makanan berprotein yang mengandung inti benzena dan unsur belerang adalah... (Pilih 2 jawaban benar)",
+  opts: ["K", "L", "M", "N", "O"],
+  ans: [0, 2],
+  exp: "Protein dengan inti benzena: uji xantoproteat positif (jingga). Protein dengan belerang: uji timbal(II) asetat positif (coklat kehitaman). K dan M memiliki kedua uji positif."
+});
+
+// C4.6 — Evaluasi polimer (dari Biomolekul) — DIPERBAIKI jadi MCMA 2 kunci
+QS.push({
+  id: 4006, topic: "karbon", type: "mcma", level: "c4",
+  stim: `
+    <div class="table-wrap">
+      <table class="soal-table">
+        <tr><th>No</th><th>Polimer</th><th>Monomer</th><th>Proses</th><th>Kegunaan</th></tr>
+        <tr><td>1</td><td>Teflon</td><td>Tetrafluoro etilena</td><td>Adisi</td><td>Pelapis panci</td></tr>
+        <tr><td>2</td><td>Amilum</td><td>Propena</td><td>Kondensasi</td><td>Adonan kue</td></tr>
+        <tr><td>3</td><td>PVC</td><td>Vinil klorida</td><td>Adisi</td><td>Plastik</td></tr>
+        <tr><td>4</td><td>Karet alam</td><td>Etena</td><td>Kondensasi</td><td>Ban</td></tr>
+        <tr><td>5</td><td>Protein</td><td>Isopropena</td><td>Kondensasi</td><td>Serat sintetis</td></tr>
+      </table>
+    </div>
+  `,
+  q: "Pasangan data yang keempatnya berhubungan secara tepat adalah... (Pilih 2 jawaban benar)",
+  opts: ["(1) dan (2)", "(1) dan (3)", "(2) dan (3)", "(3) dan (5)", "(4) dan (5)"],
+  ans: [1],
+  exp: "Teflon (1) dari tetrafluoro etilena melalui adisi, kegunaan pelapis panci. PVC (3) dari vinil klorida melalui adisi, kegunaan plastik. Keduanya tepat. Opsi lain salah karena amilum bukan dari propena, karet alam dari isoprena, protein dari asam amino."
 });
 
 // ================================================================
@@ -686,25 +665,65 @@ QS.push({
 
 // C5.1 — Rancang reaksi adisi (dari Hidrokarbon)
 QS.push({
-  id: 5001, topic: "gabungan", type: "mcma", level: "c5",
+  id: 5001, topic: "karbon", type: "mcma", level: "c5",
   stim: `
     <div class="chem-eq">2-metil-1-butena + H₂O → ... (katalis asam)</div>
   `,
-  q: "Pernyataan yang BENAR tentang reaksi hidrasi tersebut adalah... (Pilih 2 jawaban benar)",
+  q: "Pernyataan yang BENAR tentang reaksi hidrasi tersebut adalah... (Pilih 3 jawaban benar)",
   opts: [
     "Reaksi ini adalah reaksi adisi",
     "Produk utama mengikuti aturan Markovnikov",
-    "Produk utama adalah 2-metil-1-butanol",
+    "Produk utama adalah 2-metil-2-butanol",
     "Reaksi ini memerlukan sinar UV",
     "Reaksi ini menghasilkan aldehida"
   ],
-  ans: [0, 1],
-  exp: "Hidrasi alkena = adisi. Mengikuti Markovnikov: OH terikat pada C yang lebih tersubstitusi. Produk: 2-metil-2-butanol."
+  ans: [0, 1, 2],
+  exp: "Hidrasi alkena = adisi. Mengikuti Markovnikov: OH terikat pada C yang lebih tersubstitusi. Produk: 2-metil-2-butanol (CH₃-C(OH)(CH₃)-CH₂-CH₃)."
 });
 
-// C5.2 — Rancang analisis gas (dari Hidrokarbon)
+// C5.2 — Rancang sintesis ester (dari Gugus Fungsi)
 QS.push({
-  id: 5002, topic: "gabungan", type: "mcma", level: "c5",
+  id: 5002, topic: "karbon", type: "mcma", level: "c5",
+  stim: `
+    <div class="stim">
+      <p>Anda ingin mensintesis etil butirat (aroma nanas) melalui reaksi esterifikasi.</p>
+    </div>
+  `,
+  q: "Rancangan sintesis yang PALING TEPAT adalah... (Pilih 3 jawaban benar)",
+  opts: [
+    "Gunakan asam butanoat (CH₃-CH₂-CH₂-COOH) sebagai asam karboksilat",
+    "Gunakan etanol (C₂H₅OH) sebagai alkohol",
+    "Reaksikan dengan katalis asam (H₂SO₄) dan panaskan",
+    "Gunakan metanol sebagai alkohol",
+    "Gunakan asam asetat sebagai asam karboksilat"
+  ],
+  ans: [0, 1, 2],
+  exp: "Etil butirat (CH₃-CH₂-CH₂-COO-C₂H₅) = asam butanoat + etanol + katalis H₂SO₄."
+});
+
+// C5.3 — Rancang identifikasi biomolekul (dari Biomolekul) — diperbaiki
+QS.push({
+  id: 5003, topic: "karbon", type: "mcma", level: "c5",
+  stim: `
+    <div class="stim">
+      <p>Seorang siswa ingin mengidentifikasi kandungan zat gizi dalam sampel makanan (susu kedelai). Uji yang tersedia: Biuret (protein), Molisch (karbohidrat), Sudan III (lemak).</p>
+    </div>
+  `,
+  q: "Rancangan identifikasi yang PALING TEPAT adalah... (Pilih 3 jawaban benar)",
+  opts: [
+    "Uji Biuret positif (ungu) menunjukkan susu kedelai mengandung protein",
+    "Uji Molisch positif (cincin ungu) menunjukkan susu kedelai mengandung karbohidrat",
+    "Uji Sudan III positif (merah/oranye) menunjukkan susu kedelai mengandung lemak",
+    "Uji Biuret digunakan untuk menguji kandungan vitamin",
+    "Uji Molisch dan Biuret menggunakan prinsip yang sama"
+  ],
+  ans: [0, 1, 2],
+  exp: "Biuret → protein. Molisch → karbohidrat. Sudan III → lemak. Ketiga uji berbeda prinsipnya."
+});
+
+// C5.4 — Rancang analisis gas hidrokarbon (dari Hidrokarbon)
+QS.push({
+  id: 5004, topic: "karbon", type: "mcma", level: "c5",
   stim: `
     <div class="stim">
       <p>Anda diminta merancang analisis untuk membedakan gas etana, etilena, dan asetilena.</p>
@@ -722,53 +741,13 @@ QS.push({
   exp: "Air brom: alkena & alkuna memudarkan brom. KMnO₄: alkena & alkuna mengoksidasi. CuCl/amonia: asetilena → endapan merah. Etana tidak bereaksi."
 });
 
-// C5.3 — Rancang sintesis ester (dari Gugus Fungsi)
-QS.push({
-  id: 5003, topic: "gabungan", type: "mcma", level: "c5",
-  stim: `
-    <div class="stim">
-      <p>Anda ingin mensintesis etil butirat (aroma nanas) melalui reaksi esterifikasi.</p>
-    </div>
-  `,
-  q: "Rancangan sintesis yang PALING TEPAT adalah... (Pilih 3 jawaban benar)",
-  opts: [
-    "Gunakan asam butanoat (CH₃-CH₂-CH₂-COOH) sebagai asam karboksilat",
-    "Gunakan etanol (C₂H₅OH) sebagai alkohol",
-    "Reaksikan dengan katalis asam (H₂SO₄) dan panaskan",
-    "Gunakan metanol sebagai alkohol",
-    "Gunakan asam asetat sebagai asam karboksilat"
-  ],
-  ans: [0, 1, 2],
-  exp: "Etil butirat = asam butanoat + etanol + katalis H₂SO₄."
-});
-
-// C5.4 — Rancang identifikasi (dari Gugus Fungsi)
-QS.push({
-  id: 5004, topic: "gabungan", type: "mcma", level: "c5",
-  stim: `
-    <div class="stim">
-      <p>Anda memiliki 3 botol tak berlabel berisi: etanol, etanal, dan asam etanoat.</p>
-    </div>
-  `,
-  q: "Rancangan identifikasi yang PALING TEPAT adalah... (Pilih 3 jawaban benar)",
-  opts: [
-    "Uji dengan lakmus biru: asam etanoat memerahkan lakmus",
-    "Uji dengan pereaksi Tollens: etanal menghasilkan cermin perak",
-    "Uji dengan logam Na: etanol menghasilkan gas H₂",
-    "Uji dengan air brom: semua senyawa memudarkan warna brom",
-    "Uji dengan Fehling: asam etanoat menghasilkan endapan merah"
-  ],
-  ans: [0, 1, 2],
-  exp: "Asam etanoat: lakmus biru → merah. Etanal: Tollens → cermin perak. Etanol: Na → gas H₂."
-});
-
 // ================================================================
-// LEVEL C6 — Menilai (3 soal)
+// LEVEL C6 — Menilai (4 soal)
 // ================================================================
 
 // C6.1 — Nilai validitas hidrokarbon (dari Hidrokarbon)
 QS.push({
-  id: 6001, topic: "gabungan", type: "single", level: "c6",
+  id: 6001, topic: "karbon", type: "single", level: "c6",
   stim: `
     <div class="stim">
       <p>Seorang siswa menulis ringkasan:</p>
@@ -793,27 +772,9 @@ QS.push({
   exp: "Pernyataan 4 SALAH: hidrokarbon nonpolar, tidak larut air. Pernyataan 1, 2, 3, 5 benar."
 });
 
-// C6.2 — Nilai dampak pembakaran (dari Hidrokarbon)
+// C6.2 — Nilai klaim formaldehida (dari Gugus Fungsi)
 QS.push({
-  id: 6002, topic: "gabungan", type: "mcma", level: "c6",
-  stim: `
-    <div class="chem-eq">2C₈H₁₈ + 15O₂ → 8C + 4CO + 4CO₂ + 18H₂O</div>
-  `,
-  q: "Pernyataan yang BENAR mengenai dampak pembakaran tidak sempurna bensin adalah... (Pilih 2 jawaban benar)",
-  opts: [
-    "Jelaga (C) adalah partikel halus yang dapat merusak saluran pernapasan",
-    "CO berikatan dengan hemoglobin sehingga mengganggu fungsi hemoglobin mengikat oksigen",
-    "CO₂ menyebabkan iritasi mata",
-    "Semua produk pembakaran tidak sempurna tidak berbahaya",
-    "CO₂ bukan gas rumah kaca"
-  ],
-  ans: [0, 1],
-  exp: "Jelaga berbahaya bagi pernapasan. CO berikatan dengan hemoglobin (racun). CO₂ adalah gas rumah kaca."
-});
-
-// C6.3 — Nilai kebijakan formaldehida (dari Gugus Fungsi)
-QS.push({
-  id: 6003, topic: "gabungan", type: "single", level: "c6",
+  id: 6002, topic: "karbon", type: "single", level: "c6",
   stim: `
     <div class="stim">
       <p>Tiga siswa berdebat tentang penggunaan formaldehida:</p>
@@ -836,6 +797,61 @@ QS.push({
   exp: "Formaldehida karsinogenik (B). Boleh untuk preparat, tidak untuk makanan (C). Pengawet makanan dilarang (A salah)."
 });
 
+// C6.3 — Nilai kebijakan gizi (dari Biomolekul) — BARU
+QS.push({
+  id: 6003, topic: "karbon", type: "mcma", level: "c6",
+  stim: `
+    <div class="stim">
+      <p>Seorang ahli gizi mengevaluasi kandungan gizi dalam makanan berdasarkan hasil uji:</p>
+    </div>
+    <div class="table-wrap">
+      <table class="soal-table">
+        <tr><th>Uji</th><th>Hasil</th></tr>
+        <tr><td>Biuret</td><td>Ungu</td></tr>
+        <tr><td>Xantoproteat</td><td>Jingga</td></tr>
+        <tr><td>Timbal(II) asetat</td><td>Coklat kehitaman</td></tr>
+        <tr><td>Molisch</td><td>Negatif</td></tr>
+        <tr><td>Sudan III</td><td>Negatif</td></tr>
+      </table>
+    </div>
+  `,
+  q: "Pernyataan yang PALING TEPAT berdasarkan data uji tersebut adalah... (Pilih 3 jawaban benar)",
+  opts: [
+    "Makanan mengandung protein",
+    "Protein mengandung cincin benzena",
+    "Protein mengandung belerang",
+    "Makanan mengandung karbohidrat",
+    "Makanan mengandung lemak"
+  ],
+  ans: [0, 1, 2],
+  exp: "Biuret positif (ungu) → protein. Xantoproteat positif (jingga) → cincin benzena. Timbal(II) asetat positif (coklat kehitaman) → belerang. Molisch negatif → tidak ada karbohidrat. Sudan III negatif → tidak ada lemak."
+});
+
+// C6.4 — Nilai aplikasi bioplastik (dari Biomolekul) — BARU
+QS.push({
+  id: 6004, topic: "karbon", type: "single", level: "c6",
+  stim: `
+    <div class="stim">
+      <p>Tiga siswa berdebat tentang bioplastik PLA (polylactic acid) dari pati jagung sebagai alternatif pengganti plastik konvensional PE (polietilena):</p>
+      <ul style="margin-left:1.2rem;">
+        <li><strong>Siswa A:</strong> "PLA lebih baik karena dapat terurai secara alami oleh mikroorganisme."</li>
+        <li><strong>Siswa B:</strong> "PE lebih baik karena lebih kuat dan tahan panas."</li>
+        <li><strong>Siswa C:</strong> "Keduanya memiliki kelebihan dan kekurangan; PLA ramah lingkungan tapi PE lebih kuat."</li>
+      </ul>
+    </div>
+  `,
+  q: "Penilaian yang PALING TEPAT untuk pemilihan plastik ramah lingkungan adalah...",
+  opts: [
+    "Siswa A dan C benar; PLA biodegradable (ramah lingkungan) tapi PE lebih kuat, sehingga pemilihan tergantung kebutuhan",
+    "Hanya siswa A yang benar",
+    "Hanya siswa B yang benar",
+    "Hanya siswa C yang benar",
+    "Ketiga siswa salah"
+  ],
+  ans: 0,
+  exp: "PLA biodegradable (A benar). PE lebih kuat & tahan panas (B benar sebagian). Pemilihan tergantung kebutuhan: PLA untuk kemasan sekali pakai, PE untuk aplikasi yang butuh kekuatan."
+});
+
 // ================================================================
 // STATE MANAGEMENT
 // ================================================================
@@ -846,7 +862,7 @@ var S = {
 
 function load() {
   try {
-    var d = JSON.parse(localStorage.getItem("tka_kim_gabungan"));
+    var d = JSON.parse(localStorage.getItem("tka_kim_karbon"));
     if (d) {
       S.done = {};
       (d.done || []).forEach(function(x) { S.done[x] = true; });
@@ -857,7 +873,7 @@ function load() {
 }
 function save() {
   try {
-    localStorage.setItem("tka_kim_gabungan", JSON.stringify({
+    localStorage.setItem("tka_kim_karbon", JSON.stringify({
       done: Object.keys(S.done), wrong: S.wrong, scores: S.scores
     }));
   } catch(e) {}
@@ -1187,7 +1203,7 @@ function toast(msg, bg) {
 }
 
 renderHome();
-console.log("Gugus Fungsi & Hidrokarbon - HOTS C2-C6 loaded: " + QS.length + " soal");
+console.log("Senyawa Karbon (Hidrokarbon + Gugus Fungsi + Biomolekul) - HOTS C2-C6 loaded: " + QS.length + " soal");
 </script>
 </body>
 </html>
